@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>nebeko | Sebastian Weber</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --coral:   #E06040;
+      --purple:  #7B5EA7;
+      --teal:    #4A9B8E;
+      --dark:    #0F1117;
+      --paper:   #FAFAFA;
+      --white:   #FFFFFF;
+      --text:    #1A1A1A;
+      --muted:   #7A7A7A;
+      --border:  #E0DEDA;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+
+    body {
+      font-family: 'Montserrat', system-ui, sans-serif;
+      background: var(--paper);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    nav {
+      padding: 0 48px 10px;
+      height: 120px;
+      display: flex;
+      align-items: flex-end;
+      border-bottom: 1px solid var(--border);
+      max-width: 100%;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      line-height: 0;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .logo svg {
+      display: block;
+    }
+
+    main {
+      flex: 1;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 100px 48px 80px;
+      width: 100%;
+    }
+
+    .label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .label::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1.5px;
+      background: var(--muted);
+    }
+
+    h1 {
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 700;
+      color: var(--dark);
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      margin-bottom: 16px;
+    }
+
+    .sub {
+      font-size: 20px;
+      color: var(--muted);
+      font-style: normal;
+      max-width: 520px;
+      line-height: 1.8;
+      margin-bottom: 64px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      text-decoration: none;
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.07);
+    }
+
+    .card-image {
+      width: 100%;
+      height: 160px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+    }
+
+    .card-image svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .card-body {
+      padding: 28px 32px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .card-tag {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 4px 10px;
+      border-radius: 20px;
+      display: inline-block;
+      width: fit-content;
+    }
+
+    .tag-coral  { background: #FDF0EC; color: var(--coral); }
+    .tag-purple { background: #F3F0F9; color: var(--purple); }
+    .tag-teal   { background: #EBF5F3; color: var(--teal); }
+
+    .card h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--dark);
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+    }
+
+    .card p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.65;
+      flex: 1;
+    }
+
+    .card-arrow {
+      font-size: 13px;
+      font-weight: 600;
+      margin-top: 8px;
+    }
+
+    .arrow-coral  { color: var(--coral); }
+    .arrow-purple { color: var(--purple); }
+    .arrow-teal   { color: var(--teal); }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 860px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    footer p { font-size: 12px; color: var(--muted); }
+    footer a { color: var(--muted); text-decoration: none; }
+
+    @media (max-width: 640px) {
+      nav { padding: 0 20px; }
+      main { padding: 80px 20px 60px; }
+      .cards { grid-template-columns: 1fr; }
+      footer { padding: 20px; flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="logo"><svg width="40" height="40" style="display:block;" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 19.0413V20.7092L15.9986 26.8336V25.3991L11.7131 23.7928V23.7848L10.3368 23.2366L1.51283 19.9819L10.3384 16.7504V16.7576L11.7146 16.2587L16.0001 14.6524V13.1113L0 19.0413Z" fill="#0F1117"/><path d="M16.0001 24.0696V22.4023L0 16.2773V17.7113L4.2859 19.317V19.3279L5.66227 19.8759L14.4871 23.1294L5.66227 26.3619V26.3546L4.2859 26.8534L0 28.4591V29.9996L16.0001 24.0696Z" fill="#0F1117"/><path d="M20.3237 26.8333H22.1382L28.8006 11H27.2401L25.4927 15.242H25.4809L24.8844 16.6032L21.3438 25.3361L17.826 16.6032H17.8339L17.2911 15.242L15.5436 11H13.8672L20.3237 26.8333Z" fill="#0F1117"/><path d="M23.5229 26.8333H25.3374L31.9998 11H30.4394L28.6919 15.2418H28.6801L28.0837 16.603L24.543 25.3354L21.0252 16.603H21.0331L20.4903 15.2418L18.7429 11H17.0664L23.5229 26.8333Z" fill="#0F1117"/></svg></a>
+  </nav>
+
+  <main>
+    <div class="label">Design-to-Code Portfolio</div>
+    <h1>Sebastian Weber</h1>
+    <p class="sub">UX/UI Designer aus Köln.<br>Ich designe Interfaces und baue sie selbst.</p>
+
+    <div class="cards">
+
+      <!-- Karte 1: Nebeko Case Study -->
+      <a href="case-study.html" class="card">
+        <div class="card-image">
+          <svg viewBox="0 0 420 160" xmlns="http://www.w3.org/2000/svg">
+            <rect width="420" height="160" fill="#FDF0EC"/>
+            <!-- Dokument -->
+            <rect x="60" y="24" width="100" height="120" rx="4" fill="white" stroke="#E0DEDA" stroke-width="1.5"/>
+            <rect x="72" y="40" width="76" height="6" rx="2" fill="#E06040" opacity="0.7"/>
+            <rect x="72" y="54" width="60" height="4" rx="2" fill="#E0DEDA"/>
+            <rect x="72" y="64" width="68" height="4" rx="2" fill="#E0DEDA"/>
+            <rect x="72" y="74" width="52" height="4" rx="2" fill="#E0DEDA"/>
+            <rect x="72" y="88" width="76" height="5" rx="2" fill="#FDF0EC" stroke="#E06040" stroke-width="1"/>
+            <rect x="72" y="99" width="76" height="5" rx="2" fill="#FDF0EC" stroke="#E06040" stroke-width="1"/>
+            <rect x="72" y="110" width="76" height="5" rx="2" fill="#FDF0EC" stroke="#E06040" stroke-width="1"/>
+            <!-- Sprechblase -->
+            <rect x="190" y="30" width="160" height="72" rx="8" fill="white" stroke="#E0DEDA" stroke-width="1.5"/>
+            <polygon points="210,102 224,102 217,116" fill="white" stroke="#E0DEDA" stroke-width="1.5"/>
+            <polygon points="211,102 223,102 217,113" fill="white"/>
+            <rect x="204" y="44" width="132" height="5" rx="2" fill="#E0DEDA"/>
+            <rect x="204" y="56" width="110" height="5" rx="2" fill="#E0DEDA"/>
+            <rect x="204" y="68" width="120" height="5" rx="2" fill="#E0DEDA"/>
+            <rect x="204" y="80" width="90" height="5" rx="2" fill="#E06040" opacity="0.4"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <span class="card-tag tag-coral">Case Study</span>
+          <h2>Den ganzen Tag der Arbeit für KI und Excel</h2>
+          <p>In-context interview ohne Leitfaden. Drei UX-Entscheidungen. Und warum kein Figma-Prototyp die richtige Antwort war.</p>
+          <span class="card-arrow arrow-coral">Case Study lesen →</span>
+        </div>
+      </a>
+
+      <!-- Karte 2: Nebeko Workflow -->
+      <a href="workflow.html" class="card">
+        <div class="card-image">
+          <svg viewBox="0 0 420 160" xmlns="http://www.w3.org/2000/svg">
+            <rect width="420" height="160" fill="#F3F0F9"/>
+            <!-- Prompt-Box -->
+            <rect x="40" y="38" width="148" height="44" rx="6" fill="white" stroke="#E0DEDA" stroke-width="1.5"/>
+            <rect x="52" y="50" width="88" height="5" rx="2" fill="#E0DEDA"/>
+            <rect x="52" y="62" width="112" height="5" rx="2" fill="#7B5EA7" opacity="0.4"/>
+            <!-- Pfeil -->
+            <line x1="196" y1="60" x2="228" y2="60" stroke="#7B5EA7" stroke-width="2" stroke-dasharray="4 3"/>
+            <polygon points="226,55 236,60 226,65" fill="#7B5EA7"/>
+            <!-- PDF-Box -->
+            <rect x="240" y="26" width="80" height="100" rx="4" fill="white" stroke="#E0DEDA" stroke-width="1.5"/>
+            <rect x="252" y="38" width="56" height="6" rx="2" fill="#7B5EA7" opacity="0.7"/>
+            <rect x="252" y="52" width="48" height="4" rx="2" fill="#E0DEDA"/>
+            <rect x="252" y="62" width="52" height="4" rx="2" fill="#E0DEDA"/>
+            <rect x="252" y="72" width="44" height="4" rx="2" fill="#E0DEDA"/>
+            <rect x="252" y="86" width="56" height="22" rx="3" fill="#7B5EA7" opacity="0.12"/>
+            <rect x="260" y="93" width="40" height="4" rx="2" fill="#7B5EA7" opacity="0.5"/>
+            <!-- Google Drive Icon -->
+            <polygon points="100,100 120,100 110,118" fill="#7B5EA7" opacity="0.2"/>
+            <polygon points="108,100 128,100 118,118" fill="#7B5EA7" opacity="0.3"/>
+            <polygon points="100,100 120,100 110,118" fill="none" stroke="#7B5EA7" stroke-width="1" opacity="0.5"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <span class="card-tag tag-purple">AI Workflow</span>
+          <h2>Nebenkostenabrechnung per Prompt</h2>
+          <p>Wie ein Prompt eine Stunde Arbeit ersetzt. Google Drive, Claude MCP, vollautomatische PDF-Generierung.</p>
+          <span class="card-arrow arrow-purple">Workflow ansehen →</span>
+        </div>
+      </a>
+
+      <!-- Karte 3: LinkedIn Wheel Case Study -->
+      <a href="linkedin-wheel-case-study.html" class="card">
+        <div class="card-image">
+          <img src="screenshot-wheel.png" alt="LinkedIn Profile Readiness Guide Screenshot">
+        </div>
+        <div class="card-body">
+          <span class="card-tag tag-coral">Case Study</span>
+          <h2>LinkedIn Profile Readiness Guide</h2>
+          <p>Ein statisches PDF wird zum interaktiven Tool. Natürliche Sprache als Interface. Vibe Coding als Methode.</p>
+          <span class="card-arrow arrow-coral">Case Study lesen →</span>
+        </div>
+      </a>
+
+      <!-- Karte 4: LinkedIn Tool -->
+      <a href="https://sebastian-weber.github.io/linkedin-readiness-guide/" target="_blank" class="card">
+        <div class="card-image">
+          <img src="screenshot-wheel.png" alt="LinkedIn Profile Readiness Guide Tool">
+        </div>
+        <div class="card-body">
+          <span class="card-tag tag-teal">Tool</span>
+          <h2>LinkedIn Profile Readiness Guide</h2>
+          <p>Ein statisches PDF wird zum interaktiven Tool. Natürliche Sprache als Interface. Vibe Coding als Methode.</p>
+          <span class="card-arrow arrow-teal">Tool ausprobieren →</span>
+        </div>
+      </a>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>Sebastian Weber · UI Designer · Design-to-Code · Köln 2026</p>
+    <p><a href="https://linkedin.com/in/sebastian-weber1708">LinkedIn</a></p>
+  </footer>
+
+</body>
+</html>
