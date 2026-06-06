@@ -164,6 +164,20 @@
       display: block;
     }
 
+    .card-image img.contain-gray {
+      object-fit: contain;
+      object-position: center;
+      padding: 16px;
+      background: #EEECE9;
+    }
+
+    .card-image img.contain-white {
+      object-fit: contain;
+      object-position: center;
+      padding: 16px;
+      background: var(--white);
+    }
+
     .card-body {
       padding: 28px 32px 32px;
       display: flex;
@@ -282,7 +296,7 @@
       <!-- Karte 3: LinkedIn Wheel Case Study -->
       <a href="https://sebastian-weber.github.io/linkedin-readiness-guide/linkedin-wheel-case-study.html" class="card">
         <div class="card-image">
-          <img src="screenshot-banner.png" alt="LinkedIn Profile Readiness Guide Case Study">
+          <img src="screenshot-banner.png" alt="LinkedIn Profile Readiness Guide Case Study" class="contain-gray">
         </div>
         <div class="card-body">
           <span class="card-tag tag-coral">Case Study</span>
@@ -295,7 +309,7 @@
       <!-- Karte 4: LinkedIn Tool -->
       <a href="https://sebastian-weber.github.io/linkedin-readiness-guide/" target="_blank" class="card">
         <div class="card-image">
-          <img src="screenshot-wheel.png" alt="LinkedIn Profile Readiness Guide Tool">
+          <img src="screenshot-wheel.png" alt="LinkedIn Profile Readiness Guide Tool" class="contain-white">
         </div>
         <div class="card-body">
           <span class="card-tag tag-teal">Tool</span>
