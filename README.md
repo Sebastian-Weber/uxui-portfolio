@@ -1,4 +1,4 @@
-# Sebastian Weber — Design-to-Code Portfolio
+# Sebastian Weber - Design-to-Code Portfolio
  
 UX/UI Designer aus Köln. Ich designe Interfaces und baue sie selbst.
  
