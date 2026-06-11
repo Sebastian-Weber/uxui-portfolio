@@ -196,6 +196,80 @@
       flex: 1;
     }
 
+    /* Metrics row */
+    .card-metrics {
+      display: flex;
+      gap: 20px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      margin-top: 4px;
+    }
+
+    .metric {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .metric-value {
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .metric-label {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+
+    .metric-value.coral  { color: var(--coral); }
+    .metric-value.purple { color: var(--purple); }
+    .metric-value.teal   { color: var(--teal); }
+
+    /* Quote block */
+    .card-quote {
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      margin-top: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .card-quote blockquote {
+      font-size: 11.5px;
+      line-height: 1.65;
+      font-style: italic;
+      font-weight: 400;
+      padding-left: 10px;
+    }
+
+    .quote-coral blockquote {
+      border-left: 2px solid var(--coral);
+      color: var(--coral);
+    }
+
+    .quote-purple blockquote {
+      border-left: 2px solid var(--purple);
+      color: var(--purple);
+    }
+
+    .card-quote cite {
+      display: block;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      font-style: normal;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
     .card-arrow {
       font-size: 13px;
       font-weight: 600;
@@ -225,6 +299,7 @@
       main { padding: 80px 20px 60px; }
       .cards { grid-template-columns: 1fr; }
       footer { padding: 20px; flex-direction: column; gap: 8px; text-align: center; }
+      .card-quote cite { white-space: normal; }
     }
   </style>
 </head>
@@ -256,6 +331,10 @@
           <span class="card-tag tag-coral">Case Study</span>
           <h2>Den ganzen Tag der Arbeit für KI und Excel</h2>
           <p>In-context interview ohne Leitfaden. Drei UX-Entscheidungen. Und warum kein Figma-Prototyp die richtige Antwort war.</p>
+          <div class="card-quote quote-coral">
+            <blockquote>"Ja klar aber auf einem guten Weg."</blockquote>
+            <cite>Anonymer Vermieter &middot; WhatsApp &middot; 1. Mai 2026</cite>
+          </div>
           <span class="card-arrow arrow-coral">Case Study lesen →</span>
         </div>
       </a>
@@ -269,6 +348,16 @@
           <span class="card-tag tag-purple">AI Workflow</span>
           <h2>Nebenkostenabrechnung per Prompt</h2>
           <p>Wie ein Prompt eine Stunde Arbeit ersetzt. Google Drive, Claude MCP, vollautomatische PDF-Generierung.</p>
+          <div class="card-metrics">
+            <div class="metric">
+              <span class="metric-value purple">5</span>
+              <span class="metric-label">Workflow-Schritte</span>
+            </div>
+            <div class="metric">
+              <span class="metric-value purple">5</span>
+              <span class="metric-label">Wiederverwendbare Prompts</span>
+            </div>
+          </div>
           <span class="card-arrow arrow-purple">Workflow ansehen →</span>
         </div>
       </a>
@@ -282,6 +371,10 @@
           <span class="card-tag tag-coral">Case Study</span>
           <h2>LinkedIn Profile Readiness Guide</h2>
           <p>Wie aus einem Orientierungsproblem ein interaktives Browser-Tool wurde. Ohne Framework, ohne Design-Tool, ohne Team.</p>
+          <div class="card-quote quote-coral">
+            <blockquote>Taking a concept, improving it, and turning learning into something useful for others. These are the qualities hiring managers are often looking for.</blockquote>
+            <cite>Olga Lavrenko &middot; Career Coach, neuefische</cite>
+          </div>
           <span class="card-arrow arrow-coral">Case Study lesen →</span>
         </div>
       </a>
@@ -295,6 +388,20 @@
           <span class="card-tag tag-teal">Tool</span>
           <h2>LinkedIn Profile Readiness Guide</h2>
           <p>Interaktive Checkliste für dein LinkedIn-Profil. Mit Live-Visualisierung des Fortschritts — direkt im Browser, ohne Login.</p>
+          <div class="card-metrics">
+            <div class="metric">
+              <span class="metric-value teal">1.947</span>
+              <span class="metric-label">Impressions</span>
+            </div>
+            <div class="metric">
+              <span class="metric-value teal">31</span>
+              <span class="metric-label">Reaktionen</span>
+            </div>
+            <div class="metric">
+              <span class="metric-value teal">17</span>
+              <span class="metric-label">Kommentare</span>
+            </div>
+          </div>
           <span class="card-arrow arrow-teal">Tool ausprobieren →</span>
         </div>
       </a>
