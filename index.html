@@ -1,18 +1,9 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-64KGYY639W"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-64KGYY639W');
-  </script>
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/svg+xml" href="sw_favicon32.svg">
+  <link rel="icon" type="image/svg+xml" href="SW_favicon32.svg">
   <title>Sebastian Weber · UX/UI Designer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
@@ -205,6 +196,7 @@
       flex: 1;
     }
 
+    /* Metrics row */
     .card-metrics {
       display: flex;
       gap: 20px;
@@ -237,6 +229,7 @@
     .metric-value.purple { color: var(--purple); }
     .metric-value.teal   { color: var(--teal); }
 
+    /* Quote block */
     .card-quote {
       padding-top: 14px;
       border-top: 1px solid var(--border);
@@ -309,6 +302,62 @@
       .card-quote cite { white-space: normal; }
     }
   </style>
+  <!-- Google Analytics 4 -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+
+    // Only load GA4 if consent was given
+    function loadGA4() {
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-64KGYY639W';
+      document.head.appendChild(s);
+      gtag('js', new Date());
+      gtag('config', 'G-64KGYY639W');
+    }
+
+    // Check existing consent
+    if (localStorage.getItem('ga_consent') === 'granted') {
+      loadGA4();
+    }
+  </script>
+
+  <style>
+    #cookie-banner {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--dark);
+      color: #fff;
+      padding: 16px 24px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      z-index: 200;
+      font-size: 13px;
+      max-width: 560px;
+      width: calc(100% - 48px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    }
+    #cookie-banner p { margin: 0; flex: 1; color: #ccc; line-height: 1.5; }
+    #cookie-banner a { color: #fff; }
+    .cookie-btn {
+      padding: 8px 16px;
+      border-radius: 7px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      white-space: nowrap;
+      font-family: 'Montserrat', system-ui, sans-serif;
+    }
+    .cookie-accept { background: var(--steel); color: #fff; }
+    .cookie-decline { background: transparent; color: #ccc; border: 1px solid #555 !important; }
+  </style>
+
 </head>
 <body>
 
@@ -329,6 +378,7 @@
 
     <div class="cards">
 
+      <!-- Karte 1: Nebeko Case Study -->
       <a href="https://sebastian-weber.github.io/nebeko/case-study.html" class="card">
         <div class="card-image">
           <img src="screenshot-casestudy.png" alt="Nebenkostenabrechnung Case Study">
@@ -345,6 +395,7 @@
         </div>
       </a>
 
+      <!-- Karte 2: Nebeko Workflow -->
       <a href="https://sebastian-weber.github.io/nebeko/workflow.html" class="card">
         <div class="card-image">
           <img src="screenshot-workflow.png" alt="Nebenkostenabrechnung Workflow">
@@ -353,20 +404,12 @@
           <span class="card-tag tag-purple">AI Workflow</span>
           <h2>Nebenkostenabrechnung per Prompt</h2>
           <p>Wie ein Prompt eine Stunde Arbeit ersetzt. Google Drive, Claude MCP, vollautomatische PDF-Generierung.</p>
-          <div class="card-metrics">
-            <div class="metric">
-              <span class="metric-value purple">5</span>
-              <span class="metric-label">Workflow-Schritte</span>
-            </div>
-            <div class="metric">
-              <span class="metric-value purple">5</span>
-              <span class="metric-label">Wiederverwendbare Prompts</span>
-            </div>
-          </div>
+          <p style="font-size: 13px; font-weight: 700; color: var(--purple); margin-top: 4px; flex: 0;">Wie ein Prompt eine Stunde Arbeit ersetzt.</p>
           <span class="card-arrow arrow-purple">Workflow ansehen →</span>
         </div>
       </a>
 
+      <!-- Karte 3: LinkedIn Wheel Case Study -->
       <a href="https://sebastian-weber.github.io/linkedin-readiness-guide/linkedin-wheel-case-study.html" class="card">
         <div class="card-image">
           <img src="screenshot-banner.png" alt="LinkedIn Profile Readiness Guide Case Study">
@@ -383,7 +426,8 @@
         </div>
       </a>
 
-      <a href="https://sebastian-weber.github.io/linkedin-readiness-guide/linkedin-wheel-index.html" class="card">
+      <!-- Karte 4: LinkedIn Tool -->
+      <a href="https://sebastian-weber.github.io/linkedin-readiness-guide/" target="_blank" class="card">
         <div class="card-image">
           <img src="screenshot-wheel.png" alt="LinkedIn Profile Readiness Guide Tool">
         </div>
@@ -414,7 +458,7 @@
 
   <footer>
     <p>Sebastian Weber · UX/UI Designer · Design-to-Code · Köln 2026</p>
-    <p><a href="https://linkedin.com/in/sebastian-weber1708">LinkedIn</a></p>
+    <p><a href="https://linkedin.com/in/sebastian-weber1708">LinkedIn</a> · <a href="datenschutz.html">Impressum & Datenschutz</a></p>
   </footer>
 
   <script>
@@ -423,6 +467,31 @@
       const total = document.body.scrollHeight - window.innerHeight;
       document.getElementById('progress').style.width = (scrolled / total * 100) + '%';
     });
+  </script>
+
+
+  <!-- Cookie Banner -->
+  <div id="cookie-banner" style="display:none;">
+    <p>Diese Seite verwendet Google Analytics, um den Traffic anonym zu analysieren. <a href="https://policies.google.com/privacy" target="_blank">Datenschutz</a></p>
+    <button class="cookie-btn cookie-decline" onclick="decideConsent(false)">Ablehnen</button>
+    <button class="cookie-btn cookie-accept" onclick="decideConsent(true)">Akzeptieren</button>
+  </div>
+
+  <script>
+    function decideConsent(accepted) {
+      document.getElementById('cookie-banner').style.display = 'none';
+      if (accepted) {
+        localStorage.setItem('ga_consent', 'granted');
+        loadGA4();
+      } else {
+        localStorage.setItem('ga_consent', 'denied');
+      }
+    }
+
+    // Show banner only if no decision yet
+    if (!localStorage.getItem('ga_consent')) {
+      document.getElementById('cookie-banner').style.display = 'flex';
+    }
   </script>
 
 </body>
