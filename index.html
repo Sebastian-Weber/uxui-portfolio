@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- saved from url=(0049)https://sebastian-weber.github.io/uxui-portfolio/ -->
 <html lang="de"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -196,7 +195,6 @@
       flex: 1;
     }
 
-    /* Metrics row */
     .card-metrics {
       display: flex;
       gap: 20px;
@@ -229,7 +227,6 @@
     .metric-value.purple { color: var(--purple); }
     .metric-value.teal   { color: var(--teal); }
 
-    /* Quote block */
     .card-quote {
       padding-top: 14px;
       border-top: 1px solid var(--border);
@@ -302,12 +299,12 @@
       .card-quote cite { white-space: normal; }
     }
   </style>
-  <!-- Google Analytics 4 -->
-  <script type="text/javascript" crossorigin="anonymous" async="" src="./array.js.Download"></script><script>
+
+  <!-- Google Analytics 4 (consent-gated) -->
+  <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
 
-    // Only load GA4 if consent was given
     function loadGA4() {
       var s = document.createElement('script');
       s.async = true;
@@ -317,20 +314,97 @@
       gtag('config', 'G-64KGYY639W');
     }
 
-    // Check existing consent
     if (localStorage.getItem('ga_consent') === 'granted') {
       loadGA4();
     }
-  </script><script async="" src="./js"></script>
+  </script>
 
-<script>
+  <!-- PostHog — Enhanced Tracking -->
+  <script>
     !function(t,e){var o,n,p,r;e.__SV||(window.posthog && window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Pn On init Wn Qn ki Gn Kn zn capture calculateEventProperties rs register register_once register_for_session unregister unregister_for_session os getFeatureFlag getFeatureFlagPayload getFeatureFlagResult isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync ls identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty ns es createPersonProfile setInternalOrTestUser ss Hn cs opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing Yn debug Ci gr getPageViewId captureTraceFeedback captureTraceMetric qn".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+
     posthog.init('phc_ozweFkkTr9KtcQmuiTQHfjf3CiFv2hE2dKqwszmWutKv', {
-        api_host: 'https://eu.i.posthog.com',
-        defaults: '2026-05-30',
-        person_profiles: 'identified_only', // or 'always' to create profiles for anonymous users as well
-    })
-</script>
+      api_host: 'https://eu.i.posthog.com',
+      defaults: '2026-05-30',
+      person_profiles: 'identified_only',
+      session_recording: {
+        maskAllInputs: false,
+      },
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+
+      // 1. Project card clicks
+      document.querySelectorAll('.card').forEach(function (card) {
+        card.addEventListener('click', function () {
+          var tag   = card.querySelector('.card-tag') ? card.querySelector('.card-tag').textContent.trim() : 'unknown';
+          var title = card.querySelector('h2')        ? card.querySelector('h2').textContent.trim()        : 'unknown';
+          var href  = card.getAttribute('href') || '';
+          posthog.capture('project_card_clicked', {
+            card_title: title,
+            card_tag:   tag,
+            card_href:  href,
+          });
+        });
+      });
+
+      // 2. LinkedIn clicks (nav + footer)
+      document.querySelectorAll('a[href*="linkedin.com"]').forEach(function (el) {
+        el.addEventListener('click', function () {
+          posthog.capture('linkedin_clicked', {
+            source: el.closest('nav') ? 'nav' : 'footer',
+          });
+        });
+      });
+
+      // 3. About click (nav)
+      var aboutLink = document.querySelector('.nav-links a[href*="#"]');
+      if (aboutLink) {
+        aboutLink.addEventListener('click', function () {
+          posthog.capture('nav_about_clicked');
+        });
+      }
+
+      // 4. Logo click
+      var logo = document.querySelector('nav .logo');
+      if (logo) {
+        logo.addEventListener('click', function () {
+          posthog.capture('logo_clicked');
+        });
+      }
+
+      // 5. Footer Impressum / Datenschutz
+      var impressum = document.querySelector('footer a[href*="datenschutz"]');
+      if (impressum) {
+        impressum.addEventListener('click', function () {
+          posthog.capture('footer_impressum_clicked');
+        });
+      }
+
+      // 6. Scroll depth (25 / 50 / 75 / 100%)
+      var scrollMilestones = { 25: false, 50: false, 75: false, 100: false };
+      window.addEventListener('scroll', function () {
+        var scrolled = window.scrollY;
+        var total    = document.body.scrollHeight - window.innerHeight;
+        if (total <= 0) return;
+        var pct = Math.round(scrolled / total * 100);
+        [25, 50, 75, 100].forEach(function (m) {
+          if (!scrollMilestones[m] && pct >= m) {
+            scrollMilestones[m] = true;
+            posthog.capture('scroll_depth', { depth_percent: m });
+          }
+        });
+      }, { passive: true });
+
+      // 7. Time on page (30s / 60s / 120s)
+      [30, 60, 120].forEach(function (sec) {
+        setTimeout(function () {
+          posthog.capture('time_on_page', { seconds: sec });
+        }, sec * 1000);
+      });
+
+    });
+  </script>
 
   <style>
     #cookie-banner {
@@ -367,10 +441,10 @@
     .cookie-decline { background: transparent; color: #ccc; border: 1px solid #555 !important; }
   </style>
 
-<script type="text/javascript" crossorigin="anonymous" src="./config.js.Download"></script><script type="text/javascript" crossorigin="anonymous" src="./surveys.js.Download"></script><script src="chrome-extension://liecbddmkiiihnedobmlmillhodjkdmb/js/recordConsoleEvents.js"></script></head>
-<body cz-shortcut-listen="true">
+</head>
+<body>
 
-  <div id="progress" style="width: 99.9662%;"></div>
+  <div id="progress"></div>
 
   <nav>
     <a href="https://sebastian-weber.github.io/uxui-portfolio/index.html" class="logo" style="display:flex;align-items:center;line-height:0;margin-right:8px;"><svg width="40" height="40" style="display:block;margin-top:-2px;" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 19.0413V20.7092L15.9986 26.8336V25.3991L11.7131 23.7928V23.7848L10.3368 23.2366L1.51283 19.9819L10.3384 16.7504V16.7576L11.7146 16.2587L16.0001 14.6524V13.1113L0 19.0413Z" fill="#0F1117"></path><path d="M16.0001 24.0696V22.4023L0 16.2773V17.7113L4.2859 19.317V19.3279L5.66227 19.8759L14.4871 23.1294L5.66227 26.3619V26.3546L4.2859 26.8534L0 28.4591V29.9996L16.0001 24.0696Z" fill="#0F1117"></path><path d="M20.3237 26.8333H22.1382L28.8006 11H27.2401L25.4927 15.242H25.4809L24.8844 16.6032L21.3438 25.3361L17.826 16.6032H17.8339L17.2911 15.242L15.5436 11H13.8672L20.3237 26.8333Z" fill="#0F1117"></path><path d="M23.5229 26.8333H25.3374L31.9998 11H30.4394L28.6919 15.2418H28.6801L28.0837 16.603L24.543 25.3354L21.0252 16.603H21.0331L20.4903 15.2418L18.7429 11H17.0664L23.5229 26.8333Z" fill="#0F1117"></path></svg></a>
@@ -387,7 +461,6 @@
 
     <div class="cards">
 
-      <!-- Karte 1: Nebeko Case Study -->
       <a href="https://sebastian-weber.github.io/nebeko/case-study.html" class="card">
         <div class="card-image">
           <img src="./screenshot-casestudy.png" alt="Nebenkostenabrechnung Case Study">
@@ -404,7 +477,6 @@
         </div>
       </a>
 
-      <!-- Karte 2: Nebeko Workflow -->
       <a href="https://sebastian-weber.github.io/nebeko/workflow.html" class="card">
         <div class="card-image">
           <img src="./screenshot-workflow.png" alt="Nebenkostenabrechnung Workflow">
@@ -418,7 +490,6 @@
         </div>
       </a>
 
-      <!-- Karte 3: LinkedIn Wheel Case Study -->
       <a href="https://sebastian-weber.github.io/linkedin-readiness-guide/linkedin-wheel-case-study.html" class="card">
         <div class="card-image">
           <img src="./screenshot-banner.png" alt="LinkedIn Profile Readiness Guide Case Study">
@@ -435,7 +506,6 @@
         </div>
       </a>
 
-      <!-- Karte 4: LinkedIn Tool -->
       <a href="https://sebastian-weber.github.io/linkedin-readiness-guide/" class="card">
         <div class="card-image">
           <img src="./screenshot-wheel.png" alt="LinkedIn Profile Readiness Guide Tool">
@@ -444,7 +514,6 @@
           <span class="card-tag tag-teal">Tool</span>
           <h2>LinkedIn Profile Readiness Guide</h2>
           <p>Interaktive Checkliste für dein LinkedIn-Profil. Mit Live-Visualisierung des Fortschritts — direkt im Browser, ohne Login.</p>
-          <div class="card-metrics">
           <div class="card-metrics">
             <div class="metric">
               <span class="metric-value teal">2</span>
@@ -458,7 +527,6 @@
               <span class="metric-value teal">0</span>
               <span class="metric-label">Dev-Handoffs</span>
             </div>
-          </div>
           </div>
           <span class="card-arrow arrow-teal">Tool ausprobieren →</span>
         </div>
@@ -480,7 +548,6 @@
     });
   </script>
 
-
   <!-- Cookie Banner -->
   <div id="cookie-banner" style="display:none;">
     <p>Diese Seite verwendet Google Analytics, um den Traffic anonym zu analysieren. <a href="https://policies.google.com/privacy" target="_blank">Datenschutz</a></p>
@@ -491,6 +558,7 @@
   <script>
     function decideConsent(accepted) {
       document.getElementById('cookie-banner').style.display = 'none';
+      posthog.capture('cookie_consent', { accepted: accepted });
       if (accepted) {
         localStorage.setItem('ga_consent', 'granted');
         loadGA4();
@@ -499,12 +567,9 @@
       }
     }
 
-    // Show banner only if no decision yet
     if (!localStorage.getItem('ga_consent')) {
       document.getElementById('cookie-banner').style.display = 'flex';
     }
   </script>
-
-
 
 </body></html>
