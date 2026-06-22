@@ -334,21 +334,62 @@
 
     document.addEventListener('DOMContentLoaded', function () {
 
-      // 1. Project card clicks
-      document.querySelectorAll('.card').forEach(function (card) {
+      // 1. Project card clicks — fires on all cards, with card_id and card_position
+      var cardMeta = [
+        { selector: 'a[href*="nebeko/case-study"]',           card_id: 'nebeko-case-study' },
+        { selector: 'a[href*="nebeko/workflow"]',             card_id: 'nebeko-workflow'   },
+        { selector: 'a[href*="linkedin-wheel-case-study"]',   card_id: 'linkedin-readiness-guide-case-study' },
+        { selector: 'a[href*="linkedin-readiness-guide/"]',   card_id: 'linkedin-readiness-guide-tool' },
+        { selector: 'a[href*="convert-slides"]',              card_id: 'convert-slides'    },
+      ];
+
+      document.querySelectorAll('.card').forEach(function (card, index) {
+        var href   = card.getAttribute('href') || '';
+        var match  = cardMeta.find(function (m) { return card.matches(m.selector); });
+        var cardId = match ? match.card_id : 'unknown';
+        var tag    = card.querySelector('.card-tag') ? card.querySelector('.card-tag').textContent.trim() : 'unknown';
+        var title  = card.querySelector('h2')        ? card.querySelector('h2').textContent.trim()        : 'unknown';
+
         card.addEventListener('click', function () {
-          var tag   = card.querySelector('.card-tag') ? card.querySelector('.card-tag').textContent.trim() : 'unknown';
-          var title = card.querySelector('h2')        ? card.querySelector('h2').textContent.trim()        : 'unknown';
-          var href  = card.getAttribute('href') || '';
           posthog.capture('project_card_clicked', {
-            card_title: title,
-            card_tag:   tag,
-            card_href:  href,
+            card_id:       cardId,
+            card_position: index + 1,
+            card_title:    title,
+            card_tag:      tag,
+            card_href:     href,
           });
         });
       });
 
-      // 2. LinkedIn clicks (nav + footer)
+      // 2. Case study clicks (granular — fires only on Case Study cards)
+      var caseStudyCards = [
+        {
+          selector: 'a[href*="nebeko/case-study"]',
+          case_study_id: 'nebeko',
+        },
+        {
+          selector: 'a[href*="linkedin-wheel-case-study"]',
+          case_study_id: 'linkedin-readiness-guide',
+        },
+        {
+          selector: 'a[href*="convert-slides"]',
+          case_study_id: 'convert-slides',
+        },
+      ];
+
+      caseStudyCards.forEach(function (def) {
+        var el = document.querySelector(def.selector);
+        if (!el) return;
+        el.addEventListener('click', function () {
+          posthog.capture('case_study_clicked', {
+            case_study_id: def.case_study_id,
+            source_page:   'portfolio',
+            opens_new_tab: el.getAttribute('target') === '_blank',
+          });
+        });
+      });
+
+      // 3. LinkedIn clicks (nav + footer)
       document.querySelectorAll('a[href*="linkedin.com"]').forEach(function (el) {
         el.addEventListener('click', function () {
           posthog.capture('linkedin_clicked', {
@@ -357,7 +398,7 @@
         });
       });
 
-      // 3. About click (nav)
+      // 4. About click (nav)
       var aboutLink = document.querySelector('.nav-links a[href*="#"]');
       if (aboutLink) {
         aboutLink.addEventListener('click', function () {
@@ -365,7 +406,7 @@
         });
       }
 
-      // 4. Logo click
+      // 5. Logo click
       var logo = document.querySelector('nav .logo');
       if (logo) {
         logo.addEventListener('click', function () {
@@ -373,7 +414,7 @@
         });
       }
 
-      // 5. Footer Impressum / Datenschutz
+      // 6. Footer Impressum / Datenschutz
       var impressum = document.querySelector('footer a[href*="datenschutz"]');
       if (impressum) {
         impressum.addEventListener('click', function () {
@@ -381,7 +422,7 @@
         });
       }
 
-      // 6. Scroll depth (25 / 50 / 75 / 100%)
+      // 7. Scroll depth (25 / 50 / 75 / 100%)
       var scrollMilestones = { 25: false, 50: false, 75: false, 100: false };
       window.addEventListener('scroll', function () {
         var scrolled = window.scrollY;
@@ -391,16 +432,39 @@
         [25, 50, 75, 100].forEach(function (m) {
           if (!scrollMilestones[m] && pct >= m) {
             scrollMilestones[m] = true;
-            posthog.capture('scroll_depth', { depth_percent: m });
+            posthog.capture('scroll_depth', {
+              depth_percent: m,
+              page:          'portfolio',
+            });
           }
         });
       }, { passive: true });
 
-      // 7. Time on page (30s / 60s / 120s)
+      // 8. Time on page (30s / 60s / 120s) — seconds_on_page = tatsaechlich vergangene Zeit
+      var pageLoadTime = Date.now();
       [30, 60, 120].forEach(function (sec) {
         setTimeout(function () {
-          posthog.capture('time_on_page', { seconds: sec });
+          posthog.capture('time_on_page', {
+            seconds_on_page: Math.round((Date.now() - pageLoadTime) / 1000),
+            page:            'portfolio',
+          });
         }, sec * 1000);
+      });
+
+      // 9. Contact clicks
+      var contactLinks = [
+        { selector: 'nav a[href*="linkedin.com"]',    method: 'linkedin' },
+        { selector: 'footer a[href*="linkedin.com"]', method: 'linkedin' },
+      ];
+      contactLinks.forEach(function (def) {
+        document.querySelectorAll(def.selector).forEach(function (el) {
+          el.addEventListener('click', function () {
+            posthog.capture('contact_clicked', {
+              method:      def.method,
+              source_page: 'portfolio',
+            });
+          });
+        });
       });
 
     });
