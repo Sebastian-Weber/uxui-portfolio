@@ -442,13 +442,14 @@
 
       // 8. Time on page (30s / 60s / 120s) — seconds_on_page = tatsaechlich vergangene Zeit
       var pageLoadTime = Date.now();
-      [30, 60, 120].forEach(function (sec) {
-        setTimeout(function () {
-          posthog.capture('time_on_page', {
-            seconds_on_page: Math.round((Date.now() - pageLoadTime) / 1000),
-            page:            'portfolio',
-          });
-        }, sec * 1000);
+    [30, 60, 120].forEach(function (sec) {
+      setTimeout(function () {
+        posthog.capture('time_on_page', {
+          seconds: Math.round((Date.now() - pageLoadTime) / 1000),
+          page:    'portfolio',
+        });
+      }, sec * 1000);
+
       });
 
       // 9. Contact clicks
