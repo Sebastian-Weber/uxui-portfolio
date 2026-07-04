@@ -473,6 +473,15 @@
         });
       });
 
+      // 10. Cookie-Einstellungen erneut öffnen (Art. 7 Abs. 3 DSGVO: Widerruf so einfach wie Erteilung)
+      var settingsLink = document.getElementById('cookie-settings-link');
+      if (settingsLink) {
+        settingsLink.addEventListener('click', function (e) {
+          e.preventDefault();
+          document.getElementById('cookie-banner').style.display = 'flex';
+        });
+      }
+
     });
   </script>
 
@@ -608,7 +617,7 @@
 
   <footer>
     <p>Sebastian Weber · UX/UI Designer · Design-to-Code · Köln 2026</p>
-    <p><a href="https://linkedin.com/in/sebastian-weber1708">LinkedIn</a> · <a href="https://sebastian-weber.github.io/uxui-portfolio/datenschutz.html">Impressum &amp; Datenschutz</a></p>
+    <p><a href="https://linkedin.com/in/sebastian-weber1708">LinkedIn</a> · <a href="https://sebastian-weber.github.io/uxui-portfolio/datenschutz.html">Impressum &amp; Datenschutz</a> · <a href="#" id="cookie-settings-link">Cookie-Einstellungen</a></p>
   </footer>
 
   <script>
