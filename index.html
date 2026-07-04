@@ -298,6 +298,23 @@
       footer { padding: 20px; flex-direction: column; gap: 8px; text-align: center; }
       .card-quote cite { white-space: normal; }
     }
+
+    /* Cookie Banner */
+    #cookie-banner {
+      position: fixed; bottom: 24px; left: 50%;
+      transform: translateX(-50%);
+      background: var(--dark); color: #fff;
+      padding: 16px 24px; border-radius: 12px;
+      display: flex; align-items: center; gap: 16px;
+      z-index: 200; font-size: 13px;
+      max-width: 560px; width: calc(100% - 48px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    }
+    #cookie-banner p { margin: 0; flex: 1; color: #ccc; line-height: 1.5; }
+    #cookie-banner a { color: #fff; }
+    .cookie-btn { padding: 8px 16px; border-radius: 7px; font-size: 12px; font-weight: 600; cursor: pointer; border: none; white-space: nowrap; font-family: inherit; }
+    .cookie-accept { background: var(--coral); color: #fff; }
+    .cookie-decline { background: transparent; color: #ccc; border: 1px solid #555 !important; }
   </style>
 
   <!-- PostHog — Enhanced Tracking -->
@@ -308,8 +325,15 @@
       api_host: 'https://eu.i.posthog.com',
       defaults: '2026-05-30',
       person_profiles: 'identified_only',
+      opt_out_capturing_by_default: true,
       session_recording: {
-        maskAllInputs: false,
+        maskAllInputs: true,
+      },
+      loaded: function (ph) {
+        if (!ph.has_opted_in_capturing() && !ph.has_opted_out_capturing()) {
+          var banner = document.getElementById('cookie-banner');
+          if (banner) banner.style.display = 'flex';
+        }
       },
     });
 
@@ -455,6 +479,12 @@
 </head>
 <body>
 
+  <div id="cookie-banner" style="display:none;">
+    <p>Diese Seite verwendet PostHog, um anonymisierte Nutzungsstatistiken und Sitzungsaufzeichnungen zu erstellen. <a href="https://sebastian-weber.github.io/uxui-portfolio/datenschutz.html">Datenschutz</a></p>
+    <button class="cookie-btn cookie-decline" onclick="decideConsent(false)">Ablehnen</button>
+    <button class="cookie-btn cookie-accept" onclick="decideConsent(true)">Akzeptieren</button>
+  </div>
+
   <div id="progress"></div>
 
   <nav>
@@ -587,6 +617,19 @@
       const total = document.body.scrollHeight - window.innerHeight;
       document.getElementById('progress').style.width = (scrolled / total * 100) + '%';
     });
+  </script>
+
+  <script>
+    function decideConsent(accepted) {
+      document.getElementById('cookie-banner').style.display = 'none';
+      if (accepted) {
+        posthog.opt_in_capturing();
+      } else {
+        posthog.opt_out_capturing();
+      }
+      // No-op if declined — capture() is silently dropped once opted out.
+      posthog.capture('cookie_consent', { accepted: accepted });
+    }
   </script>
 
 </body></html>
