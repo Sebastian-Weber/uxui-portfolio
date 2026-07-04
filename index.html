@@ -300,25 +300,6 @@
     }
   </style>
 
-  <!-- Google Analytics 4 (consent-gated) -->
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-
-    function loadGA4() {
-      var s = document.createElement('script');
-      s.async = true;
-      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-64KGYY639W';
-      document.head.appendChild(s);
-      gtag('js', new Date());
-      gtag('config', 'G-64KGYY639W');
-    }
-
-    if (localStorage.getItem('ga_consent') === 'granted') {
-      loadGA4();
-    }
-  </script>
-
   <!-- PostHog — Enhanced Tracking -->
   <script>
     !function(t,e){var o,n,p,r;e.__SV||(window.posthog && window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Pn On init Wn Qn ki Gn Kn zn capture calculateEventProperties rs register register_once register_for_session unregister unregister_for_session os getFeatureFlag getFeatureFlagPayload getFeatureFlagResult isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync ls identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty ns es createPersonProfile setInternalOrTestUser ss Hn cs opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing Yn debug Ci gr getPageViewId captureTraceFeedback captureTraceMetric qn".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
@@ -471,41 +452,6 @@
     });
   </script>
 
-  <style>
-    #cookie-banner {
-      position: fixed;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--dark);
-      color: #fff;
-      padding: 16px 24px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      z-index: 200;
-      font-size: 13px;
-      max-width: 560px;
-      width: calc(100% - 48px);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-    }
-    #cookie-banner p { margin: 0; flex: 1; color: #ccc; line-height: 1.5; }
-    #cookie-banner a { color: #fff; }
-    .cookie-btn {
-      padding: 8px 16px;
-      border-radius: 7px;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      border: none;
-      white-space: nowrap;
-      font-family: 'Montserrat', system-ui, sans-serif;
-    }
-    .cookie-accept { background: var(--steel); color: #fff; }
-    .cookie-decline { background: transparent; color: #ccc; border: 1px solid #555 !important; }
-  </style>
-
 </head>
 <body>
 
@@ -535,7 +481,22 @@
           <h2>From Ambiguous Choice to Curated Presets</h2>
           <p>How curating presets instead of adding more options became the real design move, and how transparency builds trust.</p>
           <div class="card-quote quote-coral">
-            <blockquote>Coming soon ...</blockquote>
+            <blockquote>"Will be super helpful for all situations."</blockquote>
+            <cite>Anonymous stakeholder</cite>
+          </div>
+          <div class="card-metrics">
+            <div class="metric">
+              <span class="metric-value coral">4</span>
+              <span class="metric-label">Iterations</span>
+            </div>
+            <div class="metric">
+              <span class="metric-value coral">3</span>
+              <span class="metric-label">Presets</span>
+            </div>
+            <div class="metric">
+              <span class="metric-value coral">0</span>
+              <span class="metric-label">Ambiguity</span>
+            </div>
           </div>
           <span class="card-arrow arrow-coral">Case Study lesen →</span>
         </div>
@@ -626,30 +587,6 @@
       const total = document.body.scrollHeight - window.innerHeight;
       document.getElementById('progress').style.width = (scrolled / total * 100) + '%';
     });
-  </script>
-
-  <!-- Cookie Banner -->
-  <div id="cookie-banner" style="display:none;">
-    <p>Diese Seite verwendet Google Analytics, um den Traffic anonym zu analysieren. <a href="https://policies.google.com/privacy" target="_blank">Datenschutz</a></p>
-    <button class="cookie-btn cookie-decline" onclick="decideConsent(false)">Ablehnen</button>
-    <button class="cookie-btn cookie-accept" onclick="decideConsent(true)">Akzeptieren</button>
-  </div>
-
-  <script>
-    function decideConsent(accepted) {
-      document.getElementById('cookie-banner').style.display = 'none';
-      posthog.capture('cookie_consent', { accepted: accepted });
-      if (accepted) {
-        localStorage.setItem('ga_consent', 'granted');
-        loadGA4();
-      } else {
-        localStorage.setItem('ga_consent', 'denied');
-      }
-    }
-
-    if (!localStorage.getItem('ga_consent')) {
-      document.getElementById('cookie-banner').style.display = 'flex';
-    }
   </script>
 
 </body></html>
