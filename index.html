@@ -8,15 +8,17 @@
   <link href="./css2" rel="stylesheet">
   <style>
     :root {
-      --coral:   #E06040;
-      --purple:  #7B5EA7;
-      --teal:    #4A9B8E;
+      --coral:      #E06040;
+      --coral-text: #D04522;
+      --purple:     #7B5EA7;
+      --teal:       #48988B;
+      --teal-text:  #3D7F75;
       --steel:   #4A6FA5;
       --dark:    #0F1117;
       --paper:   #FAFAFA;
       --white:   #FFFFFF;
       --text:    #1A1A1A;
-      --muted:   #7A7A7A;
+      --muted:   #757575;
       --border:  #E0DEDA;
     }
 
@@ -80,7 +82,7 @@
     }
 
     .label {
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 600;
       color: var(--muted);
       letter-spacing: 0.1em;
@@ -165,12 +167,16 @@
       flex: 1;
     }
 
+    .card > .card-tag {
+      margin: 16px 16px 0;
+    }
+
     .card-tag {
-      font-size: 10px;
+      font-size: 19px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-      padding: 4px 10px;
+      letter-spacing: 0.05em;
+      padding: 6px 16px;
       border-radius: 20px;
       display: inline-block;
       width: fit-content;
@@ -216,16 +222,16 @@
     }
 
     .metric-label {
-      font-size: 10px;
+      font-size: 12px;
       font-weight: 600;
       color: var(--muted);
       text-transform: uppercase;
       letter-spacing: 0.07em;
     }
 
-    .metric-value.coral  { color: var(--coral); }
+    .metric-value.coral  { color: var(--coral-text); }
     .metric-value.purple { color: var(--purple); }
-    .metric-value.teal   { color: var(--teal); }
+    .metric-value.teal   { color: var(--teal-text); }
 
     .card-quote {
       padding-top: 14px;
@@ -237,7 +243,7 @@
     }
 
     .card-quote blockquote {
-      font-size: 11.5px;
+      font-size: 13px;
       line-height: 1.65;
       font-style: italic;
       font-weight: 400;
@@ -245,8 +251,8 @@
     }
 
     .quote-coral blockquote {
-      border-left: 2px solid var(--coral);
-      color: var(--coral);
+      border-left: 2px solid var(--coral-text);
+      color: var(--coral-text);
     }
 
     .quote-purple blockquote {
@@ -256,7 +262,7 @@
 
     .card-quote cite {
       display: block;
-      font-size: 10px;
+      font-size: 12px;
       font-weight: 600;
       color: var(--muted);
       text-transform: uppercase;
@@ -273,9 +279,9 @@
       margin-top: 8px;
     }
 
-    .arrow-coral  { color: var(--coral); }
+    .arrow-coral  { color: var(--coral-text); }
     .arrow-purple { color: var(--purple); }
-    .arrow-teal   { color: var(--teal); }
+    .arrow-teal   { color: var(--teal-text); }
 
     footer {
       border-top: 1px solid var(--border);
@@ -497,7 +503,7 @@
   <div id="progress"></div>
 
   <nav>
-    <a href="https://sebastian-weber.github.io/uxui-portfolio/index.html" class="logo" style="display:flex;align-items:center;line-height:0;margin-right:8px;"><svg width="40" height="40" style="display:block;margin-top:-2px;" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 19.0413V20.7092L15.9986 26.8336V25.3991L11.7131 23.7928V23.7848L10.3368 23.2366L1.51283 19.9819L10.3384 16.7504V16.7576L11.7146 16.2587L16.0001 14.6524V13.1113L0 19.0413Z" fill="#0F1117"></path><path d="M16.0001 24.0696V22.4023L0 16.2773V17.7113L4.2859 19.317V19.3279L5.66227 19.8759L14.4871 23.1294L5.66227 26.3619V26.3546L4.2859 26.8534L0 28.4591V29.9996L16.0001 24.0696Z" fill="#0F1117"></path><path d="M20.3237 26.8333H22.1382L28.8006 11H27.2401L25.4927 15.242H25.4809L24.8844 16.6032L21.3438 25.3361L17.826 16.6032H17.8339L17.2911 15.242L15.5436 11H13.8672L20.3237 26.8333Z" fill="#0F1117"></path><path d="M23.5229 26.8333H25.3374L31.9998 11H30.4394L28.6919 15.2418H28.6801L28.0837 16.603L24.543 25.3354L21.0252 16.603H21.0331L20.4903 15.2418L18.7429 11H17.0664L23.5229 26.8333Z" fill="#0F1117"></path></svg></a>
+    <a href="https://sebastian-weber.github.io/uxui-portfolio/index.html" class="logo" aria-label="Sebastian Weber - Startseite" style="display:flex;align-items:center;line-height:0;margin-right:8px;"><svg width="40" height="40" style="display:block;margin-top:-2px;" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M0 19.0413V20.7092L15.9986 26.8336V25.3991L11.7131 23.7928V23.7848L10.3368 23.2366L1.51283 19.9819L10.3384 16.7504V16.7576L11.7146 16.2587L16.0001 14.6524V13.1113L0 19.0413Z" fill="#0F1117"></path><path d="M16.0001 24.0696V22.4023L0 16.2773V17.7113L4.2859 19.317V19.3279L5.66227 19.8759L14.4871 23.1294L5.66227 26.3619V26.3546L4.2859 26.8534L0 28.4591V29.9996L16.0001 24.0696Z" fill="#0F1117"></path><path d="M20.3237 26.8333H22.1382L28.8006 11H27.2401L25.4927 15.242H25.4809L24.8844 16.6032L21.3438 25.3361L17.826 16.6032H17.8339L17.2911 15.242L15.5436 11H13.8672L20.3237 26.8333Z" fill="#0F1117"></path><path d="M23.5229 26.8333H25.3374L31.9998 11H30.4394L28.6919 15.2418H28.6801L28.0837 16.603L24.543 25.3354L21.0252 16.603H21.0331L20.4903 15.2418L18.7429 11H17.0664L23.5229 26.8333Z" fill="#0F1117"></path></svg></a>
     <ul class="nav-links">
       <li><a href="https://sebastian-weber.github.io/uxui-portfolio/about.html">About</a></li>
       <li><a href="https://linkedin.com/in/sebastian-weber1708" target="_blank">LinkedIn</a></li>
@@ -512,11 +518,11 @@
     <div class="cards">
 
       <a href="https://sebastian-weber.github.io/Preset-template-selection-tool/preset-template-selection-case-study-EN.html" class="card">
+        <span class="card-tag tag-coral">Case Study</span>
         <div class="card-image">
           <img src="./screenshot-update-layout.png" alt="Preset Template Selection Tool Case Study">
         </div>
         <div class="card-body">
-          <span class="card-tag tag-coral">Case Study</span>
           <h2>From Ambiguous Choice to Curated Presets</h2>
           <p>How curating presets instead of adding more options became the real design move, and how transparency builds trust.</p>
           <div class="card-quote quote-coral">
@@ -542,11 +548,11 @@
       </a>
 
       <a href="https://sebastian-weber.github.io/nebeko/case-study.html" class="card">
+        <span class="card-tag tag-coral">Case Study</span>
         <div class="card-image">
           <img src="./screenshot-casestudy.png" alt="Nebenkostenabrechnung Case Study">
         </div>
         <div class="card-body">
-          <span class="card-tag tag-coral">Case Study</span>
           <h2>Den ganzen Tag der Arbeit für KI und Excel</h2>
           <p>In-context interview ohne Leitfaden. Drei UX-Entscheidungen. Und warum kein Figma-Prototyp die richtige Antwort war.</p>
           <div class="card-quote quote-coral">
@@ -558,11 +564,11 @@
       </a>
 
       <a href="https://sebastian-weber.github.io/nebeko/workflow.html" class="card">
+        <span class="card-tag tag-purple">AI Workflow</span>
         <div class="card-image">
           <img src="./screenshot-workflow.png" alt="Nebenkostenabrechnung Workflow">
         </div>
         <div class="card-body">
-          <span class="card-tag tag-purple">AI Workflow</span>
           <h2>Nebenkostenabrechnung per Prompt</h2>
           <p>Wie ein Prompt eine Stunde Arbeit ersetzt. Google Drive, Claude MCP, vollautomatische PDF-Generierung.</p>
           <p style="font-size: 13px; font-weight: 700; color: var(--purple); margin-top: 4px; flex: 0;">3 Prompts. 1 PDF.</p>
@@ -571,11 +577,11 @@
       </a>
 
       <a href="https://sebastian-weber.github.io/linkedin-readiness-guide/linkedin-wheel-case-study.html" class="card">
+        <span class="card-tag tag-coral">Case Study</span>
         <div class="card-image">
           <img src="./screenshot-banner.png" alt="LinkedIn Profile Readiness Guide Case Study">
         </div>
         <div class="card-body">
-          <span class="card-tag tag-coral">Case Study</span>
           <h2>LinkedIn Profile Readiness Guide</h2>
           <p>Wie aus einem Orientierungsproblem ein interaktives Browser-Tool wurde. Ohne Framework, ohne Design-Tool, ohne Team.</p>
           <div class="card-quote quote-coral">
@@ -587,11 +593,11 @@
       </a>
 
       <a href="https://sebastian-weber.github.io/linkedin-readiness-guide/" class="card">
+        <span class="card-tag tag-teal">Tool</span>
         <div class="card-image">
           <img src="./screenshot-wheel.png" alt="LinkedIn Profile Readiness Guide Tool">
         </div>
         <div class="card-body">
-          <span class="card-tag tag-teal">Tool</span>
           <h2>LinkedIn Profile Readiness Guide</h2>
           <p>Interaktive Checkliste für dein LinkedIn-Profil. Mit Live-Visualisierung des Fortschritts — direkt im Browser, ohne Login.</p>
           <div class="card-metrics">
