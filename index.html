@@ -8,8 +8,8 @@
   <link href="./css2" rel="stylesheet">
   <style>
     :root {
-      --coral:      #E06040;
-      --coral-text: #D04522;
+      --coral:      #B45309;
+      --coral-text: #B45309;
       --purple:     #7B5EA7;
       --teal:       #48988B;
       --teal-text:  #3D7F75;
@@ -167,10 +167,6 @@
       flex: 1;
     }
 
-    .card > .card-tag {
-      margin: 16px 16px 0;
-    }
-
     .card-tag {
       font-size: 12px;
       font-weight: 700;
@@ -204,7 +200,8 @@
 
     .card-metrics {
       display: flex;
-      gap: 20px;
+      flex-wrap: wrap;
+      gap: 16px 20px;
       padding-top: 14px;
       border-top: 1px solid var(--border);
       margin-top: 4px;
@@ -214,6 +211,8 @@
       display: flex;
       flex-direction: column;
       gap: 2px;
+      min-width: 0;
+      flex: 1 1 auto;
     }
 
     .metric-value {
@@ -269,9 +268,6 @@
       text-transform: uppercase;
       letter-spacing: 0.07em;
       font-style: normal;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
 
     .card-arrow {
@@ -519,11 +515,11 @@
     <div class="cards">
 
       <a href="https://sebastian-weber.github.io/Preset-template-selection-tool/preset-template-selection-case-study-EN.html" class="card">
-        <span class="card-tag tag-coral">Case Study</span>
         <div class="card-image">
           <img src="./screenshot-update-layout.png" alt="Preset Template Selection Tool Case Study">
         </div>
         <div class="card-body">
+          <span class="card-tag tag-coral">Case Study</span>
           <h2>From Ambiguous Choice to Curated Presets</h2>
           <p>How curating presets instead of adding more options became the real design move, and how transparency builds trust.</p>
           <div class="card-quote quote-coral">
@@ -549,11 +545,11 @@
       </a>
 
       <a href="https://sebastian-weber.github.io/nebeko/case-study.html" class="card">
-        <span class="card-tag tag-coral">Case Study</span>
         <div class="card-image">
           <img src="./screenshot-casestudy.png" alt="Nebenkostenabrechnung Case Study">
         </div>
         <div class="card-body">
+          <span class="card-tag tag-coral">Case Study</span>
           <h2>Den ganzen Tag der Arbeit für KI und Excel</h2>
           <p>In-context interview ohne Leitfaden. Drei UX-Entscheidungen. Und warum kein Figma-Prototyp die richtige Antwort war.</p>
           <div class="card-quote quote-coral">
@@ -565,11 +561,11 @@
       </a>
 
       <a href="https://sebastian-weber.github.io/nebeko/workflow.html" class="card">
-        <span class="card-tag tag-purple">AI Workflow</span>
         <div class="card-image">
           <img src="./screenshot-workflow.png" alt="Nebenkostenabrechnung Workflow">
         </div>
         <div class="card-body">
+          <span class="card-tag tag-purple">AI Workflow</span>
           <h2>Nebenkostenabrechnung per Prompt</h2>
           <p>Wie ein Prompt eine Stunde Arbeit ersetzt. Google Drive, Claude MCP, vollautomatische PDF-Generierung.</p>
           <p style="font-size: 13px; font-weight: 700; color: var(--purple); margin-top: 4px; flex: 0;">3 Prompts. 1 PDF.</p>
@@ -578,11 +574,11 @@
       </a>
 
       <a href="https://sebastian-weber.github.io/linkedin-readiness-guide/linkedin-wheel-case-study.html" class="card">
-        <span class="card-tag tag-coral">Case Study</span>
         <div class="card-image">
           <img src="./screenshot-banner.png" alt="LinkedIn Profile Readiness Guide Case Study">
         </div>
         <div class="card-body">
+          <span class="card-tag tag-coral">Case Study</span>
           <h2>LinkedIn Profile Readiness Guide</h2>
           <p>Wie aus einem Orientierungsproblem ein interaktives Browser-Tool wurde. Ohne Framework, ohne Design-Tool, ohne Team.</p>
           <div class="card-quote quote-coral">
@@ -594,11 +590,11 @@
       </a>
 
       <a href="https://sebastian-weber.github.io/linkedin-readiness-guide/" class="card">
-        <span class="card-tag tag-teal">Tool</span>
         <div class="card-image">
           <img src="./screenshot-wheel.png" alt="LinkedIn Profile Readiness Guide Tool">
         </div>
         <div class="card-body">
+          <span class="card-tag tag-teal">Tool</span>
           <h2>LinkedIn Profile Readiness Guide</h2>
           <p>Interaktive Checkliste für dein LinkedIn-Profil. Mit Live-Visualisierung des Fortschritts — direkt im Browser, ohne Login.</p>
           <div class="card-metrics">
