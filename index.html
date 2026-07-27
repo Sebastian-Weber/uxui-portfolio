@@ -119,6 +119,34 @@
       margin-bottom: 64px;
     }
 
+    .rotating-line {
+      display: inline-flex;
+      align-items: baseline;
+    }
+
+    .rotating {
+      font-weight: 500;
+      display: inline-block;
+      white-space: nowrap;
+      min-width: 1px;
+      transition: color 0.15s;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1em;
+      margin-left: 2px;
+      vertical-align: -0.1em;
+      animation: blink 0.8s step-end infinite;
+      transition: background 0.15s;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+
     .cards {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -515,7 +543,12 @@
   <main>
     <div class="label">Design-to-Code Portfolio</div>
     <h1>Sebastian Weber</h1>
-    <p class="sub">UX/UI Designer aus Köln.<br>Ich designe Interfaces und baue sie selbst.</p>
+    <p class="sub">
+      UX/UI Designer aus Köln.<br>
+      Background in design technology, native software development, web/app development, and data analytics.
+      I build interfaces that are
+      <span class="rotating-line"><span class="rotating" id="word"></span><span class="cursor" id="cursor"></span></span>
+    </p>
 
     <div class="cards">
 
@@ -673,6 +706,63 @@
       // No-op if declined — capture() is silently dropped once opted out.
       posthog.capture('cookie_consent', { accepted: accepted });
     }
+  </script>
+
+  <!-- Typing animation: rotating adjectives, colored with existing CD tokens -->
+  <script>
+    (function () {
+      var words = [
+        { text: 'data-driven.',   color: 'var(--steel)' },
+        { text: 'handoff-free.',  color: 'var(--teal)'  },
+        { text: 'ethical.',       color: 'var(--purple)'},
+        { text: 'empathetic.',    color: 'var(--coral)' }
+      ];
+
+      var el     = document.getElementById('word');
+      var cursor = document.getElementById('cursor');
+      if (!el || !cursor) return;
+
+      var wordIndex = 0;
+      var charIndex = 0;
+      var deleting  = false;
+
+      var TYPE_SPEED   = 60;
+      var DELETE_SPEED = 35;
+      var HOLD_TIME    = 1400;
+
+      function setColor(color) {
+        el.style.color = color;
+        cursor.style.background = color;
+      }
+
+      function tick() {
+        var current = words[wordIndex];
+
+        if (!deleting) {
+          if (charIndex === 0) setColor(current.color);
+          charIndex++;
+          el.textContent = current.text.slice(0, charIndex);
+          if (charIndex === current.text.length) {
+            deleting = true;
+            setTimeout(tick, HOLD_TIME);
+            return;
+          }
+          setTimeout(tick, TYPE_SPEED);
+        } else {
+          charIndex--;
+          el.textContent = current.text.slice(0, charIndex);
+          if (charIndex === 0) {
+            deleting = false;
+            wordIndex = (wordIndex + 1) % words.length;
+            setTimeout(tick, 300);
+            return;
+          }
+          setTimeout(tick, DELETE_SPEED);
+        }
+      }
+
+      tick();
+    })();
   </script>
 
 </body></html>
