@@ -378,6 +378,7 @@
         { selector: 'a[href*="linkedin-readiness-guide/"]',   card_id: 'linkedin-readiness-guide-tool' },
         { selector: 'a[href*="convert-slides"]',              card_id: 'convert-slides'    },
         { selector: 'a[href*="figma-make-redesign-navbar"]',  card_id: 'figma-make-navbar-case-study' },
+        { selector: 'a[href*="ga4-user-segmentation-web-dashboard"]', card_id: 'ga4-segmentation-dashboard' },
       ];
 
       document.querySelectorAll('.card').forEach(function (card, index) {
@@ -415,6 +416,10 @@
         {
           selector: 'a[href*="figma-make-redesign-navbar"]',
           case_study_id: 'figma-make-navbar',
+        },
+        {
+          selector: 'a[href*="ga4-user-segmentation-web-dashboard"]',
+          case_study_id: 'ga4-segmentation-dashboard',
         },
       ];
 
@@ -550,6 +555,32 @@
     </p>
 
     <div class="cards">
+
+      <a href="https://sebastian-weber.github.io/ga4-user-segmentation-web-dashboard/" class="card">
+        <div class="card-image">
+          <img src="./hero-dashboards.png" alt="GA4 Behavioral Segmentation of Google Merchandise Store Users">
+        </div>
+        <div class="card-body">
+          <span class="card-tag tag-coral">Case Study</span>
+          <h2>GA4 Behavioral Segmentation of Google Merchandise Store Users</h2>
+          <p>270.154 Nutzer:innen via k-means in vier Verhaltenssegmente geclustert. Von BigQuery SQL über Python bis zum interaktiven Dashboard.</p>
+          <div class="card-metrics">
+            <div class="metric">
+              <span class="metric-value coral">270k</span>
+              <span class="metric-label">Users</span>
+            </div>
+            <div class="metric">
+              <span class="metric-value coral">4</span>
+              <span class="metric-label">Segmente</span>
+            </div>
+            <div class="metric">
+              <span class="metric-value coral">65</span>
+              <span class="metric-label">Sheets Workbook</span>
+            </div>
+          </div>
+          <span class="card-arrow arrow-coral">Case Study lesen →</span>
+        </div>
+      </a>
 
       <a href="https://sebastian-weber.github.io/figma-make-redesign-navbar/case-study.html" class="card">
         <div class="card-image">
