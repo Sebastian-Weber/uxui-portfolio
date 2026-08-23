@@ -147,11 +147,80 @@
       51%, 100% { opacity: 0; }
     }
 
+    .filter-hint {
+      display: none;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 20px;
+      padding: 12px 16px;
+      background: #F3F0F9;
+      border-radius: 10px;
+    }
+
+    .filter-hint.visible { display: flex; }
+
+    .filter-hint strong { color: var(--purple); font-weight: 700; }
+
+    .filter-hint button {
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--purple);
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-decoration: underline;
+      padding: 0;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 40px;
+    }
+
+    .filter-chip {
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 20px;
+      border: 1.5px solid var(--border);
+      background: var(--white);
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .filter-chip:hover {
+      border-color: var(--steel);
+      color: var(--steel);
+      background: #EAEFF7;
+    }
+
+    .filter-chip.active {
+      background: var(--steel);
+      border-color: var(--steel);
+      color: var(--white);
+    }
+
+    .filter-chip[data-filter="all"].active {
+      background: var(--dark);
+      border-color: var(--dark);
+    }
+
     .cards {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
       gap: 20px;
     }
+
+    .card.hidden { display: none; }
 
     .card {
       background: var(--white);
@@ -172,7 +241,7 @@
 
     .card-image {
       width: 100%;
-      height: 220px;
+      height: 380px;
       overflow: hidden;
       flex-shrink: 0;
     }
@@ -180,10 +249,9 @@
     .card-image img {
       width: 100%;
       height: 100%;
-      object-fit: contain;
-      object-position: center;
+      object-fit: cover;
+      object-position: top center;
       display: block;
-      padding: 16px;
       background: var(--white);
     }
 
@@ -554,9 +622,21 @@
       <span class="rotating-line"><span class="rotating" id="word"></span><span class="cursor" id="cursor"></span></span>
     </p>
 
+    <div class="filter-hint" id="filter-hint">
+      <span id="filter-hint-text"></span>
+      <button id="filter-hint-reset" type="button">Alle anzeigen</button>
+    </div>
+
+    <div class="filter-bar" role="group" aria-label="Portfolio nach Schwerpunkt filtern">
+      <button class="filter-chip active" data-filter="all" type="button">All</button>
+      <button class="filter-chip" data-filter="design" type="button">UX/UI Design</button>
+      <button class="filter-chip" data-filter="uxr" type="button">User Research</button>
+      <button class="filter-chip" data-filter="ai" type="button">AI Builder</button>
+    </div>
+
     <div class="cards">
 
-      <a href="https://sebastian-weber.github.io/ga4-user-segmentation-web-dashboard/" class="card">
+      <a href="https://sebastian-weber.github.io/ga4-user-segmentation-web-dashboard/" class="card" data-category="uxr">
         <div class="card-image">
           <img src="./hero-dashboards.png" alt="GA4 Behavioral Segmentation of Google Merchandise Store Users">
         </div>
@@ -582,7 +662,7 @@
         </div>
       </a>
 
-      <a href="https://sebastian-weber.github.io/figma-make-redesign-navbar/case-study.html" class="card">
+      <a href="https://sebastian-weber.github.io/figma-make-redesign-navbar/case-study.html" class="card" data-category="ai uxr"
         <div class="card-image">
           <img src="./screenshot-nav-redesign-before-after.png" alt="Human Review of an AI-Generated Redesign Case Study">
         </div>
@@ -608,7 +688,7 @@
         </div>
       </a>
 
-      <a href="https://sebastian-weber.github.io/Preset-template-selection-tool/preset-template-selection-case-study-EN.html" class="card">
+      <a href="https://sebastian-weber.github.io/Preset-template-selection-tool/preset-template-selection-case-study-EN.html" class="card" data-category="design"
         <div class="card-image">
           <img src="./screenshot-update-layout.png" alt="Preset Template Selection Tool Case Study">
         </div>
@@ -638,7 +718,7 @@
         </div>
       </a>
 
-      <a href="https://sebastian-weber.github.io/nebeko/case-study.html" class="card">
+      <a href="https://sebastian-weber.github.io/nebeko/case-study.html" class="card" data-category="uxr ai"
         <div class="card-image">
           <img src="./screenshot-casestudy.png" alt="Nebenkostenabrechnung Case Study">
         </div>
@@ -654,7 +734,7 @@
         </div>
       </a>
 
-      <a href="https://sebastian-weber.github.io/nebeko/workflow.html" class="card">
+      <a href="https://sebastian-weber.github.io/nebeko/workflow.html" class="card" data-category="ai"
         <div class="card-image">
           <img src="./screenshot-workflow.png" alt="Nebenkostenabrechnung Workflow">
         </div>
@@ -667,7 +747,7 @@
         </div>
       </a>
 
-      <a href="https://sebastian-weber.github.io/linkedin-readiness-guide/linkedin-wheel-case-study.html" class="card">
+      <a href="https://sebastian-weber.github.io/linkedin-readiness-guide/linkedin-wheel-case-study.html" class="card" data-category="design ai"
         <div class="card-image">
           <img src="./screenshot-banner.png" alt="LinkedIn Profile Readiness Guide Case Study">
         </div>
@@ -683,7 +763,7 @@
         </div>
       </a>
 
-      <a href="https://sebastian-weber.github.io/linkedin-readiness-guide/linkedin-wheel-index.html" class="card">
+      <a href="https://sebastian-weber.github.io/linkedin-readiness-guide/linkedin-wheel-index.html" class="card" data-category="design ai"
         <div class="card-image">
           <img src="./screenshot-wheel.png" alt="LinkedIn Profile Readiness Guide Tool">
         </div>
@@ -792,6 +872,68 @@
       }
 
       tick();
+    })();
+  </script>
+
+  <!-- Filter bar: manual chip clicks (single-select) + UTM-preselect via utm_content -->
+  <script>
+    (function () {
+      var chips     = document.querySelectorAll('.filter-chip');
+      var cards     = document.querySelectorAll('.card');
+      var hint      = document.getElementById('filter-hint');
+      var hintText  = document.getElementById('filter-hint-text');
+      var hintReset = document.getElementById('filter-hint-reset');
+
+      var categoryLabels = {
+        design: 'UX/UI Design',
+        ai:     'AI Builder',
+        uxr:    'User Research'
+      };
+
+      function applyFilter(category, source) {
+        chips.forEach(function (chip) {
+          chip.classList.toggle('active', chip.dataset.filter === category);
+        });
+
+        cards.forEach(function (card) {
+          var cats = (card.dataset.category || '').split(' ');
+          var show = category === 'all' || cats.indexOf(category) !== -1;
+          card.classList.toggle('hidden', !show);
+        });
+
+        if (source === 'link' && category !== 'all') {
+          hintText.innerHTML = 'Vorausgewählt: <strong>' + categoryLabels[category] + '</strong>';
+          hint.classList.add('visible');
+        } else {
+          hint.classList.remove('visible');
+        }
+      }
+
+      chips.forEach(function (chip) {
+        chip.addEventListener('click', function () {
+          var category = chip.dataset.filter;
+          applyFilter(category, 'manual');
+          posthog.capture('filter_clicked', { category: category });
+        });
+      });
+
+      hintReset.addEventListener('click', function () {
+        applyFilter('all', 'manual');
+        posthog.capture('filter_reset_clicked');
+      });
+
+      var params      = new URLSearchParams(window.location.search);
+      var utmContent  = params.get('utm_content');
+      var validValues = Object.keys(categoryLabels);
+
+      if (utmContent && validValues.indexOf(utmContent) !== -1) {
+        applyFilter(utmContent, 'link');
+        posthog.capture('filter_preset_via_link', {
+          category:   utmContent,
+          utm_source: params.get('utm_source'),
+          utm_medium: params.get('utm_medium')
+        });
+      }
     })();
   </script>
 
