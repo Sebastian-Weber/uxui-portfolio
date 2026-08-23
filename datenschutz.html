@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Impressum & Datenschutz · Sebastian Weber</title>
+  <title>Imprint & Privacy Policy · Sebastian Weber</title>
   <link rel="icon" type="image/svg+xml" href="sw_favicon32.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -37,9 +37,59 @@
     }
 
     nav a { text-decoration: none; }
-    .nav-back { font-size: 13px; color: var(--muted); font-weight: 500; }
-    .nav-back:hover { color: var(--text); }
     .logo { display: flex; align-items: center; line-height: 0; text-decoration: none; }
+
+    .nav-links {
+      display: flex; gap: 28px; list-style: none; align-items: center;
+    }
+
+    .nav-links a {
+      font-size: 13px; color: var(--muted);
+      text-decoration: none; font-weight: 500;
+      transition: color 0.15s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-links .nav-flex-item {
+      display: inline-block;
+      min-width: 76px;
+      text-align: center;
+    }
+
+    .nav-current {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      cursor: default;
+    }
+
+    .lang-switch {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .lang-switch button {
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .lang-switch button.active {
+      color: var(--text);
+      font-weight: 700;
+      cursor: default;
+    }
+
+    .lang-switch .sep { color: var(--border); }
 
     main {
       max-width: 680px;
@@ -77,6 +127,19 @@
 
     .section { border-top: 1px solid var(--border); padding-top: 40px; margin-top: 40px; }
 
+    .courtesy-note {
+      font-size: 12px;
+      color: var(--muted);
+      font-style: italic;
+      background: #F3F0F9;
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin-bottom: 20px;
+      display: none;
+    }
+
+    .courtesy-note.visible { display: block; }
+
     footer {
       border-top: 1px solid var(--border);
       padding: 24px 48px;
@@ -97,47 +160,148 @@
 
 <nav>
   <a href="index.html" class="logo" style="display:flex;align-items:center;line-height:0;margin-right:8px;"><svg width="40" height="40" style="display:block;margin-top:-2px;" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 19.0413V20.7092L15.9986 26.8336V25.3991L11.7131 23.7928V23.7848L10.3368 23.2366L1.51283 19.9819L10.3384 16.7504V16.7576L11.7146 16.2587L16.0001 14.6524V13.1113L0 19.0413Z" fill="#0F1117"/><path d="M16.0001 24.0696V22.4023L0 16.2773V17.7113L4.2859 19.317V19.3279L5.66227 19.8759L14.4871 23.1294L5.66227 26.3619V26.3546L4.2859 26.8534L0 28.4591V29.9996L16.0001 24.0696Z" fill="#0F1117"/><path d="M20.3237 26.8333H22.1382L28.8006 11H27.2401L25.4927 15.242H25.4809L24.8844 16.6032L21.3438 25.3361L17.826 16.6032H17.8339L17.2911 15.242L15.5436 11H13.8672L20.3237 26.8333Z" fill="#0F1117"/><path d="M23.5229 26.8333H25.3374L31.9998 11H30.4394L28.6919 15.2418H28.6801L28.0837 16.603L24.543 25.3354L21.0252 16.603H21.0331L20.4903 15.2418L18.7429 11H17.0664L23.5229 26.8333Z" fill="#0F1117"/></svg></a>
-  <ul style="display:flex;gap:28px;list-style:none;align-items:center;">
-    <li><a href="index.html" style="font-size:13px;color:var(--muted);text-decoration:none;font-weight:500;">← Portfolio</a></li>
+  <ul class="nav-links">
+    <li><a href="index.html" class="nav-flex-item" data-i18n="nav-portfolio">Portfolio</a></li>
+    <li><a href="about.html" class="nav-flex-item" data-i18n="nav-about">About</a></li>
+    <li><span class="nav-current nav-flex-item" data-i18n="nav-imprint" aria-current="page">Imprint</span></li>
+    <li>
+      <span class="lang-switch">
+        <button type="button" data-lang="de">DE</button>
+        <span class="sep">|</span>
+        <button type="button" data-lang="en" class="active">EN</button>
+      </span>
+    </li>
+    <li><a href="https://linkedin.com/in/sebastian-weber1708" target="_blank">LinkedIn</a></li>
   </ul>
 </nav>
 
 <main>
-  <div class="label">Rechtliches</div>
-  <h1>Impressum &amp; Datenschutz</h1>
+  <div class="label" data-i18n="page-label">Legal</div>
+  <h1 data-i18n="page-h1">Imprint &amp; Privacy Policy</h1>
+
+  <p class="courtesy-note" id="courtesy-note">This is a courtesy translation for convenience. The German original is the legally binding version.</p>
 
   <!-- IMPRESSUM -->
-  <h2>Impressum</h2>
-  <p>Angaben gemäß § 5 TMG:</p>
-  <img src="adresse.png" alt="Adresse Sebastian Weber" style="display:block; margin: 8px 0 16px; max-width: 100%;">
-  <p>E-Mail: <img src="email.png" alt="E-Mail-Adresse Sebastian Weber" style="vertical-align: middle; max-width: 100%;"></p>
+  <h2 data-i18n="h2-imprint">Imprint</h2>
+  <p data-i18n="p-tmg">Information according to § 5 TMG (German Telemedia Act):</p>
+  <img src="adresse.png" alt="Address Sebastian Weber" style="display:block; margin: 8px 0 16px; max-width: 100%;">
+  <p><span data-i18n="p-email-label">Email:</span> <img src="email.png" alt="Email address Sebastian Weber" style="vertical-align: middle; max-width: 100%;"></p>
 
   <!-- DATENSCHUTZ -->
   <div class="section">
-    <h2>Datenschutzerklärung</h2>
+    <h2 data-i18n="h2-privacy">Privacy Policy</h2>
 
-    <h2>1. Verantwortlicher</h2>
-    <p>Verantwortlicher im Sinne der DSGVO ist die unter Impressum genannte Person.</p>
+    <h2 data-i18n="h2-controller">1. Data Controller</h2>
+    <p data-i18n="p-controller">The data controller within the meaning of the GDPR is the person named in the Imprint above.</p>
 
-    <h2>2. Hosting</h2>
-    <p>Diese Website wird über GitHub Pages gehostet. Anbieter ist GitHub Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA. GitHub kann beim Aufruf dieser Seite technische Daten (insbesondere IP-Adressen) verarbeiten. Weitere Informationen finden Sie in der <a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement" target="_blank">Datenschutzerklärung von GitHub</a>.</p>
+    <h2 data-i18n="h2-hosting">2. Hosting</h2>
+    <p data-i18n="p-hosting">This website is hosted via GitHub Pages. The provider is GitHub Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA. GitHub may process technical data (in particular IP addresses) when this page is accessed. For more information, see GitHub's <a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement" target="_blank">Privacy Statement</a>.</p>
 
-    <h2>3. PostHog Analytics</h2>
-    <p>Diese Website verwendet PostHog, einen Webanalysedienst, der über die EU-Region (eu.posthog.com) gehostet wird. PostHog wird nur nach Ihrer ausdrücklichen Einwilligung (Art. 6 Abs. 1 lit. a DSGVO) aktiviert; ohne Einwilligung werden keinerlei Nutzungsdaten erfasst oder übertragen.</p>
-    <p>Nach erteilter Einwilligung erfasst PostHog anonymisierte Nutzungsereignisse (z. B. Seitenaufrufe, Klicks, Scroll- und Verweildauer) sowie Sitzungsaufzeichnungen (Session Replays) Ihres Interaktionsverhaltens auf dieser Website. Eingabefelder werden dabei standardmäßig maskiert.</p>
-    <p>Die erfassten Ereignisdaten werden bei PostHog für 1 Jahr gespeichert (Free Plan). Sitzungsaufzeichnungen werden 30 Tage gespeichert (Free Plan).</p>
-    <p>Sie können Ihre Einwilligung jederzeit mit einem Klick widerrufen oder ändern über den Link "Cookie-Einstellungen" im Footer der jeweiligen Seite. Alternativ können Sie uns per E-Mail kontaktieren.</p>
-    <p>Weitere Informationen finden Sie in der <a href="https://posthog.com/privacy" target="_blank">Datenschutzerklärung von PostHog</a>.</p>
+    <h2 data-i18n="h2-posthog">3. PostHog Analytics</h2>
+    <p data-i18n="p-posthog-1">This website uses PostHog, a web analytics service hosted via the EU region (eu.posthog.com). PostHog is only activated after your explicit consent (Art. 6(1)(a) GDPR); without consent, no usage data is collected or transmitted.</p>
+    <p data-i18n="p-posthog-2">Once consent has been given, PostHog collects anonymized usage events (e.g. page views, clicks, scroll depth, and time on page) as well as session recordings (session replays) of your interaction on this website. Input fields are masked by default.</p>
+    <p data-i18n="p-posthog-3">Collected event data is stored at PostHog for 1 year (Free Plan). Session recordings are stored for 30 days (Free Plan).</p>
+    <p data-i18n="p-posthog-4">You can withdraw or change your consent at any time with one click via the "Cookie Settings" link in the footer of the respective page. Alternatively, you can contact us by email.</p>
+    <p data-i18n="p-posthog-5">For more information, see PostHog's <a href="https://posthog.com/privacy" target="_blank">Privacy Policy</a>.</p>
 
-    <h2>4. Ihre Rechte</h2>
-    <p>Sie haben das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung Ihrer personenbezogenen Daten sowie das Recht auf Datenübertragbarkeit. Wenden Sie sich dazu an die oben genannte E-Mail-Adresse.</p>
-    <p>Sie haben außerdem das Recht, sich bei einer Datenschutzaufsichtsbehörde zu beschweren. In Nordrhein-Westfalen ist dies der Landesbeauftragte für Datenschutz und Informationsfreiheit NRW.</p>
+    <h2 data-i18n="h2-rights">4. Your Rights</h2>
+    <p data-i18n="p-rights-1">You have the right to access, rectification, erasure, and restriction of processing of your personal data, as well as the right to data portability. To exercise these rights, please contact the email address given above.</p>
+    <p data-i18n="p-rights-2">You also have the right to lodge a complaint with a data protection supervisory authority. In North Rhine-Westphalia, this is the State Commissioner for Data Protection and Freedom of Information NRW.</p>
   </div>
 </main>
 
-<footer>
-  Sebastian Weber · UX/UI Designer · Köln 2026
+<footer data-i18n="footer-line1">
+  Sebastian Weber · UX/UI Designer · Cologne 2026
 </footer>
+
+<!-- i18n: translation dictionary + language switch (shared localStorage key with index.html / about.html) -->
+<script>
+  var translations = {
+    en: {
+      'nav-portfolio': 'Portfolio',
+      'nav-about': 'About',
+      'nav-imprint': 'Imprint',
+      'page-label': 'Legal',
+      'page-h1': 'Imprint &amp; Privacy Policy',
+      'h2-imprint': 'Imprint',
+      'p-tmg': 'Information according to § 5 TMG (German Telemedia Act):',
+      'p-email-label': 'Email:',
+      'h2-privacy': 'Privacy Policy',
+      'h2-controller': '1. Data Controller',
+      'p-controller': 'The data controller within the meaning of the GDPR is the person named in the Imprint above.',
+      'h2-hosting': '2. Hosting',
+      'p-hosting': 'This website is hosted via GitHub Pages. The provider is GitHub Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA. GitHub may process technical data (in particular IP addresses) when this page is accessed. For more information, see GitHub\'s <a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement" target="_blank">Privacy Statement</a>.',
+      'h2-posthog': '3. PostHog Analytics',
+      'p-posthog-1': 'This website uses PostHog, a web analytics service hosted via the EU region (eu.posthog.com). PostHog is only activated after your explicit consent (Art. 6(1)(a) GDPR); without consent, no usage data is collected or transmitted.',
+      'p-posthog-2': 'Once consent has been given, PostHog collects anonymized usage events (e.g. page views, clicks, scroll depth, and time on page) as well as session recordings (session replays) of your interaction on this website. Input fields are masked by default.',
+      'p-posthog-3': 'Collected event data is stored at PostHog for 1 year (Free Plan). Session recordings are stored for 30 days (Free Plan).',
+      'p-posthog-4': 'You can withdraw or change your consent at any time with one click via the "Cookie Settings" link in the footer of the respective page. Alternatively, you can contact us by email.',
+      'p-posthog-5': 'For more information, see PostHog\'s <a href="https://posthog.com/privacy" target="_blank">Privacy Policy</a>.',
+      'h2-rights': '4. Your Rights',
+      'p-rights-1': 'You have the right to access, rectification, erasure, and restriction of processing of your personal data, as well as the right to data portability. To exercise these rights, please contact the email address given above.',
+      'p-rights-2': 'You also have the right to lodge a complaint with a data protection supervisory authority. In North Rhine-Westphalia, this is the State Commissioner for Data Protection and Freedom of Information NRW.',
+      'footer-line1': 'Sebastian Weber · UX/UI Designer · Cologne 2026'
+    },
+    de: {
+      'nav-portfolio': 'Portfolio',
+      'nav-about': 'Über mich',
+      'nav-imprint': 'Impressum',
+      'page-label': 'Rechtliches',
+      'page-h1': 'Impressum &amp; Datenschutz',
+      'h2-imprint': 'Impressum',
+      'p-tmg': 'Angaben gemäß § 5 TMG:',
+      'p-email-label': 'E-Mail:',
+      'h2-privacy': 'Datenschutzerklärung',
+      'h2-controller': '1. Verantwortlicher',
+      'p-controller': 'Verantwortlicher im Sinne der DSGVO ist die oben unter Impressum genannte Person.',
+      'h2-hosting': '2. Hosting',
+      'p-hosting': 'Diese Website wird über GitHub Pages gehostet. Anbieter ist GitHub Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA. GitHub kann beim Aufruf dieser Seite technische Daten (insbesondere IP-Adressen) verarbeiten. Weitere Informationen finden Sie in der <a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement" target="_blank">Datenschutzerklärung von GitHub</a>.',
+      'h2-posthog': '3. PostHog Analytics',
+      'p-posthog-1': 'Diese Website verwendet PostHog, einen Webanalysedienst, der über die EU-Region (eu.posthog.com) gehostet wird. PostHog wird nur nach Ihrer ausdrücklichen Einwilligung (Art. 6 Abs. 1 lit. a DSGVO) aktiviert; ohne Einwilligung werden keinerlei Nutzungsdaten erfasst oder übertragen.',
+      'p-posthog-2': 'Nach erteilter Einwilligung erfasst PostHog anonymisierte Nutzungsereignisse (z. B. Seitenaufrufe, Klicks, Scroll- und Verweildauer) sowie Sitzungsaufzeichnungen (Session Replays) Ihres Interaktionsverhaltens auf dieser Website. Eingabefelder werden dabei standardmäßig maskiert.',
+      'p-posthog-3': 'Die erfassten Ereignisdaten werden bei PostHog für 1 Jahr gespeichert (Free Plan). Sitzungsaufzeichnungen werden 30 Tage gespeichert (Free Plan).',
+      'p-posthog-4': 'Sie können Ihre Einwilligung jederzeit mit einem Klick widerrufen oder ändern über den Link "Cookie-Einstellungen" im Footer der jeweiligen Seite. Alternativ können Sie uns per E-Mail kontaktieren.',
+      'p-posthog-5': 'Weitere Informationen finden Sie in der <a href="https://posthog.com/privacy" target="_blank">Datenschutzerklärung von PostHog</a>.',
+      'h2-rights': '4. Ihre Rechte',
+      'p-rights-1': 'Sie haben das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung Ihrer personenbezogenen Daten sowie das Recht auf Datenübertragbarkeit. Wenden Sie sich dazu an die oben genannte E-Mail-Adresse.',
+      'p-rights-2': 'Sie haben außerdem das Recht, sich bei einer Datenschutzaufsichtsbehörde zu beschweren. In Nordrhein-Westfalen ist dies der Landesbeauftragte für Datenschutz und Informationsfreiheit NRW.',
+      'footer-line1': 'Sebastian Weber · UX/UI Designer · Köln 2026'
+    }
+  };
+
+  var currentLang = localStorage.getItem('portfolio-lang') || 'en';
+
+  function applyTranslations(lang) {
+    document.documentElement.lang = lang;
+    var dict = translations[lang];
+    document.querySelectorAll('[data-i18n]').forEach(function (el) {
+      var key = el.getAttribute('data-i18n');
+      if (dict[key] !== undefined) {
+        el.innerHTML = dict[key];
+      }
+    });
+    document.querySelectorAll('.lang-switch button').forEach(function (btn) {
+      btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+    var note = document.getElementById('courtesy-note');
+    if (note) note.classList.toggle('visible', lang === 'en');
+  }
+
+  function switchLang(lang) {
+    currentLang = lang;
+    localStorage.setItem('portfolio-lang', lang);
+    applyTranslations(lang);
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    applyTranslations(currentLang);
+    document.querySelectorAll('.lang-switch button').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        if (btn.dataset.lang !== currentLang) switchLang(btn.dataset.lang);
+      });
+    });
+  });
+</script>
 
 </body>
 </html>
