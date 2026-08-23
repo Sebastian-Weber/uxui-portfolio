@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="de"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/svg+xml" href="https://sebastian-weber.github.io/uxui-portfolio/sw_favicon32.svg">
-  <title>Über mich · Sebastian Weber</title>
+  <title>About · Sebastian Weber</title>
   <link rel="preconnect" href="https://fonts.googleapis.com/">
   <link href="./css2" rel="stylesheet">
   <style>
@@ -60,6 +60,42 @@
     }
 
     .nav-links a:hover { color: var(--text); }
+
+    .nav-current {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      cursor: default;
+    }
+
+    .lang-switch {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .lang-switch button {
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .lang-switch button.active {
+      color: var(--text);
+      font-weight: 700;
+      cursor: default;
+    }
+
+    .lang-switch .sep {
+      color: var(--border);
+    }
 
     .logo {
       display: flex;
@@ -202,11 +238,19 @@
 
     document.addEventListener('DOMContentLoaded', function () {
 
-      // Portfolio-Link (Nav)
+      // Portfolio link (nav)
       var portfolioLink = document.querySelector('.nav-links a[href*="uxui-portfolio/index.html"]');
       if (portfolioLink) {
         portfolioLink.addEventListener('click', function () {
           posthog.capture('nav_portfolio_back_clicked', { source_page: 'about' });
+        });
+      }
+
+      // Imprint link (nav)
+      var imprintLink = document.querySelector('.nav-links a[href*="datenschutz"]');
+      if (imprintLink) {
+        imprintLink.addEventListener('click', function () {
+          posthog.capture('nav_imprint_clicked', { source_page: 'about' });
         });
       }
 
@@ -228,7 +272,7 @@
         });
       }
 
-      // Footer Impressum / Datenschutz
+      // Footer imprint / privacy
       var impressum = document.querySelector('footer a[href*="datenschutz"]');
       if (impressum) {
         impressum.addEventListener('click', function () {
@@ -265,7 +309,7 @@
         }, sec * 1000);
       });
 
-      // Cookie-Einstellungen erneut öffnen
+      // Reopen cookie settings
       var settingsLink = document.getElementById('cookie-settings-link');
       if (settingsLink) {
         settingsLink.addEventListener('click', function (e) {
@@ -274,6 +318,14 @@
         });
       }
 
+      // Language switch
+      var langButtons = document.querySelectorAll('.lang-switch button');
+      langButtons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          posthog.capture('lang_switched', { lang: btn.dataset.lang, source_page: 'about' });
+        });
+      });
+
     });
   </script>
 
@@ -281,9 +333,9 @@
 <body>
 
   <div id="cookie-banner" style="display:none;">
-    <p>Diese Seite verwendet PostHog, um anonymisierte Nutzungsstatistiken und Sitzungsaufzeichnungen zu erstellen. <a href="https://sebastian-weber.github.io/uxui-portfolio/datenschutz.html">Datenschutz</a></p>
-    <button class="cookie-btn cookie-decline" onclick="decideConsent(false)">Ablehnen</button>
-    <button class="cookie-btn cookie-accept" onclick="decideConsent(true)">Akzeptieren</button>
+    <p data-i18n="cookie-text">This site uses PostHog to create anonymized usage statistics and session recordings. <a href="https://sebastian-weber.github.io/uxui-portfolio/datenschutz.html">Privacy Policy</a></p>
+    <button class="cookie-btn cookie-decline" onclick="decideConsent(false)" data-i18n="cookie-decline">Decline</button>
+    <button class="cookie-btn cookie-accept" onclick="decideConsent(true)" data-i18n="cookie-accept">Accept</button>
   </div>
 
   <div id="progress"></div>
@@ -291,35 +343,43 @@
   <nav>
     <a href="https://sebastian-weber.github.io/uxui-portfolio/index.html" class="logo" style="display:flex;align-items:center;line-height:0;margin-right:8px;"><svg width="40" height="40" style="display:block;margin-top:-2px;" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 19.0413V20.7092L15.9986 26.8336V25.3991L11.7131 23.7928V23.7848L10.3368 23.2366L1.51283 19.9819L10.3384 16.7504V16.7576L11.7146 16.2587L16.0001 14.6524V13.1113L0 19.0413Z" fill="#0F1117"></path><path d="M16.0001 24.0696V22.4023L0 16.2773V17.7113L4.2859 19.317V19.3279L5.66227 19.8759L14.4871 23.1294L5.66227 26.3619V26.3546L4.2859 26.8534L0 28.4591V29.9996L16.0001 24.0696Z" fill="#0F1117"></path><path d="M20.3237 26.8333H22.1382L28.8006 11H27.2401L25.4927 15.242H25.4809L24.8844 16.6032L21.3438 25.3361L17.826 16.6032H17.8339L17.2911 15.242L15.5436 11H13.8672L20.3237 26.8333Z" fill="#0F1117"></path><path d="M23.5229 26.8333H25.3374L31.9998 11H30.4394L28.6919 15.2418H28.6801L28.0837 16.603L24.543 25.3354L21.0252 16.603H21.0331L20.4903 15.2418L18.7429 11H17.0664L23.5229 26.8333Z" fill="#0F1117"></path></svg></a>
     <ul class="nav-links">
-      <li><a href="https://sebastian-weber.github.io/uxui-portfolio/index.html">Portfolio</a></li>
-      <li><a href="https://sebastian-weber.github.io/uxui-portfolio/about.html" style="font-weight:600;color:var(--text);">DE</a> <span style="color:var(--border);">|</span> <a href="https://sebastian-weber.github.io/uxui-portfolio/about-en.html" style="color:var(--muted);">EN</a></li>
+      <li><a href="https://sebastian-weber.github.io/uxui-portfolio/index.html" data-i18n="nav-portfolio">Portfolio</a></li>
+      <li><span class="nav-current" data-i18n="nav-about" aria-current="page">About</span></li>
+      <li><a href="https://sebastian-weber.github.io/uxui-portfolio/datenschutz.html" data-i18n="nav-imprint">Imprint</a></li>
+      <li>
+        <span class="lang-switch">
+          <button type="button" data-lang="de">DE</button>
+          <span class="sep">|</span>
+          <button type="button" data-lang="en" class="active">EN</button>
+        </span>
+      </li>
       <li><a href="https://linkedin.com/in/sebastian-weber1708" target="_blank">LinkedIn</a></li>
     </ul>
   </nav>
 
   <main>
-    <div class="label">Über mich</div>
+    <div class="label" data-i18n="page-label">About</div>
     <img src="./portrait-sebastian-weber.png" alt="Sebastian Weber" class="portrait">
     <h1>Sebastian Weber</h1>
 
     <div class="about-body">
-      <p>Ich bin Sebastian, UX/UI Designer aus Köln mit Fokus auf Design-to-Code. Mich interessiert die Lücke zwischen Figma-Datei und funktionierendem Interface. Diese Lücke schließe ich selbst, in React, TypeScript und Tailwind.</p>
+      <p data-i18n="about-p1">I'm Sebastian, a UX/UI Designer from Cologne with a focus on Design-to-Code. I'm interested in the gap between a Figma file and a working interface, a gap I close myself, in React, TypeScript, and Tailwind.</p>
 
-      <p>Medien- und Informationsgeschichte ist für mich mehr als ein Nebeninteresse: Meine Bachelorarbeit beschäftigte sich mit Vannevar Bushs Memex-Konzept und der Entstehungsgeschichte der grafischen Benutzeroberfläche, meine Masterarbeit mit Ubiquitous Computing.</p>
+      <p data-i18n="about-p2">Media and information history is more than a side interest to me: my bachelor's thesis explored Vannevar Bush's Memex concept and the origins of the graphical user interface, my master's thesis focused on ubiquitous computing.</p>
 
-      <p>Ich nutze Data Analytics und AI als zusätzliches Werkzeug: Wenn ich Tracking auf meiner eigenen Portfolio-Seite aufsetze oder Nutzersegmente in Rohdaten analysiere, treffe ich Design-Entscheidungen mit Belegen statt mit Annahmen.</p>
+      <p data-i18n="about-p3">I use data analytics and AI as an additional tool: when I set up tracking on my own portfolio or analyze user segments in raw data, I make design decisions based on evidence instead of assumptions.</p>
 
-      <p>Diese Neugier endet nicht am Feierabend. Eine alte Wandfliese, eine Pflanze, ein Möbelstück, das mir einfach zuläuft, ich gehe der Herkunft nach, oft mit KI als Recherche-Werkzeug. Ich mag elektronische Musik, Katzen, 16-Bit-Videospiele, aber auch Sonne, Strand und Meer.</p>
+      <p data-i18n="about-p4">That curiosity doesn't end when the workday does. An old wall tile, a plant, a piece of furniture that just comes my way, I trace its origin, often with AI as a research tool. I'm into electronic music, cats, and 16-bit video games, but also sun, beach, and sea.</p>
 
       <p class="emoji-row">🎧😺🎮 🌴☀️🏖️🌊</p>
 
-      <p class="status">Ich suche aktuell eine Rolle als UI Designer, Product Designer oder Design Engineer in NRW oder remote.</p>
+      <p class="status" data-i18n="about-status">I'm currently looking for a role as UI Designer, Product Designer, or Design Engineer in NRW or remote.</p>
     </div>
   </main>
 
   <footer>
-    <p>Sebastian Weber · UX/UI Designer · Design-to-Code · Köln 2026</p>
-    <p><a href="https://linkedin.com/in/sebastian-weber1708">LinkedIn</a> · <a href="https://sebastian-weber.github.io/uxui-portfolio/datenschutz.html">Impressum &amp; Datenschutz</a> · <a href="#" id="cookie-settings-link">Cookie-Einstellungen</a></p>
+    <p data-i18n="footer-line1">Sebastian Weber · UX/UI Designer · Design-to-Code · Cologne 2026</p>
+    <p><a href="https://linkedin.com/in/sebastian-weber1708">LinkedIn</a> · <a href="https://sebastian-weber.github.io/uxui-portfolio/datenschutz.html" data-i18n="footer-imprint">Imprint &amp; Privacy Policy</a> · <a href="#" id="cookie-settings-link" data-i18n="footer-cookie-settings">Cookie Settings</a></p>
   </footer>
 
   <script>
@@ -340,6 +400,77 @@
       }
       posthog.capture('cookie_consent', { accepted: accepted, page: 'about' });
     }
+  </script>
+
+  <!-- i18n: translation dictionary + language switch (shared localStorage key with index.html) -->
+  <script>
+    var translations = {
+      en: {
+        'nav-portfolio': 'Portfolio',
+        'nav-about': 'About',
+        'nav-imprint': 'Imprint',
+        'page-label': 'About',
+        'about-p1': "I'm Sebastian, a UX/UI Designer from Cologne with a focus on Design-to-Code. I'm interested in the gap between a Figma file and a working interface, a gap I close myself, in React, TypeScript, and Tailwind.",
+        'about-p2': "Media and information history is more than a side interest to me: my bachelor's thesis explored Vannevar Bush's Memex concept and the origins of the graphical user interface, my master's thesis focused on ubiquitous computing.",
+        'about-p3': 'I use data analytics and AI as an additional tool: when I set up tracking on my own portfolio or analyze user segments in raw data, I make design decisions based on evidence instead of assumptions.',
+        'about-p4': "That curiosity doesn't end when the workday does. An old wall tile, a plant, a piece of furniture that just comes my way, I trace its origin, often with AI as a research tool. I'm into electronic music, cats, and 16-bit video games, but also sun, beach, and sea.",
+        'about-status': "I'm currently looking for a role as UI Designer, Product Designer, or Design Engineer in NRW or remote.",
+        'footer-line1': 'Sebastian Weber · UX/UI Designer · Design-to-Code · Cologne 2026',
+        'footer-imprint': 'Imprint & Privacy Policy',
+        'footer-cookie-settings': 'Cookie Settings',
+        'cookie-text': 'This site uses PostHog to create anonymized usage statistics and session recordings. <a href="https://sebastian-weber.github.io/uxui-portfolio/datenschutz.html">Privacy Policy</a>',
+        'cookie-decline': 'Decline',
+        'cookie-accept': 'Accept'
+      },
+      de: {
+        'nav-portfolio': 'Portfolio',
+        'nav-about': 'Über mich',
+        'nav-imprint': 'Impressum',
+        'page-label': 'Über mich',
+        'about-p1': 'Ich bin Sebastian, UX/UI Designer aus Köln mit Fokus auf Design-to-Code. Mich interessiert die Lücke zwischen einer Figma-Datei und einem funktionierenden Interface, eine Lücke, die ich selbst schließe, in React, TypeScript und Tailwind.',
+        'about-p2': 'Medien- und Informationsgeschichte ist für mich mehr als ein Nebeninteresse: Meine Bachelorarbeit behandelte Vannevar Bushs Memex-Konzept und die Ursprünge der grafischen Benutzeroberfläche, meine Masterarbeit widmete sich Ubiquitous Computing.',
+        'about-p3': 'Data Analytics und KI nutze ich als zusätzliches Werkzeug: Wenn ich Tracking auf meinem eigenen Portfolio aufsetze oder Nutzersegmente in Rohdaten analysiere, treffe ich Designentscheidungen auf Basis von Evidenz statt Annahmen.',
+        'about-p4': 'Diese Neugier endet nicht mit dem Feierabend. Eine alte Wandfliese, eine Pflanze, ein Möbelstück, das mir einfach über den Weg läuft, ich gehe der Herkunft nach, oft mit KI als Recherche-Werkzeug. Ich stehe auf elektronische Musik, Katzen und 16-Bit-Videospiele, aber auch auf Sonne, Strand und Meer.',
+        'about-status': 'Ich suche aktuell eine Stelle als UI Designer, Product Designer oder Design Engineer in NRW oder remote.',
+        'footer-line1': 'Sebastian Weber · UX/UI Designer · Design-to-Code · Köln 2026',
+        'footer-imprint': 'Impressum & Datenschutz',
+        'footer-cookie-settings': 'Cookie-Einstellungen',
+        'cookie-text': 'Diese Seite verwendet PostHog, um anonymisierte Nutzungsstatistiken und Sitzungsaufzeichnungen zu erstellen. <a href="https://sebastian-weber.github.io/uxui-portfolio/datenschutz.html">Datenschutz</a>',
+        'cookie-decline': 'Ablehnen',
+        'cookie-accept': 'Akzeptieren'
+      }
+    };
+
+    var currentLang = localStorage.getItem('portfolio-lang') || 'en';
+
+    function applyTranslations(lang) {
+      document.documentElement.lang = lang;
+      var dict = translations[lang];
+      document.querySelectorAll('[data-i18n]').forEach(function (el) {
+        var key = el.getAttribute('data-i18n');
+        if (dict[key] !== undefined) {
+          el.innerHTML = dict[key];
+        }
+      });
+      document.querySelectorAll('.lang-switch button').forEach(function (btn) {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+      });
+    }
+
+    function switchLang(lang) {
+      currentLang = lang;
+      localStorage.setItem('portfolio-lang', lang);
+      applyTranslations(lang);
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      applyTranslations(currentLang);
+      document.querySelectorAll('.lang-switch button').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          if (btn.dataset.lang !== currentLang) switchLang(btn.dataset.lang);
+        });
+      });
+    });
   </script>
 
 </body></html>
