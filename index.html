@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="de"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/svg+xml" href="https://sebastian-weber.github.io/uxui-portfolio/sw_favicon32.svg">
@@ -63,35 +63,6 @@
 
     .nav-links a:hover { color: var(--text); }
 
-    .lang-switch {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 13px;
-      font-weight: 500;
-    }
-
-    .lang-switch button {
-      font-family: inherit;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--muted);
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0;
-    }
-
-    .lang-switch button.active {
-      color: var(--text);
-      font-weight: 700;
-      cursor: default;
-    }
-
-    .lang-switch .sep {
-      color: var(--border);
-    }
-
     .logo {
       display: flex;
       align-items: center;
@@ -143,10 +114,9 @@
       font-size: 20px;
       color: var(--muted);
       font-style: normal;
-      max-width: 620px;
+      max-width: 520px;
       line-height: 1.8;
       margin-bottom: 64px;
-      text-wrap: pretty;
     }
 
     .rotating-line {
@@ -175,36 +145,6 @@
     @keyframes blink {
       0%, 50% { opacity: 1; }
       51%, 100% { opacity: 0; }
-    }
-
-    .filter-hint {
-      display: none;
-      align-items: center;
-      gap: 10px;
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 20px;
-      padding: 12px 16px;
-      background: #F3F0F9;
-      border-radius: 10px;
-    }
-
-    .filter-hint.visible { display: flex; }
-
-    .filter-hint strong { color: var(--purple); font-weight: 700; }
-
-    .filter-hint button {
-      font-family: inherit;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--purple);
-      background: none;
-      border: none;
-      cursor: pointer;
-      text-decoration: underline;
-      padding: 0;
-      margin-left: auto;
-      flex-shrink: 0;
     }
 
     .filter-bar {
@@ -279,10 +219,9 @@
     .card-image img {
       width: 100%;
       height: 100%;
-      object-fit: contain;
-      object-position: center;
+      object-fit: cover;
+      object-position: top center;
       display: block;
-      padding: 16px;
       background: var(--white);
     }
 
@@ -544,7 +483,7 @@
       });
 
       // 4. About click (nav)
-      var aboutLink = document.querySelector('.nav-links a[href*="about.html"]');
+      var aboutLink = document.querySelector('.nav-links a[href*="#"]');
       if (aboutLink) {
         aboutLink.addEventListener('click', function () {
           posthog.capture('nav_about_clicked');
@@ -585,7 +524,7 @@
         });
       }, { passive: true });
 
-      // 8. Time on page (30s / 60s / 120s)
+      // 8. Time on page (30s / 60s / 120s) — seconds_on_page = tatsaechlich vergangene Zeit
       var pageLoadTime = Date.now();
     [30, 60, 120].forEach(function (sec) {
       setTimeout(function () {
@@ -613,7 +552,7 @@
         });
       });
 
-      // 10. Reopen cookie settings (Art. 7(3) GDPR: revoking consent must be as easy as giving it)
+      // 10. Cookie-Einstellungen erneut öffnen (Art. 7 Abs. 3 DSGVO: Widerruf so einfach wie Erteilung)
       var settingsLink = document.getElementById('cookie-settings-link');
       if (settingsLink) {
         settingsLink.addEventListener('click', function (e) {
@@ -622,14 +561,6 @@
         });
       }
 
-      // 11. Language switch
-      var langButtons = document.querySelectorAll('.lang-switch button');
-      langButtons.forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          posthog.capture('lang_switched', { lang: btn.dataset.lang });
-        });
-      });
-
     });
   </script>
 
@@ -637,47 +568,35 @@
 <body>
 
   <div id="cookie-banner" style="display:none;">
-    <p data-i18n="cookie-text">This site uses PostHog to create anonymized usage statistics and session recordings. <a href="https://sebastian-weber.github.io/uxui-portfolio/datenschutz.html">Privacy Policy</a></p>
-    <button class="cookie-btn cookie-decline" onclick="decideConsent(false)" data-i18n="cookie-decline">Decline</button>
-    <button class="cookie-btn cookie-accept" onclick="decideConsent(true)" data-i18n="cookie-accept">Accept</button>
+    <p>Diese Seite verwendet PostHog, um anonymisierte Nutzungsstatistiken und Sitzungsaufzeichnungen zu erstellen. <a href="https://sebastian-weber.github.io/uxui-portfolio/datenschutz.html">Datenschutz</a></p>
+    <button class="cookie-btn cookie-decline" onclick="decideConsent(false)">Ablehnen</button>
+    <button class="cookie-btn cookie-accept" onclick="decideConsent(true)">Akzeptieren</button>
   </div>
 
   <div id="progress"></div>
 
   <nav>
-    <a href="https://sebastian-weber.github.io/uxui-portfolio/index.html" class="logo" aria-label="Sebastian Weber - Home" style="display:flex;align-items:center;line-height:0;margin-right:8px;"><svg width="40" height="40" style="display:block;margin-top:-2px;" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M0 19.0413V20.7092L15.9986 26.8336V25.3991L11.7131 23.7928V23.7848L10.3368 23.2366L1.51283 19.9819L10.3384 16.7504V16.7576L11.7146 16.2587L16.0001 14.6524V13.1113L0 19.0413Z" fill="#0F1117"></path><path d="M16.0001 24.0696V22.4023L0 16.2773V17.7113L4.2859 19.317V19.3279L5.66227 19.8759L14.4871 23.1294L5.66227 26.3619V26.3546L4.2859 26.8534L0 28.4591V29.9996L16.0001 24.0696Z" fill="#0F1117"></path><path d="M20.3237 26.8333H22.1382L28.8006 11H27.2401L25.4927 15.242H25.4809L24.8844 16.6032L21.3438 25.3361L17.826 16.6032H17.8339L17.2911 15.242L15.5436 11H13.8672L20.3237 26.8333Z" fill="#0F1117"></path><path d="M23.5229 26.8333H25.3374L31.9998 11H30.4394L28.6919 15.2418H28.6801L28.0837 16.603L24.543 25.3354L21.0252 16.603H21.0331L20.4903 15.2418L18.7429 11H17.0664L23.5229 26.8333Z" fill="#0F1117"></path></svg></a>
+    <a href="https://sebastian-weber.github.io/uxui-portfolio/index.html" class="logo" aria-label="Sebastian Weber - Startseite" style="display:flex;align-items:center;line-height:0;margin-right:8px;"><svg width="40" height="40" style="display:block;margin-top:-2px;" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M0 19.0413V20.7092L15.9986 26.8336V25.3991L11.7131 23.7928V23.7848L10.3368 23.2366L1.51283 19.9819L10.3384 16.7504V16.7576L11.7146 16.2587L16.0001 14.6524V13.1113L0 19.0413Z" fill="#0F1117"></path><path d="M16.0001 24.0696V22.4023L0 16.2773V17.7113L4.2859 19.317V19.3279L5.66227 19.8759L14.4871 23.1294L5.66227 26.3619V26.3546L4.2859 26.8534L0 28.4591V29.9996L16.0001 24.0696Z" fill="#0F1117"></path><path d="M20.3237 26.8333H22.1382L28.8006 11H27.2401L25.4927 15.242H25.4809L24.8844 16.6032L21.3438 25.3361L17.826 16.6032H17.8339L17.2911 15.242L15.5436 11H13.8672L20.3237 26.8333Z" fill="#0F1117"></path><path d="M23.5229 26.8333H25.3374L31.9998 11H30.4394L28.6919 15.2418H28.6801L28.0837 16.603L24.543 25.3354L21.0252 16.603H21.0331L20.4903 15.2418L18.7429 11H17.0664L23.5229 26.8333Z" fill="#0F1117"></path></svg></a>
     <ul class="nav-links">
-      <li><a href="https://sebastian-weber.github.io/uxui-portfolio/about.html" data-i18n="nav-about">About</a></li>
-      <li>
-        <span class="lang-switch">
-          <button type="button" data-lang="de">DE</button>
-          <span class="sep">|</span>
-          <button type="button" data-lang="en" class="active">EN</button>
-        </span>
-      </li>
+      <li><a href="https://sebastian-weber.github.io/uxui-portfolio/about.html">About</a></li>
       <li><a href="https://linkedin.com/in/sebastian-weber1708" target="_blank">LinkedIn</a></li>
     </ul>
   </nav>
 
   <main>
-    <div class="label" data-i18n="hero-label">Design-to-Code Portfolio</div>
+    <div class="label">Design-to-Code Portfolio</div>
     <h1>Sebastian Weber</h1>
     <p class="sub">
-      <span data-i18n="hero-intro">👋 Hi, I'm Sebastian, a UX/UI Designer from Cologne, Germany. I develop interfaces based on user research and bring them to life with AI, from Figma to finished code.</span><br>
-      <span data-i18n="hero-tagline-lead">I work</span> 
+      I'm a UX/UI Designer from Cologne, Germany. I ground interfaces in user research, design them, and build them with AI, from Figma to production code.<br>
+      I build interfaces that are 
       <span class="rotating-line"><span class="rotating" id="word"></span><span class="cursor" id="cursor"></span></span>
     </p>
 
-    <div class="filter-hint" id="filter-hint">
-      <span id="filter-hint-text"></span>
-      <button id="filter-hint-reset" type="button" data-i18n="filter-reset">Show all</button>
-    </div>
-
-    <div class="filter-bar" role="group" aria-label="Filter portfolio by focus area">
-      <button class="filter-chip active" data-filter="all" type="button" data-i18n="filter-all">All</button>
-      <button class="filter-chip" data-filter="uxr" type="button" data-i18n="filter-uxr">User Research</button>
-      <button class="filter-chip" data-filter="design" type="button" data-i18n="filter-design">UX/UI Design</button>
-      <button class="filter-chip" data-filter="ai" type="button" data-i18n="filter-ai">AI Builder</button>
+    <div class="filter-bar" role="group" aria-label="Portfolio nach Schwerpunkt filtern">
+      <button class="filter-chip active" data-filter="all" type="button">All</button>
+      <button class="filter-chip" data-filter="uxr" type="button">User Research</button>
+      <button class="filter-chip" data-filter="design" type="button">UX/UI Design</button>
+      <button class="filter-chip" data-filter="ai" type="button">AI Builder</button>
     </div>
 
     <div class="cards">
@@ -687,24 +606,24 @@
           <img src="./hero-dashboards.png" alt="GA4 Behavioral Segmentation of Google Merchandise Store Users">
         </div>
         <div class="card-body">
-          <span class="card-tag tag-coral" data-i18n="tag-case-study">Case Study</span>
-          <h2 data-i18n="c1-h2">GA4 Behavioral Segmentation of Google Merchandise Store Users</h2>
-          <p data-i18n="c1-p">270,154 Google Merchandise Store users clustered into four behavioral segments via k-means. From BigQuery SQL through Python to an interactive dashboard.</p>
+          <span class="card-tag tag-coral">Case Study</span>
+          <h2>GA4 Behavioral Segmentation of Google Merchandise Store Users</h2>
+          <p>270,154 Google Merchandise Store users clustered into four behavioral segments via k-means. From BigQuery SQL through Python to an interactive dashboard.</p>
           <div class="card-metrics">
             <div class="metric">
               <span class="metric-value coral">270k</span>
-              <span class="metric-label" data-i18n="c1-m1">Users</span>
+              <span class="metric-label">Users</span>
             </div>
             <div class="metric">
               <span class="metric-value coral">4</span>
-              <span class="metric-label" data-i18n="c1-m2">Segments</span>
+              <span class="metric-label">Segments</span>
             </div>
             <div class="metric">
               <span class="metric-value coral">86%</span>
-              <span class="metric-label" data-i18n="c1-m3">Checkout Drop-off</span>
+              <span class="metric-label">Checkout Drop-off</span>
             </div>
           </div>
-          <span class="card-arrow arrow-coral" data-i18n="cta-read-case-study">Read case study →</span>
+          <span class="card-arrow arrow-coral">Read case study →</span>
         </div>
       </a>
 
@@ -713,24 +632,24 @@
           <img src="./screenshot-nav-redesign-before-after.png" alt="Human Review of an AI-Generated Redesign Case Study">
         </div>
         <div class="card-body">
-          <span class="card-tag tag-coral" data-i18n="tag-case-study">Case Study</span>
-          <h2 data-i18n="c2-h2">Human Review of an AI-Generated Redesign</h2>
-          <p data-i18n="c2-p">Figma Make rebuilt a responsive navbar from six screenshots. The review surfaced two failure modes: missing input and unverified output.</p>
+          <span class="card-tag tag-coral">Case Study</span>
+          <h2>Human Review of an AI-Generated Redesign</h2>
+          <p>Figma Make rebuilt a responsive navbar from six screenshots. The review surfaced two failure modes: missing input and unverified output.</p>
           <div class="card-metrics">
             <div class="metric">
               <span class="metric-value coral">5</span>
-              <span class="metric-label" data-i18n="c2-m1">Findings</span>
+              <span class="metric-label">Findings</span>
             </div>
             <div class="metric">
               <span class="metric-value coral">2</span>
-              <span class="metric-label" data-i18n="c2-m2">WCAG Violations</span>
+              <span class="metric-label">WCAG Violations</span>
             </div>
             <div class="metric">
               <span class="metric-value coral">0</span>
-              <span class="metric-label" data-i18n="c2-m3">Unsolvable Issues for a UX Designer</span>
+              <span class="metric-label">Unsolvable Issues for a UX Designer</span>
             </div>
           </div>
-          <span class="card-arrow arrow-coral" data-i18n="cta-read-case-study">Read case study →</span>
+          <span class="card-arrow arrow-coral">Read case study →</span>
         </div>
       </a>
 
@@ -739,28 +658,28 @@
           <img src="./screenshot-update-layout.png" alt="Preset Template Selection Tool Case Study">
         </div>
         <div class="card-body">
-          <span class="card-tag tag-coral" data-i18n="tag-case-study">Case Study</span>
-          <h2 data-i18n="c3-h2">A Preset Model for Updating Layouts</h2>
-          <p data-i18n="c3-p">How curating presets instead of adding more options became the real design move, and how transparency builds trust.</p> 
+          <span class="card-tag tag-coral">Case Study</span>
+          <h2>A Preset Model for Updating Layouts</h2>
+          <p>How curating presets instead of adding more options became the real design move, and how transparency builds trust.</p> 
           <div class="card-quote quote-coral">
             <blockquote>"Will be super helpful for all situations."</blockquote>
-            <cite data-i18n="c3-cite">Anonymous stakeholder</cite>
+            <cite>Anonymous stakeholder</cite>
           </div>
           <div class="card-metrics">
             <div class="metric">
               <span class="metric-value coral">4</span>
-              <span class="metric-label" data-i18n="c3-m1">Iterations</span>
+              <span class="metric-label">Iterations</span>
             </div>
             <div class="metric">
               <span class="metric-value coral">3</span>
-              <span class="metric-label" data-i18n="c3-m2">Presets</span>
+              <span class="metric-label">Presets</span>
             </div>
             <div class="metric">
               <span class="metric-value coral">0</span>
-              <span class="metric-label" data-i18n="c3-m3">Ambiguity</span>
+              <span class="metric-label">Ambiguity</span>
             </div>
           </div>
-          <span class="card-arrow arrow-coral" data-i18n="cta-read-case-study">Read case study →</span>
+          <span class="card-arrow arrow-coral">Read case study →</span>
         </div>
       </a>
 
@@ -769,14 +688,14 @@
           <img src="./screenshot-casestudy.png" alt="Nebenkostenabrechnung Case Study">
         </div>
         <div class="card-body">
-          <span class="card-tag tag-coral" data-i18n="tag-case-study">Case Study</span>
-          <h2 data-i18n="c4-h2">A Full Day of Work, Replaced by AI and Excel</h2>
-          <p data-i18n="c4-p">An in-context interview with no discussion guide. Three UX decisions. And why a Figma prototype wasn't the right answer.</p>
+          <span class="card-tag tag-coral">Case Study</span>
+          <h2>Den ganzen Tag der Arbeit für KI und Excel</h2>
+          <p>In-context interview ohne Leitfaden. Drei UX-Entscheidungen. Und warum kein Figma-Prototyp die richtige Antwort war.</p>
           <div class="card-quote quote-coral">
-            <blockquote data-i18n="c4-quote">"Yeah sure, but it's headed in a good direction."</blockquote>
-            <cite data-i18n="c4-cite">Anonymous landlord · WhatsApp · May 1, 2026</cite>
+            <blockquote>"Ja klar aber auf einem guten Weg."</blockquote>
+            <cite>Anonymer Vermieter · WhatsApp · 1. Mai 2026</cite>
           </div>
-          <span class="card-arrow arrow-coral" data-i18n="cta-read-case-study">Read case study →</span>
+          <span class="card-arrow arrow-coral">Case Study lesen →</span>
         </div>
       </a>
 
@@ -785,11 +704,11 @@
           <img src="./screenshot-workflow.png" alt="Nebenkostenabrechnung Workflow">
         </div>
         <div class="card-body">
-          <span class="card-tag tag-purple" data-i18n="tag-ai-workflow">AI Workflow</span>
-          <h2 data-i18n="c5-h2">Utility Bill Statements, by Prompt</h2>
-          <p data-i18n="c5-p">How a single prompt replaces an hour of work. Google Drive, Claude MCP, fully automated PDF generation.</p>
-          <p style="font-size: 13px; font-weight: 700; color: var(--purple); margin-top: 4px; flex: 0;" data-i18n="c5-callout">3 prompts. 1 PDF.</p>
-          <span class="card-arrow arrow-purple" data-i18n="cta-view-workflow">View workflow →</span>
+          <span class="card-tag tag-purple">AI Workflow</span>
+          <h2>Nebenkostenabrechnung per Prompt</h2>
+          <p>Wie ein Prompt eine Stunde Arbeit ersetzt. Google Drive, Claude MCP, vollautomatische PDF-Generierung.</p>
+          <p style="font-size: 13px; font-weight: 700; color: var(--purple); margin-top: 4px; flex: 0;">3 Prompts. 1 PDF.</p>
+          <span class="card-arrow arrow-purple">Workflow ansehen →</span>
         </div>
       </a>
 
@@ -798,14 +717,14 @@
           <img src="./screenshot-banner.png" alt="LinkedIn Profile Readiness Guide Case Study">
         </div>
         <div class="card-body">
-          <span class="card-tag tag-coral" data-i18n="tag-case-study">Case Study</span>
-          <h2 data-i18n="c6-h2">From Orientation Problem to Interactive Tool</h2>
-          <p data-i18n="c6-p">How a navigation problem became an interactive browser tool. No framework, no design tool, no team.</p>
+          <span class="card-tag tag-coral">Case Study</span>
+          <h2>LinkedIn Profile Readiness Guide</h2>
+          <p>Wie aus einem Orientierungsproblem ein interaktives Browser-Tool wurde. Ohne Framework, ohne Design-Tool, ohne Team.</p>
           <div class="card-quote quote-coral">
             <blockquote>Taking a concept, improving it, and turning learning into something useful for others. These are the qualities hiring managers are often looking for.</blockquote>
             <cite>Olga Lavrenko · Career Coach, neuefische</cite>
           </div>
-          <span class="card-arrow arrow-coral" data-i18n="cta-read-case-study">Read case study →</span>
+          <span class="card-arrow arrow-coral">Case Study lesen →</span>
         </div>
       </a>
 
@@ -814,24 +733,24 @@
           <img src="./screenshot-wheel.png" alt="LinkedIn Profile Readiness Guide Tool">
         </div>
         <div class="card-body">
-          <span class="card-tag tag-teal" data-i18n="tag-tool">Tool</span>
-          <h2 data-i18n="c7-h2">Where Does Your LinkedIn Profile Stand?</h2>
-          <p data-i18n="c7-p">An interactive checklist for your LinkedIn profile. With live progress visualization, right in the browser, no login required.</p>
+          <span class="card-tag tag-teal">Tool</span>
+          <h2>LinkedIn Profile Readiness Guide</h2>
+          <p>Interaktive Checkliste für dein LinkedIn-Profil. Mit Live-Visualisierung des Fortschritts — direkt im Browser, ohne Login.</p>
           <div class="card-metrics">
             <div class="metric">
               <span class="metric-value teal">2</span>
-              <span class="metric-label" data-i18n="c7-m1">Days to Build</span>
+              <span class="metric-label">Tage Entwicklungszeit</span>
             </div>
             <div class="metric">
               <span class="metric-value teal">5</span>
-              <span class="metric-label" data-i18n="c7-m2">Iterations</span>
+              <span class="metric-label">Iterationen</span>
             </div>
             <div class="metric">
               <span class="metric-value teal">0</span>
-              <span class="metric-label" data-i18n="c7-m3">Dev Handoffs</span>
+              <span class="metric-label">Dev-Handoffs</span>
             </div>
           </div>
-          <span class="card-arrow arrow-teal" data-i18n="cta-try-tool">Try the tool →</span>
+          <span class="card-arrow arrow-teal">Tool ausprobieren →</span>
         </div>
       </a>
 
@@ -839,8 +758,8 @@
   </main>
 
   <footer>
-    <p data-i18n="footer-line1">Sebastian Weber · UX/UI Designer · Design-to-Code · Cologne 2026</p>
-    <p><a href="https://linkedin.com/in/sebastian-weber1708">LinkedIn</a> · <a href="https://sebastian-weber.github.io/uxui-portfolio/datenschutz.html" data-i18n="footer-imprint">Imprint &amp; Privacy Policy</a> · <a href="#" id="cookie-settings-link" data-i18n="footer-cookie-settings">Cookie Settings</a></p>
+    <p>Sebastian Weber · UX/UI Designer · Design-to-Code · Köln 2026</p>
+    <p><a href="https://linkedin.com/in/sebastian-weber1708">LinkedIn</a> · <a href="https://sebastian-weber.github.io/uxui-portfolio/datenschutz.html">Impressum &amp; Datenschutz</a> · <a href="#" id="cookie-settings-link">Cookie-Einstellungen</a></p>
   </footer>
 
   <script>
@@ -864,160 +783,15 @@
     }
   </script>
 
-  <!-- i18n: translation dictionary + language switch -->
+  <!-- Typing animation: rotating adjectives, colored with existing CD tokens -->
   <script>
-    var translations = {
-      en: {
-        'nav-about': 'About',
-        'hero-label': 'Design-to-Code Portfolio',
-        'hero-intro': "👋 Hi, I'm Sebastian, a UX/UI Designer from Cologne, Germany. I develop interfaces based on user research and bring them to life with AI, from Figma to finished code.",
-        'hero-tagline-lead': 'I work',
-        'filter-reset': 'Show all',
-        'filter-all': 'All',
-        'filter-uxr': 'User Research',
-        'filter-design': 'UX/UI Design',
-        'filter-ai': 'AI Builder',
-        'tag-case-study': 'Case Study',
-        'tag-tool': 'Tool',
-        'tag-ai-workflow': 'AI Workflow',
-        'cta-read-case-study': 'Read case study →',
-        'cta-view-workflow': 'View workflow →',
-        'cta-try-tool': 'Try the tool →',
-        'c1-h2': 'GA4 Behavioral Segmentation of Google Merchandise Store Users',
-        'c1-p': '270,154 Google Merchandise Store users clustered into four behavioral segments via k-means. From BigQuery SQL through Python to an interactive dashboard.',
-        'c1-m1': 'Users', 'c1-m2': 'Segments', 'c1-m3': 'Checkout Drop-off',
-        'c2-h2': 'Human Review of an AI-Generated Redesign',
-        'c2-p': 'Figma Make rebuilt a responsive navbar from six screenshots. The review surfaced two failure modes: missing input and unverified output.',
-        'c2-m1': 'Findings', 'c2-m2': 'WCAG Violations', 'c2-m3': 'Unsolvable Issues for a UX Designer',
-        'c3-h2': 'A Preset Model for Updating Layouts',
-        'c3-p': 'How curating presets instead of adding more options became the real design move, and how transparency builds trust.',
-        'c3-cite': 'Anonymous stakeholder',
-        'c3-m1': 'Iterations', 'c3-m2': 'Presets', 'c3-m3': 'Ambiguity',
-        'c4-h2': 'A Full Day of Work, Replaced by AI and Excel',
-        'c4-p': "An in-context interview with no discussion guide. Three UX decisions. And why a Figma prototype wasn't the right answer.",
-        'c4-quote': '"Yeah sure, but it\u2019s headed in a good direction."',
-        'c4-cite': 'Anonymous landlord · WhatsApp · May 1, 2026',
-        'c5-h2': 'Utility Bill Statements, by Prompt',
-        'c5-p': 'How a single prompt replaces an hour of work. Google Drive, Claude MCP, fully automated PDF generation.',
-        'c5-callout': '3 prompts. 1 PDF.',
-        'c6-h2': 'From Orientation Problem to Interactive Tool',
-        'c6-p': 'How a navigation problem became an interactive browser tool. No framework, no design tool, no team.',
-        'c7-h2': 'Where Does Your LinkedIn Profile Stand?',
-        'c7-p': 'An interactive checklist for your LinkedIn profile. With live progress visualization, right in the browser, no login required.',
-        'c7-m1': 'Days to Build', 'c7-m2': 'Iterations', 'c7-m3': 'Dev Handoffs',
-        'footer-line1': 'Sebastian Weber · UX/UI Designer · Design-to-Code · Cologne 2026',
-        'footer-imprint': 'Imprint & Privacy Policy',
-        'footer-cookie-settings': 'Cookie Settings',
-        'cookie-text': 'This site uses PostHog to create anonymized usage statistics and session recordings. <a href="https://sebastian-weber.github.io/uxui-portfolio/datenschutz.html">Privacy Policy</a>',
-        'cookie-decline': 'Decline',
-        'cookie-accept': 'Accept',
-        'filter-preselected': 'Preselected:'
-      },
-      de: {
-        'nav-about': 'Über mich',
-        'hero-label': 'Design-to-Code Portfolio',
-        'hero-intro': '👋 Hi, ich bin Sebastian, UX/UI Designer aus Köln. Ich entwickle Interfaces auf Basis von Nutzerforschung und setze sie mit KI um, von Figma bis zum fertigen Code.',
-        'hero-tagline-lead': 'Ich arbeite',
-        'filter-reset': 'Alle anzeigen',
-        'filter-all': 'Alle',
-        'filter-uxr': 'User Research',
-        'filter-design': 'UX/UI Design',
-        'filter-ai': 'AI Builder',
-        'tag-case-study': 'Case Study',
-        'tag-tool': 'Tool',
-        'tag-ai-workflow': 'AI-Workflow',
-        'cta-read-case-study': 'Case Study lesen →',
-        'cta-view-workflow': 'Workflow ansehen →',
-        'cta-try-tool': 'Tool ausprobieren →',
-        'c1-h2': 'GA4-Verhaltenssegmentierung von Google-Merchandise-Store-Nutzern',
-        'c1-p': '270.154 Nutzer:innen des Google Merchandise Store per k-means in vier Verhaltenssegmente geclustert. Von BigQuery SQL über Python bis zum interaktiven Dashboard.',
-        'c1-m1': 'Nutzer:innen', 'c1-m2': 'Segmente', 'c1-m3': 'Checkout-Abbruch',
-        'c2-h2': 'Human Review eines KI-generierten Redesigns',
-        'c2-p': 'Figma Make hat aus sechs Screenshots eine responsive Navbar gebaut. Der Review deckte zwei Fehlerarten auf: fehlender Input und ungeprüfter Output.',
-        'c2-m1': 'Findings', 'c2-m2': 'WCAG-Verstöße', 'c2-m3': 'Unlösbare Probleme für UX Designer',
-        'c3-h2': 'Ein Preset-Modell für Layout-Updates',
-        'c3-p': 'Wie das Kuratieren von Presets statt weiterer Optionen zum eigentlichen Design-Move wurde, und wie Transparenz Vertrauen schafft.',
-        'c3-cite': 'Anonymer Stakeholder',
-        'c3-m1': 'Iterationen', 'c3-m2': 'Presets', 'c3-m3': 'Mehrdeutigkeit',
-        'c4-h2': 'Den ganzen Tag der Arbeit für KI und Excel',
-        'c4-p': 'In-context Interview ohne Leitfaden. Drei UX-Entscheidungen. Und warum kein Figma-Prototyp die richtige Antwort war.',
-        'c4-quote': '"Ja klar aber auf einem guten Weg."',
-        'c4-cite': 'Anonymer Vermieter · WhatsApp · 1. Mai 2026',
-        'c5-h2': 'Nebenkostenabrechnung per Prompt',
-        'c5-p': 'Wie ein Prompt eine Stunde Arbeit ersetzt. Google Drive, Claude MCP, vollautomatische PDF-Generierung.',
-        'c5-callout': '3 Prompts. 1 PDF.',
-        'c6-h2': 'Vom Orientierungsproblem zum interaktiven Tool',
-        'c6-p': 'Wie aus einem Orientierungsproblem ein interaktives Browser-Tool wurde. Ohne Framework, ohne Design-Tool, ohne Team.',
-        'c7-h2': 'Wie bereit ist dein LinkedIn-Profil?',
-        'c7-p': 'Interaktive Checkliste für dein LinkedIn-Profil. Mit Live-Visualisierung des Fortschritts — direkt im Browser, ohne Login.',
-        'c7-m1': 'Tage Entwicklungszeit', 'c7-m2': 'Iterationen', 'c7-m3': 'Dev-Handoffs',
-        'footer-line1': 'Sebastian Weber · UX/UI Designer · Design-to-Code · Köln 2026',
-        'footer-imprint': 'Impressum & Datenschutz',
-        'footer-cookie-settings': 'Cookie-Einstellungen',
-        'cookie-text': 'Diese Seite verwendet PostHog, um anonymisierte Nutzungsstatistiken und Sitzungsaufzeichnungen zu erstellen. <a href="https://sebastian-weber.github.io/uxui-portfolio/datenschutz.html">Datenschutz</a>',
-        'cookie-decline': 'Ablehnen',
-        'cookie-accept': 'Akzeptieren',
-        'filter-preselected': 'Vorausgewählt:'
-      }
-    };
+    (function () {
+      var words = [
+        { text: 'research-grounded.',    color: 'var(--coral)' },
+        { text: 'user-centered.',  color: 'var(--teal)'},
+        { text: 'AI-augmented.',   color: 'var(--purple)' }
+      ];
 
-    var rotatingWords = {
-      en: [
-        { text: 'research-grounded.', color: 'var(--coral)' },
-        { text: 'problem-solving.',   color: 'var(--teal)'  },
-        { text: 'AI-augmented.',      color: 'var(--purple)'}
-      ],
-      de: [
-        { text: 'forschungsbasiert.', color: 'var(--coral)' },
-        { text: 'lösungsorientiert.', color: 'var(--teal)'  },
-        { text: 'KI-unterstützt.',    color: 'var(--purple)'}
-      ]
-    };
-
-    var currentLang = localStorage.getItem('portfolio-lang') || 'en';
-
-    function applyTranslations(lang) {
-      document.documentElement.lang = lang;
-      var dict = translations[lang];
-      document.querySelectorAll('[data-i18n]').forEach(function (el) {
-        var key = el.getAttribute('data-i18n');
-        if (dict[key] !== undefined) {
-          el.innerHTML = dict[key];
-        }
-      });
-      document.querySelectorAll('.lang-switch button').forEach(function (btn) {
-        btn.classList.toggle('active', btn.dataset.lang === lang);
-      });
-    }
-
-    function switchLang(lang) {
-      currentLang = lang;
-      localStorage.setItem('portfolio-lang', lang);
-      applyTranslations(lang);
-      restartTyping(lang);
-    }
-
-    document.addEventListener('DOMContentLoaded', function () {
-      applyTranslations(currentLang);
-      document.querySelectorAll('.lang-switch button').forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          if (btn.dataset.lang !== currentLang) switchLang(btn.dataset.lang);
-        });
-      });
-    });
-  </script>
-
-  <!-- Typing animation: rotating adjectives, colored with existing CD tokens, language-aware -->
-  <script>
-    var typingTimer = null;
-
-    function restartTyping(lang) {
-      if (typingTimer) clearTimeout(typingTimer);
-      startTyping(lang);
-    }
-
-    function startTyping(lang) {
-      var words = rotatingWords[lang] || rotatingWords.en;
       var el     = document.getElementById('word');
       var cursor = document.getElementById('cursor');
       if (!el || !cursor) return;
@@ -1044,93 +818,105 @@
           el.textContent = current.text.slice(0, charIndex);
           if (charIndex === current.text.length) {
             deleting = true;
-            typingTimer = setTimeout(tick, HOLD_TIME);
+            setTimeout(tick, HOLD_TIME);
             return;
           }
-          typingTimer = setTimeout(tick, TYPE_SPEED);
+          setTimeout(tick, TYPE_SPEED);
         } else {
           charIndex--;
           el.textContent = current.text.slice(0, charIndex);
           if (charIndex === 0) {
             deleting = false;
             wordIndex = (wordIndex + 1) % words.length;
-            typingTimer = setTimeout(tick, 300);
+            setTimeout(tick, 300);
             return;
           }
-          typingTimer = setTimeout(tick, DELETE_SPEED);
+          setTimeout(tick, DELETE_SPEED);
         }
       }
 
       tick();
-    }
-
-    document.addEventListener('DOMContentLoaded', function () {
-      startTyping(currentLang);
-    });
+    })();
   </script>
 
   <!-- Filter bar: manual chip clicks (single-select) + UTM-preselect via utm_content -->
   <script>
     (function () {
-      document.addEventListener('DOMContentLoaded', function () {
-        var chips     = document.querySelectorAll('.filter-chip');
-        var cards     = document.querySelectorAll('.card');
-        var hint      = document.getElementById('filter-hint');
-        var hintText  = document.getElementById('filter-hint-text');
-        var hintReset = document.getElementById('filter-hint-reset');
+      var chips          = document.querySelectorAll('.filter-chip');
+      var cards          = document.querySelectorAll('.card');
+      var cardsContainer = document.querySelector('.cards');
+      var originalOrder  = Array.prototype.slice.call(cardsContainer.children);
 
-        var categoryI18nKey = {
-          design: 'filter-design',
-          ai:     'filter-ai',
-          uxr:    'filter-uxr'
-        };
+      var categoryLabels = {
+        design: 'UX/UI Design',
+        ai:     'AI Builder',
+        uxr:    'User Research'
+      };
 
-        function applyFilter(category, source) {
-          chips.forEach(function (chip) {
-            chip.classList.toggle('active', chip.dataset.filter === category);
-          });
+      // Category-specific card order overrides. Keys are unique href substrings,
+      // used to find and reposition the matching card. Categories without an
+      // entry keep the default (original) DOM order.
+      var categoryOrder = {
+        ai: [
+          'figma-make-redesign-navbar',
+          'linkedin-readiness-guide/linkedin-wheel-index',
+          'linkedin-readiness-guide/linkedin-wheel-case-study',
+          'nebeko/workflow',
+          'nebeko/case-study'
+        ]
+      };
 
-          cards.forEach(function (card) {
-            var cats = (card.dataset.category || '').split(' ');
-            var show = category === 'all' || cats.indexOf(category) !== -1;
-            card.classList.toggle('hidden', !show);
-          });
-
-          if (source === 'link' && category !== 'all') {
-            var dict = translations[currentLang];
-            hintText.innerHTML = dict['filter-preselected'] + ' <strong>' + dict[categoryI18nKey[category]] + '</strong>';
-            hint.classList.add('visible');
-          } else {
-            hint.classList.remove('visible');
-          }
+      function reorderCards(category) {
+        var order = categoryOrder[category];
+        if (!order) {
+          originalOrder.forEach(function (node) { cardsContainer.appendChild(node); });
+          return;
         }
+        var matched = [];
+        order.forEach(function (key) {
+          var node = originalOrder.filter(function (n) {
+            return n.getAttribute('href').indexOf(key) !== -1;
+          })[0];
+          if (node) matched.push(node);
+        });
+        var remaining = originalOrder.filter(function (n) { return matched.indexOf(n) === -1; });
+        matched.concat(remaining).forEach(function (node) { cardsContainer.appendChild(node); });
+      }
 
+      function applyFilter(category, source) {
         chips.forEach(function (chip) {
-          chip.addEventListener('click', function () {
-            var category = chip.dataset.filter;
-            applyFilter(category, 'manual');
-            posthog.capture('filter_clicked', { category: category });
-          });
+          chip.classList.toggle('active', chip.dataset.filter === category);
         });
 
-        hintReset.addEventListener('click', function () {
-          applyFilter('all', 'manual');
-          posthog.capture('filter_reset_clicked');
+        reorderCards(category === 'all' ? null : category);
+
+        cards.forEach(function (card) {
+          var cats = (card.dataset.category || '').split(' ');
+          var show = category === 'all' || cats.indexOf(category) !== -1;
+          card.classList.toggle('hidden', !show);
         });
+      }
 
-        var params      = new URLSearchParams(window.location.search);
-        var utmContent  = params.get('utm_content');
-        var validValues = Object.keys(categoryI18nKey);
-
-        if (utmContent && validValues.indexOf(utmContent) !== -1) {
-          applyFilter(utmContent, 'link');
-          posthog.capture('filter_preset_via_link', {
-            category:   utmContent,
-            utm_source: params.get('utm_source'),
-            utm_medium: params.get('utm_medium')
-          });
-        }
+      chips.forEach(function (chip) {
+        chip.addEventListener('click', function () {
+          var category = chip.dataset.filter;
+          applyFilter(category, 'manual');
+          posthog.capture('filter_clicked', { category: category });
+        });
       });
+
+      var params      = new URLSearchParams(window.location.search);
+      var utmContent  = params.get('utm_content');
+      var validValues = Object.keys(categoryLabels);
+
+      if (utmContent && validValues.indexOf(utmContent) !== -1) {
+        applyFilter(utmContent, 'link');
+        posthog.capture('filter_preset_via_link', {
+          category:   utmContent,
+          utm_source: params.get('utm_source'),
+          utm_medium: params.get('utm_medium')
+        });
+      }
     })();
   </script>
 
