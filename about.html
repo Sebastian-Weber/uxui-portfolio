@@ -311,7 +311,6 @@
 
     document.addEventListener('DOMContentLoaded', function () {
 
-      // Portfolio link (nav)
       var portfolioLink = document.querySelector('.nav-links a[href*="uxui-portfolio/index.html"]');
       if (portfolioLink) {
         portfolioLink.addEventListener('click', function () {
@@ -319,7 +318,6 @@
         });
       }
 
-      // Imprint link (nav)
       var imprintLink = document.querySelector('.nav-links a[href*="datenschutz"]');
       if (imprintLink) {
         imprintLink.addEventListener('click', function () {
@@ -327,7 +325,6 @@
         });
       }
 
-      // LinkedIn clicks (nav + footer)
       document.querySelectorAll('a[href*="linkedin.com"]').forEach(function (el) {
         el.addEventListener('click', function () {
           posthog.capture('linkedin_clicked', {
@@ -337,7 +334,6 @@
         });
       });
 
-      // Logo click
       var logo = document.querySelector('nav .logo');
       if (logo) {
         logo.addEventListener('click', function () {
@@ -345,7 +341,6 @@
         });
       }
 
-      // Footer imprint / privacy
       var impressum = document.querySelector('footer a[href*="datenschutz"]');
       if (impressum) {
         impressum.addEventListener('click', function () {
@@ -353,7 +348,6 @@
         });
       }
 
-      // Scroll depth (25 / 50 / 75 / 100%)
       var scrollMilestones = { 25: false, 50: false, 75: false, 100: false };
       window.addEventListener('scroll', function () {
         var scrolled = window.scrollY;
@@ -371,7 +365,6 @@
         });
       }, { passive: true });
 
-      // Time on page (30s / 60s / 120s)
       var pageLoadTime = Date.now();
       [30, 60, 120].forEach(function (sec) {
         setTimeout(function () {
@@ -382,7 +375,6 @@
         }, sec * 1000);
       });
 
-      // Reopen cookie settings
       var settingsLink = document.getElementById('cookie-settings-link');
       if (settingsLink) {
         settingsLink.addEventListener('click', function (e) {
@@ -391,7 +383,6 @@
         });
       }
 
-      // Language switch
       var langButtons = document.querySelectorAll('.lang-switch button');
       langButtons.forEach(function (btn) {
         btn.addEventListener('click', function () {
@@ -417,6 +408,8 @@
     <a href="https://sebastian-weber.github.io/uxui-portfolio/index.html" class="logo" style="display:flex;align-items:center;line-height:0;margin-right:8px;"><svg width="40" height="40" style="display:block;margin-top:-2px;" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 19.0413V20.7092L15.9986 26.8336V25.3991L11.7131 23.7928V23.7848L10.3368 23.2366L1.51283 19.9819L10.3384 16.7504V16.7576L11.7146 16.2587L16.0001 14.6524V13.1113L0 19.0413Z" fill="#0F1117"></path><path d="M16.0001 24.0696V22.4023L0 16.2773V17.7113L4.2859 19.317V19.3279L5.66227 19.8759L14.4871 23.1294L5.66227 26.3619V26.3546L4.2859 26.8534L0 28.4591V29.9996L16.0001 24.0696Z" fill="#0F1117"></path><path d="M20.3237 26.8333H22.1382L28.8006 11H27.2401L25.4927 15.242H25.4809L24.8844 16.6032L21.3438 25.3361L17.826 16.6032H17.8339L17.2911 15.242L15.5436 11H13.8672L20.3237 26.8333Z" fill="#0F1117"></path><path d="M23.5229 26.8333H25.3374L31.9998 11H30.4394L28.6919 15.2418H28.6801L28.0837 16.603L24.543 25.3354L21.0252 16.603H21.0331L20.4903 15.2418L18.7429 11H17.0664L23.5229 26.8333Z" fill="#0F1117"></path></svg></a>
     <ul class="nav-links">
       <li><a href="https://sebastian-weber.github.io/uxui-portfolio/index.html" data-i18n="nav-portfolio">Portfolio</a></li>
+      <li><span class="nav-current nav-flex-item" data-i18n="nav-about" aria-current="page">About</span></li>
+      <li><a href="https://sebastian-weber.github.io/uxui-portfolio/datenschutz.html" class="nav-flex-item" data-i18n="nav-imprint">Imprint</a></li>
       <li>
         <span class="lang-switch">
           <button type="button" data-lang="de">DE</button>
@@ -424,8 +417,6 @@
           <button type="button" data-lang="en" class="active">EN</button>
         </span>
       </li>
-      <li><span class="nav-current nav-flex-item" data-i18n="nav-about" aria-current="page">About</span></li>
-      <li><a href="https://sebastian-weber.github.io/uxui-portfolio/datenschutz.html" class="nav-flex-item" data-i18n="nav-imprint">Imprint</a></li>
       <li><a href="https://linkedin.com/in/sebastian-weber1708" target="_blank">LinkedIn</a></li>
     </ul>
     <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navDrawer" aria-label="Menü öffnen">
@@ -443,6 +434,8 @@
     </div>
     <ul class="nav-drawer__links">
       <li><a href="https://sebastian-weber.github.io/uxui-portfolio/index.html" data-i18n="nav-portfolio">Portfolio</a></li>
+      <li><span class="nav-current" data-i18n="nav-about" aria-current="page">About</span></li>
+      <li><a href="https://sebastian-weber.github.io/uxui-portfolio/datenschutz.html" data-i18n="nav-imprint">Imprint</a></li>
       <li>
         <div class="nav-drawer__lang">
           <button type="button" data-lang="de">DE</button>
@@ -450,8 +443,6 @@
           <button type="button" data-lang="en" class="active">EN</button>
         </div>
       </li>
-      <li><span class="nav-current" data-i18n="nav-about" aria-current="page">About</span></li>
-      <li><a href="https://sebastian-weber.github.io/uxui-portfolio/datenschutz.html" data-i18n="nav-imprint">Imprint</a></li>
       <li><a href="https://linkedin.com/in/sebastian-weber1708" target="_blank">LinkedIn</a></li>
     </ul>
   </aside>
