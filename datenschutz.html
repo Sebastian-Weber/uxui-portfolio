@@ -91,6 +91,72 @@
 
     .lang-switch .sep { color: var(--border); }
 
+    /* ═══ Mobile Navbar: Hamburger + Off-Canvas Drawer ═══ */
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      padding: 8px;
+      cursor: pointer;
+      color: var(--text);
+    }
+    .nav-toggle svg { display: block; }
+
+    .nav-drawer {
+      position: fixed;
+      top: 0; right: 0;
+      height: 100%;
+      width: min(78vw, 320px);
+      background: var(--paper);
+      z-index: 200;
+      padding: 20px;
+      transform: translateX(100%);
+      transition: transform 0.28s ease;
+      display: flex;
+      flex-direction: column;
+      box-shadow: -8px 0 24px rgba(0,0,0,0.08);
+    }
+    .nav-drawer[data-open="true"] { transform: translateX(0); }
+
+    .nav-drawer__header { display: flex; justify-content: flex-end; margin-bottom: 24px; }
+    .nav-drawer__close { background: none; border: none; padding: 8px; cursor: pointer; color: var(--text); }
+
+    .nav-drawer__links { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+    .nav-drawer__links li { border-bottom: 1px solid var(--border); }
+    .nav-drawer__links a,
+    .nav-drawer__links .nav-current {
+      display: flex; align-items: center; padding: 16px 4px;
+      text-decoration: none; font-size: 18px; min-height: 44px;
+    }
+    .nav-drawer__links a { color: var(--muted); font-weight: 500; }
+    .nav-drawer__links .nav-current { color: var(--text); font-weight: 700; }
+
+    .nav-drawer__lang { display: flex; gap: 6px; padding: 16px 4px; }
+    .nav-drawer__lang button {
+      font-family: inherit; background: none; border: none;
+      font-size: 16px; font-weight: 500; color: var(--muted); cursor: pointer; padding: 4px;
+    }
+    .nav-drawer__lang button.active { color: var(--text); font-weight: 700; }
+    .nav-drawer__lang .sep { color: var(--border); }
+
+    .nav-overlay {
+      position: fixed; inset: 0;
+      background: rgba(15, 17, 23, 0.55);
+      z-index: 150;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.28s ease;
+    }
+    .nav-overlay[data-open="true"] { opacity: 1; pointer-events: auto; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .nav-drawer, .nav-overlay { transition: none; }
+    }
+
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .nav-toggle { display: block; }
+    }
+
     main {
       max-width: 680px;
       margin: 0 auto;
@@ -162,8 +228,6 @@
   <a href="index.html" class="logo" style="display:flex;align-items:center;line-height:0;margin-right:8px;"><svg width="40" height="40" style="display:block;margin-top:-2px;" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 19.0413V20.7092L15.9986 26.8336V25.3991L11.7131 23.7928V23.7848L10.3368 23.2366L1.51283 19.9819L10.3384 16.7504V16.7576L11.7146 16.2587L16.0001 14.6524V13.1113L0 19.0413Z" fill="#0F1117"/><path d="M16.0001 24.0696V22.4023L0 16.2773V17.7113L4.2859 19.317V19.3279L5.66227 19.8759L14.4871 23.1294L5.66227 26.3619V26.3546L4.2859 26.8534L0 28.4591V29.9996L16.0001 24.0696Z" fill="#0F1117"/><path d="M20.3237 26.8333H22.1382L28.8006 11H27.2401L25.4927 15.242H25.4809L24.8844 16.6032L21.3438 25.3361L17.826 16.6032H17.8339L17.2911 15.242L15.5436 11H13.8672L20.3237 26.8333Z" fill="#0F1117"/><path d="M23.5229 26.8333H25.3374L31.9998 11H30.4394L28.6919 15.2418H28.6801L28.0837 16.603L24.543 25.3354L21.0252 16.603H21.0331L20.4903 15.2418L18.7429 11H17.0664L23.5229 26.8333Z" fill="#0F1117"/></svg></a>
   <ul class="nav-links">
     <li><a href="index.html" class="nav-flex-item" data-i18n="nav-portfolio">Portfolio</a></li>
-    <li><a href="about.html" class="nav-flex-item" data-i18n="nav-about">About</a></li>
-    <li><span class="nav-current nav-flex-item" data-i18n="nav-imprint" aria-current="page">Imprint</span></li>
     <li>
       <span class="lang-switch">
         <button type="button" data-lang="de">DE</button>
@@ -171,9 +235,37 @@
         <button type="button" data-lang="en" class="active">EN</button>
       </span>
     </li>
+    <li><a href="about.html" class="nav-flex-item" data-i18n="nav-about">About</a></li>
+    <li><span class="nav-current nav-flex-item" data-i18n="nav-imprint" aria-current="page">Imprint</span></li>
     <li><a href="https://linkedin.com/in/sebastian-weber1708" target="_blank">LinkedIn</a></li>
   </ul>
+  <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navDrawer" aria-label="Menü öffnen">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 6H21M3 12H21M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+  </button>
 </nav>
+
+<div class="nav-overlay" id="navOverlay" data-open="false"></div>
+
+<aside class="nav-drawer" id="navDrawer" data-open="false" aria-hidden="true">
+  <div class="nav-drawer__header">
+    <button class="nav-drawer__close" id="navDrawerClose" aria-label="Menü schließen">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 6L18 18M6 18L18 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <ul class="nav-drawer__links">
+    <li><a href="index.html" data-i18n="nav-portfolio">Portfolio</a></li>
+    <li>
+      <div class="nav-drawer__lang">
+        <button type="button" data-lang="de">DE</button>
+        <span class="sep">|</span>
+        <button type="button" data-lang="en" class="active">EN</button>
+      </div>
+    </li>
+    <li><a href="about.html" data-i18n="nav-about">About</a></li>
+    <li><span class="nav-current" data-i18n="nav-imprint" aria-current="page">Imprint</span></li>
+    <li><a href="https://linkedin.com/in/sebastian-weber1708" target="_blank">LinkedIn</a></li>
+  </ul>
+</aside>
 
 <main>
   <div class="label" data-i18n="page-label">Legal</div>
@@ -291,6 +383,9 @@
     currentLang = lang;
     localStorage.setItem('portfolio-lang', lang);
     applyTranslations(lang);
+    document.querySelectorAll('[data-lang]').forEach(function (b) {
+      b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+    });
   }
 
   document.addEventListener('DOMContentLoaded', function () {
@@ -301,6 +396,61 @@
       });
     });
   });
+</script>
+
+<!-- Mobile Drawer öffnen/schließen -->
+<script>
+(function () {
+  var toggle = document.getElementById('navToggle');
+  var closeBtn = document.getElementById('navDrawerClose');
+  var drawer = document.getElementById('navDrawer');
+  var overlay = document.getElementById('navOverlay');
+  var lastFocused = null;
+
+  function openDrawer() {
+    lastFocused = document.activeElement;
+    drawer.setAttribute('data-open', 'true');
+    drawer.setAttribute('aria-hidden', 'false');
+    overlay.setAttribute('data-open', 'true');
+    toggle.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+    document.addEventListener('keydown', onKeydown);
+  }
+  function closeDrawer() {
+    drawer.setAttribute('data-open', 'false');
+    drawer.setAttribute('aria-hidden', 'true');
+    overlay.setAttribute('data-open', 'false');
+    toggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+    document.removeEventListener('keydown', onKeydown);
+    if (lastFocused) lastFocused.focus();
+  }
+  function onKeydown(e) {
+    if (e.key === 'Escape') closeDrawer();
+    if (e.key === 'Tab') {
+      var focusables = drawer.querySelectorAll('a, button');
+      var first = focusables[0];
+      var last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  }
+  toggle.addEventListener('click', openDrawer);
+  closeBtn.addEventListener('click', closeDrawer);
+  overlay.addEventListener('click', closeDrawer);
+
+  var drawerLangButtons = document.querySelectorAll('.nav-drawer__lang [data-lang]');
+  drawerLangButtons.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var lang = btn.getAttribute('data-lang');
+      if (typeof window.switchLang === 'function') { window.switchLang(lang); }
+      document.querySelectorAll('[data-lang]').forEach(function (b) {
+        b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+      });
+    });
+  });
+})();
 </script>
 
 </body>
