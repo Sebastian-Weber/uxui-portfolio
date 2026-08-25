@@ -184,7 +184,7 @@
       flex: 1;
       max-width: 720px;
       margin: 0 auto;
-      padding: 96px 48px 32px;
+      padding: 96px 48px 420px;
       width: 100%;
     }
 
@@ -215,6 +215,13 @@
       line-height: 1.15;
       letter-spacing: -0.01em;
       margin-bottom: 20px;
+    }
+
+    h2.section-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--dark);
+      margin: 32px 0 12px;
     }
 
     .portrait {
@@ -251,6 +258,73 @@
       margin-bottom: 14px;
     }
 
+    .facts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px 24px;
+      margin-bottom: 24px;
+      max-width: 560px;
+    }
+
+    .facts-grid dt {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+
+    .facts-grid dd {
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.4;
+    }
+
+    .timeline {
+      list-style: none;
+      max-width: 560px;
+      margin-bottom: 8px;
+    }
+
+    .timeline li {
+      display: flex;
+      gap: 16px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .timeline li:last-child { border-bottom: none; }
+
+    .timeline .tl-date {
+      flex-shrink: 0;
+      width: 96px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 600;
+      padding-top: 1px;
+    }
+
+    .stack-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+      max-width: 560px;
+    }
+
+    .stack-tags span {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text);
+      background: var(--white);
+      border: 1px solid var(--border);
+      padding: 5px 10px;
+      border-radius: 6px;
+    }
+
     footer {
       border-top: 1px solid var(--border);
       padding: 24px 48px;
@@ -269,6 +343,7 @@
       nav { padding: 0 20px; }
       main { padding: 80px 20px 60px; }
       footer { padding: 20px; flex-direction: column; gap: 8px; text-align: center; }
+      .facts-grid { grid-template-columns: 1fr; }
     }
 
     /* Cookie Banner */
@@ -504,6 +579,25 @@
         'about-p2': "Media and information history is more than a side interest to me: my bachelor's thesis explored Vannevar Bush's Memex concept and the origins of the graphical user interface, my master's thesis focused on ubiquitous computing.",
         'about-p3': 'I use data analytics and AI as an additional tool: when I set up tracking on my own portfolio or analyze user segments in raw data, I make design decisions based on evidence instead of assumptions.',
         'about-p4': "That curiosity doesn't end when the workday does. An old wall tile, a plant, a piece of furniture that just comes my way, I trace its origin, often with AI as a research tool. I'm into electronic music, cats, and 16-bit video games, but also sun, beach, and sea.",
+        'fact-location-label': 'Location',
+        'fact-role-label': 'Current role',
+        'fact-role-value': 'Associate UI Designer, empower GmbH',
+        'fact-focus-label': 'Focus',
+        'fact-focus-value': 'Design systems, component libraries, Design-to-Code',
+        'fact-education-label': 'Education',
+        'fact-education-value': 'M.A. User Experience Design, Rheinische Hochschule Köln',
+        'stack-title': 'Currently working with',
+        'path-title': 'Path so far',
+        'tl-date-1': 'Since 2022',
+        'tl-text-1': 'Associate UI Designer at empower GmbH, B2B SaaS, design systems and XAML/.NET implementation.',
+        'tl-date-2': '2026',
+        'tl-text-2': 'Data Analytics & AI Bootcamp at neuefische/SPICED Academy, GA4, BigQuery, Python, Tableau.',
+        'tl-date-3': '2024',
+        'tl-text-3': 'Fullstack Web Development Bootcamp at WBS Coding School, MERN stack, React, TypeScript.',
+        'tl-date-4': '2022',
+        'tl-text-4': 'M.A. User Experience Design, Rheinische Hochschule Köln.',
+        'tl-date-5': 'Earlier',
+        'tl-text-5': 'B.A. Mediendesign / Design Technology; IT support at ZIM, Bergische Universität Wuppertal, and an internship at Deutsche Telekom.',
         'about-status': "I'm currently looking for a role as UI Designer, Product Designer, or Design Engineer in NRW or remote.",
         'footer-line1': 'Sebastian Weber · UX/UI Designer · Design-to-Code · Cologne 2026',
         'footer-imprint': 'Imprint & Privacy Policy',
@@ -521,6 +615,25 @@
         'about-p2': 'Medien- und Informationsgeschichte ist für mich mehr als ein Nebeninteresse: Meine Bachelorarbeit behandelte Vannevar Bushs Memex-Konzept und die Ursprünge der grafischen Benutzeroberfläche, meine Masterarbeit widmete sich Ubiquitous Computing.',
         'about-p3': 'Data Analytics und KI nutze ich als zusätzliches Werkzeug: Wenn ich Tracking auf meinem eigenen Portfolio aufsetze oder Nutzersegmente in Rohdaten analysiere, treffe ich Designentscheidungen auf Basis von Evidenz statt Annahmen.',
         'about-p4': 'Diese Neugier endet nicht mit dem Feierabend. Eine alte Wandfliese, eine Pflanze, ein Möbelstück, das mir einfach über den Weg läuft, ich gehe der Herkunft nach, oft mit KI als Recherche-Werkzeug. Ich stehe auf elektronische Musik, Katzen und 16-Bit-Videospiele, aber auch auf Sonne, Strand und Meer.',
+        'fact-location-label': 'Standort',
+        'fact-role-label': 'Aktuelle Rolle',
+        'fact-role-value': 'Associate UI Designer, empower GmbH',
+        'fact-focus-label': 'Fokus',
+        'fact-focus-value': 'Design Systems, Komponentenbibliotheken, Design-to-Code',
+        'fact-education-label': 'Ausbildung',
+        'fact-education-value': 'M.A. User Experience Design, Rheinische Hochschule Köln',
+        'stack-title': 'Aktuell im Einsatz',
+        'path-title': 'Werdegang',
+        'tl-date-1': 'Seit 2022',
+        'tl-text-1': 'Associate UI Designer bei empower GmbH, B2B SaaS, Design Systems und XAML/.NET-Umsetzung.',
+        'tl-date-2': '2026',
+        'tl-text-2': 'Data Analytics & AI Bootcamp bei neuefische/SPICED Academy, GA4, BigQuery, Python, Tableau.',
+        'tl-date-3': '2024',
+        'tl-text-3': 'Fullstack Web Development Bootcamp bei WBS Coding School, MERN-Stack, React, TypeScript.',
+        'tl-date-4': '2022',
+        'tl-text-4': 'M.A. User Experience Design, Rheinische Hochschule Köln.',
+        'tl-date-5': 'Davor',
+        'tl-text-5': 'B.A. Mediendesign / Design Technology; IT-Support am ZIM der Bergischen Universität Wuppertal sowie ein Praktikum bei der Deutschen Telekom.',
         'about-status': 'Ich suche aktuell eine Stelle als UI Designer, Product Designer oder Design Engineer in NRW oder remote.',
         'footer-line1': 'Sebastian Weber · UX/UI Designer · Design-to-Code · Köln 2026',
         'footer-imprint': 'Impressum & Datenschutz',
