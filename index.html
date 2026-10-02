@@ -1,149 +1,452 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <!-- PostHog Analytics, EU endpoint, consent-gated -->
-  <script>
-    !function(t,e){var o,n,p,r;e.__SV||(window.posthog && window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Pn On init Wn Qn ki Gn Kn zn capture calculateEventProperties rs register register_once register_for_session unregister unregister_for_session os getFeatureFlag getFeatureFlagPayload getFeatureFlagResult isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync ls identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty ns es createPersonProfile setInternalOrTestUser ss Hn cs opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing Yn debug Ci gr getPageViewId captureTraceFeedback captureTraceMetric qn".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-
-    posthog.init('phc_ozweFkkTr9KtcQmuiTQHfjf3CiFv2hE2dKqwszmWutKv', {
-      api_host: 'https://eu.i.posthog.com',
-      defaults: '2026-05-30',
-      person_profiles: 'identified_only',
-      opt_out_capturing_by_default: true,
-      session_recording: {
-        maskAllInputs: true,
-      },
-      loaded: function (ph) {
-        if (ph.get_explicit_consent_status() === 'pending') {
-          var banner = document.getElementById('cookie-banner');
-          if (banner) banner.style.display = 'flex';
-        }
-      },
-    });
-  </script>
-
-  <meta charset="UTF-8">
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Case Study: Human Review of an AI-Generated Redesign | Sebastian Weber</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="https://sebastian-weber.github.io/uxui-portfolio/sw_favicon32.svg">
+  <title>Sebastian Weber · UX/UI Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link href="./css2" rel="stylesheet">
   <style>
     :root {
-      --dark: #0F1117; --coral: #E06040; --coral-bg: #FDF0EC; --accent: var(--coral);
-      --white: #FFFFFF; --paper: #FAFAFA; --text: #1A1A1A;
-      --muted: #7A7A7A; --border: #E0DEDA; --border-light: #EEECE8; --neutral: #F4F2EF;
+      --coral:      #E06040;
+      --coral-text: #E06040;
+      --purple:     #7B5EA7;
+      --teal:       #4A9B8E;
+      --teal-text:  #4A9B8E;
+      --steel:   #4A6FA5;
+      --dark:    #0F1117;
+      --paper:   #FAFAFA;
+      --white:   #FFFFFF;
+      --text:    #1A1A1A;
+      --muted:   #727272;
+      --border:  #E0DEDA;
     }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Montserrat', system-ui, sans-serif; background: var(--paper); color: var(--text); line-height: 1.7; }
-    #progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--accent); width: 0%; transition: width 0.1s; z-index: 100; }
-    nav { position: fixed; top: 0; left: 0; right: 0; background: rgba(250,250,250,0.94); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); z-index: 50; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 56px; }
-    .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
-    .nav-links a, .nav-current { font-size: 13px; color: var(--muted); text-decoration: none; font-weight: 500; transition: color 0.15s; }
-    .nav-links a:hover { color: var(--text); }
-    .nav-current { color: var(--text); font-weight: 700; }
-    .nav-flex-item { display: inline-block; min-width: 76px; text-align: center; }
 
-    .lang-switch { display: flex; align-items: center; gap: 6px; }
-    .lang-switch button {
-      font-family: inherit; background: none; border: none;
-      font-size: 13px; font-weight: 500; color: var(--muted); cursor: pointer; padding: 2px;
+    #progress {
+      position: fixed; top: 0; left: 0;
+      height: 3px; background: var(--steel);
+      width: 0%; transition: width 0.1s;
+      z-index: 100;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+
+    body {
+      font-family: 'Montserrat', system-ui, sans-serif;
+      background: var(--paper);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      background: rgba(250, 250, 250, 0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 50;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px; height: 56px;
+    }
+
+    .nav-links {
+      display: flex; gap: 28px; list-style: none; align-items: center;
+    }
+
+    .nav-links a {
+      font-size: 13px; color: var(--muted);
+      text-decoration: none; font-weight: 500;
       transition: color 0.15s;
     }
-    .lang-switch button:hover { color: var(--text); }
-    .lang-switch button.active { color: var(--text); font-weight: 700; }
-    .lang-switch .sep { color: var(--border); }
 
-    .subnav {
-      position: sticky; top: 56px; z-index: 40;
-      background: rgba(250,250,250,0.94); backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      display: flex; justify-content: flex-end; gap: 24px;
-      padding: 0 48px; height: 44px; align-items: center;
-      overflow-x: auto; scrollbar-width: none;
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-links .nav-flex-item {
+      display: inline-block;
+      min-width: 76px;
+      text-align: center;
     }
-    .subnav::-webkit-scrollbar { display: none; }
-    .subnav a {
-      font-size: 12px; font-weight: 600; color: var(--muted); text-decoration: none;
-      white-space: nowrap; padding: 4px 2px; border-bottom: 2px solid transparent;
-      transition: color 0.15s, border-color 0.15s; flex-shrink: 0;
+
+    .nav-current {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      cursor: default;
     }
-    .subnav a:hover { color: var(--text); }
-    .subnav a.active { color: var(--accent); border-bottom-color: var(--accent); }
-    @media (max-width: 860px) { .subnav { padding: 0 20px; } }
-    @media (max-width: 640px) { .subnav { display: none; } }
 
-    .nav-drawer__subnav-toggle-item { margin-top: 28px; }
-    .nav-drawer__subnav-label { display: flex; align-items: center; padding: 16px 4px; min-height: 44px; font-size: 18px; font-weight: 500; color: var(--muted); }
-    .nav-drawer__subnav-list { list-style: none; margin: 0; padding: 0; }
-    .nav-drawer__subnav-list li { border-bottom: 1px solid var(--border); }
-    .nav-drawer__subnav-list li:last-child { border-bottom: none; }
-    .nav-drawer__subnav-list a.subnav-drawer-item { display: flex; align-items: center; padding: 16px 4px 16px 22px; text-decoration: none; font-size: 18px; min-height: 44px; color: var(--muted); font-weight: 500; }
-    .nav-drawer__subnav-list a.subnav-drawer-item.active { color: var(--accent); font-weight: 700; }
+    .lang-switch {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 500;
+    }
 
-    .hero { padding: 140px 48px 80px; max-width: 720px; margin: 0 auto; }
-    .hero-label { font-size: 11px; font-weight: 600; color: var(--coral); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
-    .hero-label::before { content: ''; display: block; width: 32px; height: 1.5px; background: var(--coral); }
-    h1 { font-size: clamp(28px, 4vw, 48px); font-weight: 700; line-height: 1.15; color: var(--dark); margin-bottom: 16px; letter-spacing: -0.01em; }
-    .hero-sub { font-size: 20px; color: var(--muted); font-style: italic; max-width: 580px; line-height: 1.65; margin-bottom: 40px; }
-    .meta-row { display: flex; flex-wrap: wrap; gap: 24px; }
-    .meta-item { display: flex; flex-direction: column; gap: 3px; }
-    .hero-image { margin-top: 40px; border: 1px solid var(--border); overflow: hidden; background: var(--white); box-shadow: 0 16px 40px rgba(15,17,23,0.06); }
-    img[onclick] { cursor: zoom-in; }
-    #lightbox { display: none; position: fixed; inset: 0; background: rgba(10,11,15,0.92); z-index: 300; align-items: center; justify-content: center; padding: 40px; cursor: zoom-out; }
-    #lightbox.visible { display: flex; }
-    #lightbox img { max-width: 100%; max-height: 100%; border: 1px solid rgba(255,255,255,0.15); }
-    #lightbox-close { position: fixed; top: 24px; right: 32px; color: #fff; font-size: 32px; line-height: 1; cursor: pointer; z-index: 301; background: none; border: none; }
-    .hero-image img { width: 100%; display: block; }
-    .meta-box { display: grid; grid-template-columns: 1fr 1fr; row-gap: 28px; column-gap: 24px; border: 1.5px dashed var(--border); border-radius: 16px; padding: 28px 40px; margin-top: 32px; }
-    .meta-col { text-align: center; }
-    .meta-label-box { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--dark); margin-bottom: 10px; }
-    .meta-value-box { font-size: 14px; color: var(--text); line-height: 1.5; }
-    .meta-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
-    .meta-value { font-size: 13px; color: var(--text); font-weight: 500; }
-    .content { max-width: 720px; margin: 0 auto; padding: 0 48px 120px; }
-    .block { padding: 64px 0; border-top: 1px solid var(--border); opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
-    .block.visible { opacity: 1; transform: translateY(0); }
-    .block-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--coral); margin-bottom: 16px; }
-    h2 { font-size: 22px; font-weight: 700; color: var(--dark); margin-bottom: 20px; letter-spacing: -0.01em; line-height: 1.3; }
-    p { font-size: 15px; color: var(--text); margin-bottom: 18px; line-height: 1.75; }
-    ol { font-size: 15px; color: var(--text); line-height: 1.75; }
-    .callout { background: #F5E5E0; color: var(--dark); padding: 24px 28px; border-radius: 12px; margin: 32px 0; font-style: italic; font-size: 18px; line-height: 1.5; font-weight: 300; border-left: 4px solid #C87255; }
-    .img-block { margin: 28px 0; }
-    .img-block img { width: 100%; border: 1px solid var(--border); display: block; }
-    .img-block--portrait { max-width: 280px; margin-left: auto; margin-right: auto; }
-    .img-set { margin: 48px 0; }
-    .img-set .img-block:first-child { margin-top: 0; }
-    .img-set .img-block:last-child { margin-bottom: 0; }
-    .img-divider { margin: 0; }
-    .img-caption { font-size: 11px; color: var(--muted); margin-top: 8px; font-weight: 500; letter-spacing: 0.04em; }
-    .img-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 28px 0; }
-    .img-grid-item img { width: 100%; border: 1px solid var(--border); display: block; }
-    .img-grid-item .img-caption { font-size: 11px; color: var(--muted); margin-top: 8px; font-weight: 500; }
-    .process { display: grid; gap: 16px; margin: 28px 0; }
-    .process-step { background: var(--white); border: 1.5px solid var(--border); border-radius: 12px; padding: 22px 24px; display: grid; grid-template-columns: 40px 1fr; gap: 16px; align-items: start; }
-    .step-num { width: 40px; height: 40px; border-radius: 10px; background: var(--coral); color: var(--white); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 600; flex-shrink: 0; }
-    .step-title { font-size: 14px; font-weight: 600; margin-bottom: 6px; color: var(--dark); }
-    .step-body { font-size: 13px; color: var(--muted); line-height: 1.65; margin: 0; }
-    .step-tag { display: inline-block; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 3px 10px; border-radius: 20px; margin-bottom: 10px; }
-    .step-tag.missing-input { background: var(--neutral); color: var(--muted); }
-    .step-tag.unverified-output { background: var(--coral-bg); color: var(--coral); }
-    .disclaimer { background: var(--neutral); border-radius: 10px; padding: 20px 24px; margin: 28px 0; font-size: 13px; color: var(--muted); line-height: 1.65; border-left: 3px solid var(--border); }
-    table.findings { width: 100%; border-collapse: collapse; margin: 28px 0; font-size: 13px; }
-    table.findings th { text-align: left; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); padding: 10px 12px; border-bottom: 1.5px solid var(--dark); }
-    table.findings td { padding: 12px; border-bottom: 1px solid var(--border-light); vertical-align: top; color: var(--text); }
-    table.findings tr:last-child td { border-bottom: none; }
-    .cta-block { background: #F2E6E3; border-radius: 16px; padding: 48px; text-align: center; margin-top: 80px; }
-    .cta-block h2 { color: #1A1A1A; margin-bottom: 12px; }
-    .btn { display: inline-flex; align-items: center; gap: 8px; background: var(--coral); color: var(--white); padding: 12px 24px; border-radius: 8px; font-size: 14px; font-weight: 600; text-decoration: none; transition: all 0.15s; }
-    .btn:hover { background: #E88F71; color: var(--white); }
-    footer { border-top: 1px solid var(--border); padding: 32px 48px; display: flex; justify-content: space-between; align-items: center; max-width: 860px; margin: 0 auto; }
-    footer p { font-size: 12px; color: var(--muted); margin: 0; }
+    .lang-switch button {
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
 
+    .lang-switch button.active {
+      color: var(--text);
+      font-weight: 700;
+      cursor: default;
+    }
+
+    .lang-switch .sep {
+      color: var(--border);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      line-height: 0;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .logo svg { display: block; }
+
+    main {
+      flex: 1;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 156px 48px 80px;
+      width: 100%;
+    }
+
+    .label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .label::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1.5px;
+      background: var(--steel);
+    }
+
+    h1 {
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 700;
+      color: var(--dark);
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      margin-bottom: 16px;
+    }
+
+    .sub {
+      font-size: 20px;
+      color: var(--muted);
+      font-style: normal;
+      max-width: 620px;
+      line-height: 1.8;
+      margin-bottom: 64px;
+      text-wrap: pretty;
+    }
+
+    .rotating-line {
+      display: inline-flex;
+      align-items: baseline;
+    }
+
+    .rotating {
+      font-weight: 500;
+      display: inline-block;
+      white-space: nowrap;
+      min-width: 1px;
+      transition: color 0.15s;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1em;
+      margin-left: 2px;
+      vertical-align: -0.1em;
+      animation: blink 0.8s step-end infinite;
+      transition: background 0.15s;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+
+    .filter-hint {
+      display: none;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 20px;
+      padding: 12px 16px;
+      background: #F3F0F9;
+      border-radius: 10px;
+    }
+
+    .filter-hint.visible { display: flex; }
+
+    .filter-hint strong { color: var(--purple); font-weight: 700; }
+
+    .filter-hint button {
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--purple);
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-decoration: underline;
+      padding: 0;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 40px;
+    }
+
+    .filter-chip {
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 20px;
+      border: 1.5px solid var(--border);
+      background: var(--white);
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .filter-chip:hover {
+      border-color: var(--steel);
+      color: var(--steel);
+      background: #EAEFF7;
+    }
+
+    .filter-chip.active {
+      background: var(--steel);
+      border-color: var(--steel);
+      color: var(--white);
+    }
+
+    .filter-chip[data-filter="all"].active {
+      background: var(--dark);
+      border-color: var(--dark);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .card.hidden { display: none; }
+
+    .card {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      text-decoration: none;
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.07);
+    }
+
+    .card-image {
+      width: 100%;
+      height: 380px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+      padding: 16px;
+      background: var(--white);
+    }
+
+    .card-body {
+      padding: 28px 32px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .card-tag {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 4px 10px;
+      border-radius: 20px;
+      display: inline-block;
+      width: fit-content;
+      background: transparent;
+    }
+
+    .tag-coral  { background: #FDF0EC; color: var(--coral); }
+    .tag-purple { background: #F3F0F9; color: var(--purple); }
+    .tag-teal   { background: #EBF5F3; color: var(--teal); }
+
+    .card h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--dark);
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+    }
+
+    .card p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.65;
+      flex: 1;
+    }
+
+    .card-metrics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px 20px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      margin-top: 4px;
+    }
+
+    .metric {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+      flex: 1 1 auto;
+    }
+
+    .metric-value {
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .metric-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+
+    .metric-value.coral  { color: var(--coral-text); }
+    .metric-value.purple { color: var(--purple); }
+    .metric-value.teal   { color: var(--teal-text); }
+
+    .card-quote {
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      margin-top: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .card-quote blockquote {
+      font-size: 13px;
+      line-height: 1.65;
+      font-style: italic;
+      font-weight: 400;
+      padding-left: 10px;
+    }
+
+    .quote-coral blockquote {
+      border-left: 2px solid var(--coral-text);
+      color: var(--coral-text);
+    }
+
+    .quote-purple blockquote {
+      border-left: 2px solid var(--purple);
+      color: var(--purple);
+    }
+
+    .card-quote cite {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      font-style: normal;
+    }
+
+    .card-arrow {
+      font-size: 13px;
+      font-weight: 600;
+      margin-top: 8px;
+    }
+
+    .arrow-coral  { color: var(--coral-text); }
+    .arrow-purple { color: var(--purple); }
+    .arrow-teal   { color: var(--teal-text); }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 860px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    footer p { font-size: 12px; color: var(--muted); }
+    footer a { color: var(--muted); text-decoration: none; }
+
+    @media (max-width: 640px) {
+      nav { padding: 0 20px; }
+      main { padding: 80px 20px 60px; }
+      .cards { grid-template-columns: 1fr; }
+      footer { padding: 20px; flex-direction: column; gap: 8px; text-align: center; }
+      .card-quote cite { white-space: normal; }
+    }
+
+    /* Cookie Banner */
     #cookie-banner {
       position: fixed; bottom: 24px; left: 50%;
       transform: translateX(-50%);
-      background: #0F1117; color: #fff;
+      background: var(--dark); color: #fff;
       padding: 16px 24px; border-radius: 12px;
       display: flex; align-items: center; gap: 16px;
       z-index: 200; font-size: 13px;
@@ -155,14 +458,8 @@
     .cookie-btn { padding: 8px 16px; border-radius: 7px; font-size: 12px; font-weight: 600; cursor: pointer; border: none; white-space: nowrap; font-family: inherit; }
     .cookie-accept { background: var(--coral); color: #fff; }
     .cookie-decline { background: transparent; color: #ccc; border: 1px solid #555 !important; }
-
-    @media (max-width: 860px) {
-      nav { padding: 0 20px; } .hero { padding: 120px 20px 60px; } .content { padding: 0 20px 80px; }
-      footer { padding: 24px 20px; flex-direction: column; gap: 8px; text-align: center; }
-      .img-grid { grid-template-columns: 1fr; }
-      .meta-box { grid-template-columns: 1fr; }
-    }
-
+  
+    /* ===== Mobile Navbar: Hamburger + Off-Canvas Drawer ===== */
     .nav-toggle {
       display: none;
       background: none;
@@ -229,20 +526,203 @@
     }
 
   </style>
+
+  <!-- PostHog — Enhanced Tracking -->
+  <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog && window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Pn On init Wn Qn ki Gn Kn zn capture calculateEventProperties rs register register_once register_for_session unregister unregister_for_session os getFeatureFlag getFeatureFlagPayload getFeatureFlagResult isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync ls identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty ns es createPersonProfile setInternalOrTestUser ss Hn cs opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing Yn debug Ci gr getPageViewId captureTraceFeedback captureTraceMetric qn".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+
+    posthog.init('phc_ozweFkkTr9KtcQmuiTQHfjf3CiFv2hE2dKqwszmWutKv', {
+      api_host: 'https://eu.i.posthog.com',
+      defaults: '2026-05-30',
+      person_profiles: 'identified_only',
+      opt_out_capturing_by_default: true,
+      session_recording: {
+        maskAllInputs: true,
+      },
+      loaded: function (ph) {
+        if (ph.get_explicit_consent_status() === 'pending') {
+          var banner = document.getElementById('cookie-banner');
+          if (banner) banner.style.display = 'flex';
+        }
+      },
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+
+      // 1. Project card clicks — fires on all cards, with card_id and card_position
+      var cardMeta = [
+        { selector: 'a[href*="nebeko/case-study"]',           card_id: 'nebeko-case-study' },
+        { selector: 'a[href*="nebeko/workflow"]',             card_id: 'nebeko-workflow'   },
+        { selector: 'a[href*="linkedin-wheel-case-study"]',   card_id: 'linkedin-readiness-guide-case-study' },
+        { selector: 'a[href*="linkedin-readiness-guide/"]',   card_id: 'linkedin-readiness-guide-tool' },
+        { selector: 'a[href*="convert-slides"]',              card_id: 'convert-slides'    },
+        { selector: 'a[href*="figma-make-redesign-navbar"]',  card_id: 'figma-make-navbar-case-study' },
+        { selector: 'a[href*="ga4-user-segmentation-web-dashboard"]', card_id: 'ga4-segmentation-dashboard' },
+      ];
+
+      document.querySelectorAll('.card').forEach(function (card, index) {
+        var href   = card.getAttribute('href') || '';
+        var match  = cardMeta.find(function (m) { return card.matches(m.selector); });
+        var cardId = match ? match.card_id : 'unknown';
+        var tag    = card.querySelector('.card-tag') ? card.querySelector('.card-tag').textContent.trim() : 'unknown';
+        var title  = card.querySelector('h2')        ? card.querySelector('h2').textContent.trim()        : 'unknown';
+
+        card.addEventListener('click', function () {
+          posthog.capture('project_card_clicked', {
+            card_id:       cardId,
+            card_position: index + 1,
+            card_title:    title,
+            card_tag:      tag,
+            card_href:     href,
+          });
+        });
+      });
+
+      // 2. Case study clicks (granular — fires only on Case Study cards)
+      var caseStudyCards = [
+        {
+          selector: 'a[href*="nebeko/case-study"]',
+          case_study_id: 'nebeko',
+        },
+        {
+          selector: 'a[href*="linkedin-wheel-case-study"]',
+          case_study_id: 'linkedin-readiness-guide',
+        },
+        {
+          selector: 'a[href*="convert-slides"]',
+          case_study_id: 'convert-slides',
+        },
+        {
+          selector: 'a[href*="figma-make-redesign-navbar"]',
+          case_study_id: 'figma-make-navbar',
+        },
+        {
+          selector: 'a[href*="ga4-user-segmentation-web-dashboard"]',
+          case_study_id: 'ga4-segmentation-dashboard',
+        },
+      ];
+
+      caseStudyCards.forEach(function (def) {
+        var el = document.querySelector(def.selector);
+        if (!el) return;
+        el.addEventListener('click', function () {
+          posthog.capture('case_study_clicked', {
+            case_study_id: def.case_study_id,
+            source_page:   'portfolio',
+            opens_new_tab: el.getAttribute('target') === '_blank',
+          });
+        });
+      });
+
+      // 3. LinkedIn clicks (nav + footer)
+      document.querySelectorAll('a[href*="linkedin.com"]').forEach(function (el) {
+        el.addEventListener('click', function () {
+          posthog.capture('linkedin_clicked', {
+            source: el.closest('nav') ? 'nav' : 'footer',
+          });
+        });
+      });
+
+      // 4. About click (nav)
+      var aboutLink = document.querySelector('.nav-links a[href*="about.html"]');
+      if (aboutLink) {
+        aboutLink.addEventListener('click', function () {
+          posthog.capture('nav_about_clicked');
+        });
+      }
+
+      // 5. Logo click
+      var logo = document.querySelector('nav .logo');
+      if (logo) {
+        logo.addEventListener('click', function () {
+          posthog.capture('logo_clicked');
+        });
+      }
+
+      // 6. Footer Impressum / Datenschutz
+      var impressum = document.querySelector('footer a[href*="datenschutz"]');
+      if (impressum) {
+        impressum.addEventListener('click', function () {
+          posthog.capture('footer_impressum_clicked');
+        });
+      }
+
+      // 7. Scroll depth (25 / 50 / 75 / 100%)
+      var scrollMilestones = { 25: false, 50: false, 75: false, 100: false };
+      window.addEventListener('scroll', function () {
+        var scrolled = window.scrollY;
+        var total    = document.body.scrollHeight - window.innerHeight;
+        if (total <= 0) return;
+        var pct = Math.round(scrolled / total * 100);
+        [25, 50, 75, 100].forEach(function (m) {
+          if (!scrollMilestones[m] && pct >= m) {
+            scrollMilestones[m] = true;
+            posthog.capture('scroll_depth', {
+              depth_percent: m,
+              page:          'portfolio',
+            });
+          }
+        });
+      }, { passive: true });
+
+      // 8. Time on page (30s / 60s / 120s)
+      var pageLoadTime = Date.now();
+    [30, 60, 120].forEach(function (sec) {
+      setTimeout(function () {
+        posthog.capture('time_on_page', {
+          seconds: Math.round((Date.now() - pageLoadTime) / 1000),
+          page:    'portfolio',
+        });
+      }, sec * 1000);
+
+      });
+
+      // 9. Contact clicks
+      var contactLinks = [
+        { selector: 'nav a[href*="linkedin.com"]',    method: 'linkedin' },
+        { selector: 'footer a[href*="linkedin.com"]', method: 'linkedin' },
+      ];
+      contactLinks.forEach(function (def) {
+        document.querySelectorAll(def.selector).forEach(function (el) {
+          el.addEventListener('click', function () {
+            posthog.capture('contact_clicked', {
+              method:      def.method,
+              source_page: 'portfolio',
+            });
+          });
+        });
+      });
+
+      // 10. Reopen cookie settings (Art. 7(3) GDPR: revoking consent must be as easy as giving it)
+      var settingsLink = document.getElementById('cookie-settings-link');
+      if (settingsLink) {
+        settingsLink.addEventListener('click', function (e) {
+          e.preventDefault();
+          document.getElementById('cookie-banner').style.display = 'flex';
+        });
+      }
+
+      // 11. Language switch
+      var langButtons = document.querySelectorAll('.lang-switch button');
+      langButtons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          posthog.capture('lang_switched', { lang: btn.dataset.lang });
+        });
+      });
+
+    });
+  </script>
+
 </head>
 <body>
-  <div id="progress"></div>
 
   <div id="cookie-banner" style="display:none;">
-    <p data-i18n="cookie-text">This site uses PostHog for privacy-focused analytics, hosted on EU servers. <a href="https://sebastian-weber.github.io/uxui-portfolio/datenschutz.html" target="_blank">Privacy Policy</a></p>
+    <p data-i18n="cookie-text">This site uses PostHog to create anonymized usage statistics and session recordings. <a href="https://sebastian-weber.github.io/uxui-portfolio/datenschutz.html">Privacy Policy</a></p>
     <button class="cookie-btn cookie-decline" onclick="decideConsent(false)" data-i18n="cookie-decline">Decline</button>
     <button class="cookie-btn cookie-accept" onclick="decideConsent(true)" data-i18n="cookie-accept">Accept</button>
   </div>
 
-  <div id="lightbox" onclick="closeLightbox()">
-    <button id="lightbox-close" onclick="closeLightbox()">&times;</button>
-    <img id="lightbox-img" src="" alt="">
-  </div>
+  <div id="progress"></div>
 
   <nav>
     <a href="https://sebastian-weber.github.io/uxui-portfolio/index.html" class="logo" aria-label="Sebastian Weber - Home" style="display:flex;align-items:center;line-height:0;margin-right:8px;"><svg width="40" height="40" style="display:block;margin-top:-2px;" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M0 19.0413V20.7092L15.9986 26.8336V25.3991L11.7131 23.7928V23.7848L10.3368 23.2366L1.51283 19.9819L10.3384 16.7504V16.7576L11.7146 16.2587L16.0001 14.6524V13.1113L0 19.0413Z" fill="#0F1117"></path><path d="M16.0001 24.0696V22.4023L0 16.2773V17.7113L4.2859 19.317V19.3279L5.66227 19.8759L14.4871 23.1294L5.66227 26.3619V26.3546L4.2859 26.8534L0 28.4591V29.9996L16.0001 24.0696Z" fill="#0F1117"></path><path d="M20.3237 26.8333H22.1382L28.8006 11H27.2401L25.4927 15.242H25.4809L24.8844 16.6032L21.3438 25.3361L17.826 16.6032H17.8339L17.2911 15.242L15.5436 11H13.8672L20.3237 26.8333Z" fill="#0F1117"></path><path d="M23.5229 26.8333H25.3374L31.9998 11H30.4394L28.6919 15.2418H28.6801L28.0837 16.603L24.543 25.3354L21.0252 16.603H21.0331L20.4903 15.2418L18.7429 11H17.0664L23.5229 26.8333Z" fill="#0F1117"></path></svg></a>
@@ -259,18 +739,16 @@
       </li>
       <li><a href="https://linkedin.com/in/sebastian-weber1708" target="_blank">LinkedIn</a></li>
     </ul>
-    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navDrawer" aria-label="Open menu" data-i18n-aria="menu-open">
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navDrawer" aria-label="Menü öffnen">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 6H21M3 12H21M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
     </button>
   </nav>
-
-  <div class="subnav" id="subnav" aria-label="Sections on this page" data-i18n-aria="subnav-aria"></div>
 
   <div class="nav-overlay" id="navOverlay" data-open="false"></div>
 
   <aside class="nav-drawer" id="navDrawer" data-open="false" aria-hidden="true">
     <div class="nav-drawer__header">
-      <button class="nav-drawer__close" id="navDrawerClose" aria-label="Close menu" data-i18n-aria="menu-close">
+      <button class="nav-drawer__close" id="navDrawerClose" aria-label="Menü schließen">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 6L18 18M6 18L18 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       </button>
     </div>
@@ -286,215 +764,203 @@
         </div>
       </li>
       <li><a href="https://linkedin.com/in/sebastian-weber1708" target="_blank">LinkedIn</a></li>
-
-      <li class="nav-drawer__subnav-toggle-item" id="drawerSubnavToggleItem" hidden>
-        <span class="nav-drawer__subnav-label" data-i18n="drawer-onpage">On this page</span>
-      </li>
-      <li class="nav-drawer__subnav-list-item" id="drawerSubnavListItem" hidden>
-        <ul class="nav-drawer__subnav-list" id="drawerSubnavList"></ul>
-      </li>
     </ul>
   </aside>
 
 
-  <section class="hero">
-    <div class="hero-label">Case Study</div>
-    <h1 data-i18n="h1">Human Review of an AI-Generated Redesign</h1>
-    <p class="hero-sub" data-i18n="hero-sub">I had Figma Make rebuild a responsive navbar from six screenshots. The output looked plausible at first glance. The review is where it got interesting.</p>
-    <div class="hero-image">
-      <img src="img/before-after.png" data-i18n-alt="alt-1" alt="Before and after comparison" onclick="openLightbox(this.src)">
-    </div>
-    <div class="meta-box">
-      <div class="meta-col">
-        <div class="meta-label-box" data-i18n="meta-project">Project</div>
-        <div class="meta-value-box" data-i18n="meta-project-v">Peters Elektro Template<br>Design-to-Code Experiment</div>
-      </div>
-      <div class="meta-col">
-        <div class="meta-label-box" data-i18n="meta-role">My Role</div>
-        <div class="meta-value-box" data-i18n="meta-role-v">Design Review<br>Technical Audit, Accessibility QA</div>
-      </div>
-      <div class="meta-col">
-        <div class="meta-label-box">Tools</div>
-        <div class="meta-value-box">Figma Make<br>React, TypeScript, Tailwind CSS</div>
-      </div>
-      <div class="meta-col">
-        <div class="meta-label-box" data-i18n="meta-timeline">Timeline</div>
-        <div class="meta-value-box">2026</div>
-      </div>
-    </div>
-  </section>
+  <main>
+    <div class="label" data-i18n="hero-label">Design-to-Code Portfolio</div>
+    <h1>Sebastian Weber</h1>
+    <p class="sub">
+      <span data-i18n="hero-intro">👋 Hi, I'm Sebastian, a UX/UI Designer from Cologne, Germany. I develop interfaces based on user research and bring them to life with AI, from Figma to finished code.</span><br>
+      <span data-i18n="hero-tagline-lead">I work</span> 
+      <span class="rotating-line"><span class="rotating" id="word"></span><span class="cursor" id="cursor"></span></span>
+    </p>
 
-  <main class="content">
-
-    <section class="block" id="context" style="border-top: none; padding-top: 0;">
-      <div class="block-label" data-i18n="lbl-01">01 · Context</div>
-      <h2 data-i18n="h2-01">Setup and first review</h2>
-      <p data-i18n="ctx-p1">I fed Figma Make a set of screenshots of an existing responsive navigation bar, covering the desktop and mobile layouts as well as individual interaction states such as expanded dropdowns and the mobile drawer overlay, then asked the programme to recreate the component in code. The two complete views below show the starting point; the individual state screenshots are not reproduced here.</p>
-
-      <div class="img-set">
-        <div class="img-block">
-          <img src="img/original-nav.png" data-i18n-alt="alt-2" alt="Original reference navbar on desktop before the Figma Make rework" onclick="openLightbox(this.src)">
-          <div class="img-caption" data-i18n="cap-orig-nav">Starting point · the original desktop navbar used as reference</div>
-        </div>
-
-        <div class="img-block img-block--portrait">
-          <img src="img/mobile-menu-original-ref.png" data-i18n-alt="alt-3" alt="Original reference mobile menu with chevrons grouped directly against their labels" onclick="openLightbox(this.src)">
-          <div class="img-caption" data-i18n="cap-orig-mobile">Starting point · the original mobile menu</div>
-        </div>
-      </div>
-
-      <p class="img-divider" data-i18n="ctx-p2">After reviewing the result, I asked Figma Make whether it had copied the design exactly, improved it, or created something more akin to a modern redesign. The answer: <em>"More of a <strong>faithful copy</strong> with <strong>minor practical adjustments</strong>,"</em> (!) It admitted its own shortcomings in the same breath: an approximated logo, and dropdown panel width and card proportions that might differ slightly from the original. Set against those admissions, the claim isn't true. A poor call of judgment. This is what that first output looked like:</p>
-
-      <div class="img-set">
-        <div class="img-block">
-          <img src="img/first-build-initial-output.png" data-i18n-alt="alt-4" alt="The very first Figma Make output: navbar with logo rendering as a malformed E-parenthesis shape and a broken image icon in place of the Solaranlagen-Installation photo" onclick="openLightbox(this.src)">
-          <div class="img-caption" data-i18n="cap-first">The first result, before any review: logo already malformed, image already broken</div>
-        </div>
-      </div>
-      <p data-i18n="ctx-p3">From there I had it produce two separate variants: Version B, staying close to the original reference, and Version C, a more visually ambitious rework. The gap had been underestimated: the logo was far off from the original reference, more than just an approximation, and the alignment of the navigation and the typeface also diverged more than "minor adjustments" implied, an initial indication that a tool's assessment of its own work requires independent verification rather than passive acceptance.</p>
-    </section>
-
-    <section class="block" id="findings">
-      <div class="block-label" data-i18n="lbl-02">02 · Findings</div>
-      <h2 data-i18n="h2-02">Shortcomings of the AI rework</h2>
-      <p data-i18n="find-p">After reviewing the redesign more thoroughly, all in all five findings emerged, each belonging to one of two failure modes: <strong>unverified output</strong>, where a claim needed to be checked against reality before it could be trusted, or <strong>missing input</strong>, where the tool guessed confidently from incomplete source material.</p>
-
-      <div class="process">
-
-        <div class="process-step">
-          <div class="step-num">1</div>
-          <div>
-            <span class="step-tag unverified-output" data-i18n="tag-unverified">Unverified output</span>
-            <div class="step-title" data-i18n="f1-t">A broken image that persisted until it was flagged</div>
-            <p class="step-body" data-i18n="f1-b">One of the dropdown cards for 'Solaranlagen-Installation' pointed to a broken image URL. This flaw was apparent right from the start of my review, as it was visible in the initial output shown above. However, this error survived multiple iterations and two separate design tracks without Figma Make ever catching or correcting it automatically. It took a human reviewer explicitly flagging it before it was fixed.</p>
-            <div class="img-block" style="margin-top: 16px;">
-              <img src="img/broken-image-card.png" data-i18n-alt="alt-5" alt="Dropdown card showing a broken image placeholder icon instead of a solar panel photo" onclick="openLightbox(this.src)">
-              <div class="img-caption" data-i18n="f1-cap">The Solaranlagen-Installation card, image never loaded</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="process-step">
-          <div class="step-num">2</div>
-          <div>
-            <span class="step-tag unverified-output" data-i18n="tag-unverified">Unverified output</span>
-            <div class="step-title" data-i18n="f2-t">Contrast values checked with numbers, not a glance</div>
-            <p class="step-body" data-i18n="f2-b">Checking contrast values directly rather than trusting the render, Version B held up: it preserved the accessibility choices already present in the reference design. Version C didn't. Two text elements failed WCAG AA once measured: a dropdown subtitle at 3.3:1 and a mobile sub-caption at 3.9:1, against a 4.5:1 requirement. Both looked readable enough on a bright screen. Corrected by raising opacity to roughly 0.55, around 6.2:1. Worth noting: this came from asking Figma Make pointed questions directly, a conversational capability, not a dedicated audit feature. Real WCAG scanners and heuristic-evaluation tools exist as separate plugins for Figma itself, not built into Figma Make.</p>
-            <div class="img-grid" style="margin-top: 16px;">
-              <div class="img-grid-item">
-                <img src="img/version_b_high_contrast.png" data-i18n-alt="alt-6" alt="Version B phone number and Kontakt button in full white and green, high contrast against the dark background" onclick="openLightbox(this.src)">
-                <div class="img-caption" data-i18n="f2-cap-b">Version B · faithful to the reference, contrast held up</div>
-              </div>
-              <div class="img-grid-item">
-                <img src="img/version_c_low_contrast.png" data-i18n-alt="alt-7" alt="Version C phone number in a muted, lower-contrast green against the dark background" onclick="openLightbox(this.src)">
-                <div class="img-caption" data-i18n="f2-cap-c">Version C · contrast dropped below WCAG AA</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="process-step">
-          <div class="step-num">3</div>
-          <div>
-            <span class="step-tag unverified-output" data-i18n="tag-unverified">Unverified output</span>
-            <div class="step-title" data-i18n="f3-t">A mobile hierarchy that needed a why, not just a what</div>
-            <p class="step-body" data-i18n="f3-b">The original reference had no phone number in the mobile menu at all, and its chevrons sat on the right too, same as Figma Make's version. What made the original intelligible despite not being optimized for mobile wasn't alignment, it was proximity: each chevron sat directly against its label, so the two read as one grouped unit. Figma Make kept the right-side placement but lost that closeness, pushing the chevrons out toward the far edge, disconnected from the label they belonged to, and added a phone number that didn't exist in the reference at all, dropped in at the bottom of the menu where it read as an afterthought. The tool was candid about the second problem once asked: an attempt to make the chevrons "subtle" had left them looking disconnected instead.</p>
-            <div class="img-grid" style="margin-top: 16px;">
-              <div class="img-grid-item">
-                <img src="img/mobile-menu-original-ref.png" data-i18n-alt="alt-8" alt="Original reference mobile menu with chevrons grouped directly against their labels and no phone number present" onclick="openLightbox(this.src)">
-                <div class="img-caption" data-i18n="f3-cap-a">Original reference · chevrons grouped with their labels, no phone number</div>
-              </div>
-              <div class="img-grid-item">
-                <img src="img/mobile-menu-figma-make-misplaced.png" data-i18n-alt="alt-9" alt="Figma Make's reworked mobile menu with chevrons pushed to the far right, disconnected from their labels, and a phone number isolated at the bottom" onclick="openLightbox(this.src)">
-                <div class="img-caption" data-i18n="f3-cap-b">Figma Make's rework · chevrons pushed to the edge, phone number isolated</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="process-step">
-          <div class="step-num">4</div>
-          <div>
-            <span class="step-tag missing-input" data-i18n="tag-missing">Missing input</span>
-            <div class="step-title" data-i18n="f4-t">A logo guessed wrong twice</div>
-            <p class="step-body" data-i18n="f4-b">An early version rendered the mark as "E)", a malformed arc. A later one rendered it as "P". Neither was resolved by the tool reasoning its way to a fix, and neither was accurately flagged: the tool described the logo as "close but not exact," when it wasn't close at all, it had rendered a different letterform entirely. The tool had never seen the real asset, only a shape inferred from screenshots. My logo design, an "E" resembling a power socket and tilted slightly to the right, was evidently not legible enough from screenshots alone for the tool to interpret, and so it could not be recreated properly. The correct mark appeared only once the actual Logotype.svg was uploaded directly.</p>
-            <div class="img-grid" style="margin-top: 16px;">
-              <div class="img-grid-item">
-                <img src="img/logo-broken-p.png" data-i18n-alt="alt-10" alt="Mobile menu with the logo rendering as a malformed P-like shape" onclick="openLightbox(this.src)">
-                <div class="img-caption" data-i18n="f4-cap-a">First malformed state · rendered as "P"</div>
-              </div>
-              <div class="img-grid-item">
-                <img src="img/logo-fixed-e.png" data-i18n-alt="alt-11" alt="Mobile menu with the logo rendering as a different malformed shape" onclick="openLightbox(this.src)">
-                <div class="img-caption" data-i18n="f4-cap-b">Second malformed state · a different broken arc, not the actual fix</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="process-step">
-          <div class="step-num">5</div>
-          <div>
-            <span class="step-tag missing-input" data-i18n="tag-missing">Missing input</span>
-            <div class="step-title" data-i18n="f5-t">A typeface question that resolved into something more precise</div>
-            <p class="step-body" data-i18n="f5-b">The rendered nav text came out narrower and more tightly tracked than the original. The browser's computed style panel showed why: the nav renders with Tailwind's default stack, ui-sans-serif, system-ui, sans-serif, no custom typeface at all. Figma Make was candid about the gap: working from screenshots alone, without OCR or font-detection tools, it landed on Inter as a visual guess, which happens to resemble the system fonts it was actually looking at.</p>
-            <div class="img-block" style="margin: 16px 0;">
-              <img src="img/hero-navbar-final.png" data-i18n-alt="alt-12" alt="Final navbar render" onclick="openLightbox(this.src)">
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <section class="block" id="improvements">
-      <div class="block-label" data-i18n="lbl-03">03 · Where It Helped</div>
-      <h2 data-i18n="h2-03">Where Figma Make actually improved the original</h2>
-      <p data-i18n="imp-p">Not every part of this was a correction. A few things genuinely moved the design forward:</p>
-      <ul style="padding-left: 20px; margin-bottom: 18px;">
-        <li style="margin-bottom: 10px;" data-i18n="imp-1"><strong>A more modern-looking visual design overall</strong>, the scroll-aware navbar, the gradient CTA button, and the animated hover states gave the component a visual polish the original reference screenshots never had.</li>
-        <li style="margin-bottom: 10px;" data-i18n="imp-2"><strong>Better-matched photography</strong>, several service cards had their stock imagery replaced with shots that actually fit the service and read as more German, looking more polished, glossy and commercial, though not every swap landed.</li>
-        <li style="margin-bottom: 10px;" data-i18n="imp-3"><strong>A more complete mobile-friendly layout</strong>, the full-screen mobile overlay with expandable accordion sections gave the mobile experience more structure than a simple stacked list would have.</li>
-        <li data-i18n="imp-4"><strong>A considered typography call</strong>, keeping Inter over the bare system stack it had guessed at meant consistent rendering across operating systems instead of a look that shifts depending on the visitor's device.</li>
-      </ul>
-    </section>
-
-    <section class="block" id="takeaway">
-      <div class="block-label" data-i18n="lbl-04">04 · Takeaway</div>
-      <h2 data-i18n="h2-04">Two failure modes, and the instinct that tells them apart</h2>
-
-      <p data-i18n="tk-p1"><strong>Missing input</strong> describes the logo and font problems: the tool guessed confidently from incomplete source material and never signaled that it was guessing. Both resolved faster once I went straight to the actual source, the SVG file, the computed style panel, than any further round of prompting would have. <strong>Unverified output</strong> covers the contrast failures, the hierarchy problems, and the broken image, each one only came to light because something specific got checked instead of just trusted.</p>
-
-      <p data-i18n="tk-p2">The clearest pattern in that second group: visual polish consistently won out over accessibility. The contrast failures are the sharpest example, two text elements shipped below WCAG AA while effort went into gradients and hover animation instead, and the same gap showed up again in the mobile menu, where proximity worked in the desktop dropdown cards but broke down there.</p>
-
-      <div class="callout" data-i18n="tk-callout">What actually transfers here is the diagnostic instinct: recognizing which of these two failure modes, missing input or unverified output, is in front of you, and knowing which kind of check that calls for.</div>
-
-      <p data-i18n="tk-p3">Everything above comes from examining the rendered output, the browser's computed styles, and the tool's own stated reasoning, not a line-by-line audit of the underlying implementation, that might be added later on. One question also stays open rather than asserted: whether the same approach extends to performance, image sizing, render-blocking resources, load times, is untested here.</p>
-    </section>
-
-    <div class="cta-block">
-      <h2 data-i18n="cta-h2">All Projects</h2>
-      <a href="https://sebastian-weber.github.io/uxui-portfolio/" class="btn" data-i18n="cta-btn">To the project overview &rarr;</a>
+    <div class="filter-hint" id="filter-hint">
+      <span id="filter-hint-text"></span>
+      <button id="filter-hint-reset" type="button" data-i18n="filter-reset">Show all</button>
     </div>
 
+    <div class="filter-bar" role="group" aria-label="Filter portfolio by focus area">
+      <button class="filter-chip active" data-filter="all" type="button" data-i18n="filter-all">All</button>
+      <button class="filter-chip" data-filter="uxr" type="button" data-i18n="filter-uxr">User Research</button>
+      <button class="filter-chip" data-filter="design" type="button" data-i18n="filter-design">UX/UI Design</button>
+      <button class="filter-chip" data-filter="ai" type="button" data-i18n="filter-ai">AI Builder</button>
+    </div>
+
+    <div class="cards">
+
+      <a href="https://sebastian-weber.github.io/ga4-user-segmentation-web-dashboard/" class="card" data-category="uxr">
+        <div class="card-image">
+          <img src="./hero-dashboards.png" alt="GA4 Behavioral Segmentation of Google Merchandise Store Users">
+        </div>
+        <div class="card-body">
+          <span class="card-tag tag-coral" data-i18n="tag-case-study">Case Study</span>
+          <h2 data-i18n="c1-h2">GA4 Behavioral Segmentation of Google Merchandise Store Users</h2>
+          <p data-i18n="c1-p">270,154 Google Merchandise Store users clustered into four behavioral segments via k-means. From BigQuery SQL through Python to an interactive dashboard.</p>
+          <div class="card-metrics">
+            <div class="metric">
+              <span class="metric-value coral">270k</span>
+              <span class="metric-label" data-i18n="c1-m1">Users</span>
+            </div>
+            <div class="metric">
+              <span class="metric-value coral">4</span>
+              <span class="metric-label" data-i18n="c1-m2">Segments</span>
+            </div>
+            <div class="metric">
+              <span class="metric-value coral">86%</span>
+              <span class="metric-label" data-i18n="c1-m3">Checkout Drop-off</span>
+            </div>
+          </div>
+          <span class="card-arrow arrow-coral" data-i18n="cta-read-case-study">Read case study →</span>
+        </div>
+      </a>
+
+      <a href="https://sebastian-weber.github.io/figma-make-redesign-navbar/case-study.html" class="card" data-category="ai">
+        <div class="card-image">
+          <img src="./screenshot-nav-redesign-before-after.png" alt="Human Review of an AI-Generated Redesign Case Study">
+        </div>
+        <div class="card-body">
+          <span class="card-tag tag-coral" data-i18n="tag-case-study">Case Study</span>
+          <h2 data-i18n="c2-h2">Human Review of an AI-Generated Redesign</h2>
+          <p data-i18n="c2-p">Figma Make rebuilt a responsive navbar from six screenshots. The review surfaced two failure modes: missing input and unverified output.</p>
+          <div class="card-metrics">
+            <div class="metric">
+              <span class="metric-value coral">5</span>
+              <span class="metric-label" data-i18n="c2-m1">Findings</span>
+            </div>
+            <div class="metric">
+              <span class="metric-value coral">2</span>
+              <span class="metric-label" data-i18n="c2-m2">WCAG Violations</span>
+            </div>
+            <div class="metric">
+              <span class="metric-value coral">0</span>
+              <span class="metric-label" data-i18n="c2-m3">Unsolvable Issues for a UX Designer</span>
+            </div>
+          </div>
+          <span class="card-arrow arrow-coral" data-i18n="cta-read-case-study">Read case study →</span>
+        </div>
+      </a>
+
+      <a href="https://sebastian-weber.github.io/Preset-template-selection-tool/preset-template-selection-case-study-EN.html" class="card" data-category="design">
+        <div class="card-image">
+          <img src="./screenshot-update-layout.png" alt="Preset Template Selection Tool Case Study">
+        </div>
+        <div class="card-body">
+          <span class="card-tag tag-coral" data-i18n="tag-case-study">Case Study</span>
+          <h2 data-i18n="c3-h2">A Preset Model for Updating Layouts</h2>
+          <p data-i18n="c3-p">How curating presets instead of adding more options became the real design move, and how transparency builds trust.</p> 
+          <div class="card-quote quote-coral">
+            <blockquote>"Will be super helpful for all situations."</blockquote>
+            <cite data-i18n="c3-cite">Anonymous stakeholder</cite>
+          </div>
+          <div class="card-metrics">
+            <div class="metric">
+              <span class="metric-value coral">4</span>
+              <span class="metric-label" data-i18n="c3-m1">Iterations</span>
+            </div>
+            <div class="metric">
+              <span class="metric-value coral">3</span>
+              <span class="metric-label" data-i18n="c3-m2">Presets</span>
+            </div>
+            <div class="metric">
+              <span class="metric-value coral">0</span>
+              <span class="metric-label" data-i18n="c3-m3">Ambiguity</span>
+            </div>
+          </div>
+          <span class="card-arrow arrow-coral" data-i18n="cta-read-case-study">Read case study →</span>
+        </div>
+      </a>
+
+      <a href="https://sebastian-weber.github.io/nebeko/case-study.html" class="card" data-category="uxr ai">
+        <div class="card-image">
+          <img src="./screenshot-casestudy.png" alt="Nebenkostenabrechnung Case Study">
+        </div>
+        <div class="card-body">
+          <span class="card-tag tag-coral" data-i18n="tag-case-study">Case Study</span>
+          <h2 data-i18n="c4-h2">A Full Day of Work, Replaced by AI and Excel</h2>
+          <p data-i18n="c4-p">An in-context interview with no discussion guide. Three UX decisions. And why a Figma prototype wasn't the right answer.</p>
+          <div class="card-quote quote-coral">
+            <blockquote data-i18n="c4-quote">"Yeah sure, but it's headed in a good direction."</blockquote>
+            <cite data-i18n="c4-cite">Anonymous landlord · WhatsApp · May 1, 2026</cite>
+          </div>
+          <span class="card-arrow arrow-coral" data-i18n="cta-read-case-study">Read case study →</span>
+        </div>
+      </a>
+
+      <a href="https://sebastian-weber.github.io/nebeko/workflow.html" class="card" data-category="ai uxr">
+        <div class="card-image">
+          <img src="./screenshot-workflow.png" alt="Nebenkostenabrechnung Workflow">
+        </div>
+        <div class="card-body">
+          <span class="card-tag tag-purple" data-i18n="tag-ai-workflow">AI Workflow</span>
+          <h2 data-i18n="c5-h2">Utility Bill Statements, by Prompt</h2>
+          <p data-i18n="c5-p">How a single prompt replaces an hour of work. Google Drive, Claude MCP, fully automated PDF generation.</p>
+          <p style="font-size: 13px; font-weight: 700; color: var(--purple); margin-top: 4px; flex: 0;" data-i18n="c5-callout">3 prompts. 1 PDF.</p>
+          <span class="card-arrow arrow-purple" data-i18n="cta-view-workflow">View workflow →</span>
+        </div>
+      </a>
+
+      <a href="https://sebastian-weber.github.io/linkedin-readiness-guide/linkedin-wheel-case-study.html" class="card" data-category="design ai">
+        <div class="card-image">
+          <img src="./screenshot-banner.png" alt="LinkedIn Profile Readiness Guide Case Study">
+        </div>
+        <div class="card-body">
+          <span class="card-tag tag-coral" data-i18n="tag-case-study">Case Study</span>
+          <h2 data-i18n="c6-h2">From Orientation Problem to Interactive Tool</h2>
+          <p data-i18n="c6-p">How a navigation problem became an interactive browser tool. No framework, no design tool, no team.</p>
+          <div class="card-quote quote-coral">
+            <blockquote>Taking a concept, improving it, and turning learning into something useful for others. These are the qualities hiring managers are often looking for.</blockquote>
+            <cite>Olga Lavrenko · Career Coach, neuefische</cite>
+          </div>
+          <span class="card-arrow arrow-coral" data-i18n="cta-read-case-study">Read case study →</span>
+        </div>
+      </a>
+
+      <a href="https://sebastian-weber.github.io/linkedin-readiness-guide/linkedin-wheel-index.html" class="card" data-category="design ai">
+        <div class="card-image">
+          <img src="./screenshot-wheel.png" alt="LinkedIn Profile Readiness Guide Tool">
+        </div>
+        <div class="card-body">
+          <span class="card-tag tag-teal" data-i18n="tag-tool">Tool</span>
+          <h2 data-i18n="c7-h2">Where Does Your LinkedIn Profile Stand?</h2>
+          <p data-i18n="c7-p">An interactive checklist for your LinkedIn profile. With live progress visualization, right in the browser, no login required.</p>
+          <div class="card-metrics">
+            <div class="metric">
+              <span class="metric-value teal">2</span>
+              <span class="metric-label" data-i18n="c7-m1">Days to Build</span>
+            </div>
+            <div class="metric">
+              <span class="metric-value teal">5</span>
+              <span class="metric-label" data-i18n="c7-m2">Iterations</span>
+            </div>
+            <div class="metric">
+              <span class="metric-value teal">0</span>
+              <span class="metric-label" data-i18n="c7-m3">Dev Handoffs</span>
+            </div>
+          </div>
+          <span class="card-arrow arrow-teal" data-i18n="cta-try-tool">Try the tool →</span>
+        </div>
+      </a>
+
+    </div>
   </main>
 
   <footer>
-    <p data-i18n="foot-sig">Sebastian Weber · UI Designer · Design-to-Code · Cologne 2026</p>
-    <p><a href="https://linkedin.com/in/sebastian-weber1708" style="color: var(--muted); text-decoration: none;">LinkedIn</a> · <a href="https://sebastian-weber.github.io/uxui-portfolio/datenschutz.html" style="color: var(--muted); text-decoration: none;" data-i18n="foot-legal">Legal Notice &amp; Privacy Policy</a> · <a href="#" id="cookie-settings-link" style="color: var(--muted); text-decoration: none;" data-i18n="foot-cookie">Cookie Settings</a></p>
+    <p data-i18n="footer-line1">Sebastian Weber · UX/UI Designer · Design-to-Code · Cologne 2026</p>
+    <p><a href="https://linkedin.com/in/sebastian-weber1708">LinkedIn</a> · <a href="https://sebastian-weber.github.io/uxui-portfolio/datenschutz.html" data-i18n="footer-imprint">Imprint &amp; Privacy Policy</a> · <a href="#" id="cookie-settings-link" data-i18n="footer-cookie-settings">Cookie Settings</a></p>
   </footer>
 
   <script>
-    function openLightbox(src) {
-      document.getElementById('lightbox-img').src = src;
-      document.getElementById('lightbox').classList.add('visible');
-    }
-    function closeLightbox() {
-      document.getElementById('lightbox').classList.remove('visible');
-    }
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') closeLightbox();
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      const total = document.body.scrollHeight - window.innerHeight;
+      document.getElementById('progress').style.width = (scrolled / total * 100) + '%';
     });
+  </script>
 
+  <script>
     function decideConsent(accepted) {
       document.getElementById('cookie-banner').style.display = 'none';
       if (accepted) {
@@ -502,75 +968,285 @@
       } else {
         posthog.opt_out_capturing();
       }
+      // No-op if declined — capture() is silently dropped once opted out.
       posthog.capture('cookie_consent', { accepted: accepted });
     }
+  </script>
 
-    document.getElementById('cookie-settings-link').addEventListener('click', function (e) {
-      e.preventDefault();
-      document.getElementById('cookie-banner').style.display = 'flex';
-    });
+  <!-- i18n: translation dictionary + language switch -->
+  <script>
+    var translations = {
+      en: {
+        'nav-about': 'About',
+        'nav-portfolio': 'Portfolio',
+        'nav-imprint': 'Imprint',
+        'hero-label': 'Design-to-Code Portfolio',
+        'hero-intro': "👋 Hi, I'm Sebastian, a UX/UI Designer from Cologne, Germany. I develop interfaces based on user research and bring them to life with AI, from Figma to finished code.",
+        'hero-tagline-lead': 'I work',
+        'filter-reset': 'Show all',
+        'filter-all': 'All',
+        'filter-uxr': 'User Research',
+        'filter-design': 'UX/UI Design',
+        'filter-ai': 'AI Builder',
+        'tag-case-study': 'Case Study',
+        'tag-tool': 'Tool',
+        'tag-ai-workflow': 'AI Workflow',
+        'cta-read-case-study': 'Read case study →',
+        'cta-view-workflow': 'View workflow →',
+        'cta-try-tool': 'Try the tool →',
+        'c1-h2': 'GA4 Behavioral Segmentation of Google Merchandise Store Users',
+        'c1-p': '270,154 Google Merchandise Store users clustered into four behavioral segments via k-means. From BigQuery SQL through Python to an interactive dashboard.',
+        'c1-m1': 'Users', 'c1-m2': 'Segments', 'c1-m3': 'Checkout Drop-off',
+        'c2-h2': 'Human Review of an AI-Generated Redesign',
+        'c2-p': 'Figma Make rebuilt a responsive navbar from six screenshots. The review surfaced two failure modes: missing input and unverified output.',
+        'c2-m1': 'Findings', 'c2-m2': 'WCAG Violations', 'c2-m3': 'Unsolvable Issues for a UX Designer',
+        'c3-h2': 'A Preset Model for Updating Layouts',
+        'c3-p': 'How curating presets instead of adding more options became the real design move, and how transparency builds trust.',
+        'c3-cite': 'Anonymous stakeholder',
+        'c3-m1': 'Iterations', 'c3-m2': 'Presets', 'c3-m3': 'Ambiguity',
+        'c4-h2': 'A Full Day of Work, Replaced by AI and Excel',
+        'c4-p': "An in-context interview with no discussion guide. Three UX decisions. And why a Figma prototype wasn't the right answer.",
+        'c4-quote': '"Yeah sure, but it\u2019s headed in a good direction."',
+        'c4-cite': 'Anonymous landlord · WhatsApp · May 1, 2026',
+        'c5-h2': 'Utility Bill Statements, by Prompt',
+        'c5-p': 'How a single prompt replaces an hour of work. Google Drive, Claude MCP, fully automated PDF generation.',
+        'c5-callout': '3 prompts. 1 PDF.',
+        'c6-h2': 'From Orientation Problem to Interactive Tool',
+        'c6-p': 'How a navigation problem became an interactive browser tool. No framework, no design tool, no team.',
+        'c7-h2': 'Where Does Your LinkedIn Profile Stand?',
+        'c7-p': 'An interactive checklist for your LinkedIn profile. With live progress visualization, right in the browser, no login required.',
+        'c7-m1': 'Days to Build', 'c7-m2': 'Iterations', 'c7-m3': 'Dev Handoffs',
+        'footer-line1': 'Sebastian Weber · UX/UI Designer · Design-to-Code · Cologne 2026',
+        'footer-imprint': 'Imprint & Privacy Policy',
+        'footer-cookie-settings': 'Cookie Settings',
+        'cookie-text': 'This site uses PostHog to create anonymized usage statistics and session recordings. <a href="https://sebastian-weber.github.io/uxui-portfolio/datenschutz.html">Privacy Policy</a>',
+        'cookie-decline': 'Decline',
+        'cookie-accept': 'Accept',
+        'filter-preselected': 'Preselected:'
+      },
+      de: {
+        'nav-about': 'Über mich',
+        'nav-portfolio': 'Portfolio',
+        'nav-imprint': 'Impressum',
+        'hero-label': 'Design-to-Code Portfolio',
+        'hero-intro': '👋 Hi, ich bin Sebastian, UX/UI Designer aus Köln. Ich entwickle Interfaces auf Basis von Nutzerforschung und setze sie mit KI um, von Figma bis zum fertigen Code.',
+        'hero-tagline-lead': 'Ich arbeite',
+        'filter-reset': 'Alle anzeigen',
+        'filter-all': 'Alle',
+        'filter-uxr': 'User Research',
+        'filter-design': 'UX/UI Design',
+        'filter-ai': 'AI Builder',
+        'tag-case-study': 'Case Study',
+        'tag-tool': 'Tool',
+        'tag-ai-workflow': 'AI-Workflow',
+        'cta-read-case-study': 'Case Study lesen →',
+        'cta-view-workflow': 'Workflow ansehen →',
+        'cta-try-tool': 'Tool ausprobieren →',
+        'c1-h2': 'Verhaltensbasierte GA4-Segmentierung der Nutzer des Google Merchandise Store',
+        'c1-p': '270.154 Nutzer:innen des Google Merchandise Store per k-means in vier Verhaltenssegmente geclustert. Von BigQuery SQL über Python bis zum interaktiven Dashboard.',
+        'c1-m1': 'Nutzer:innen', 'c1-m2': 'Segmente', 'c1-m3': 'Checkout-Abbruch',
+        'c2-h2': 'Ein KI-Redesign auf dem Prüfstand',
+        'c2-p': 'Figma Make hat aus sechs Screenshots eine responsive Navbar gebaut. Der Review deckte zwei Fehlerarten auf: fehlender Input und ungeprüfter Output.',
+        'c2-m1': 'Findings', 'c2-m2': 'WCAG-Verstöße', 'c2-m3': 'Unlösbare Probleme für UX Designer',
+        'c3-h2': 'Ein Preset-Modell für Layout-Updates',
+        'c3-p': 'Wie das Kuratieren von Presets statt weiterer Optionen zum eigentlichen Design-Move wurde, und wie Transparenz Vertrauen schafft.',
+        'c3-cite': 'Anonymer Stakeholder',
+        'c3-m1': 'Iterationen', 'c3-m2': 'Presets', 'c3-m3': 'Mehrdeutigkeit',
+        'c4-h2': 'Den ganzen Tag der Arbeit für KI und Excel',
+        'c4-p': 'In-context Interview ohne Leitfaden. Drei UX-Entscheidungen. Und warum kein Figma-Prototyp die richtige Antwort war.',
+        'c4-quote': '"Ja klar aber auf einem guten Weg."',
+        'c4-cite': 'Anonymer Vermieter · WhatsApp · 1. Mai 2026',
+        'c5-h2': 'Nebenkostenabrechnung per Prompt',
+        'c5-p': 'Wie ein Prompt eine Stunde Arbeit ersetzt. Google Drive, Claude MCP, vollautomatische PDF-Generierung.',
+        'c5-callout': '3 Prompts. 1 PDF.',
+        'c6-h2': 'Vom Orientierungsproblem zum interaktiven Tool',
+        'c6-p': 'Wie aus einem Orientierungsproblem ein interaktives Browser-Tool wurde. Ohne Framework, ohne Design-Tool, ohne Team.',
+        'c7-h2': 'Wie bereit ist dein LinkedIn-Profil?',
+        'c7-p': 'Interaktive Checkliste für dein LinkedIn-Profil. Mit Live-Visualisierung des Fortschritts — direkt im Browser, ohne Login.',
+        'c7-m1': 'Tage Entwicklungszeit', 'c7-m2': 'Iterationen', 'c7-m3': 'Dev-Handoffs',
+        'footer-line1': 'Sebastian Weber · UX/UI Designer · Design-to-Code · Köln 2026',
+        'footer-imprint': 'Impressum & Datenschutz',
+        'footer-cookie-settings': 'Cookie-Einstellungen',
+        'cookie-text': 'Diese Seite verwendet PostHog, um anonymisierte Nutzungsstatistiken und Sitzungsaufzeichnungen zu erstellen. <a href="https://sebastian-weber.github.io/uxui-portfolio/datenschutz.html">Datenschutz</a>',
+        'cookie-decline': 'Ablehnen',
+        'cookie-accept': 'Akzeptieren',
+        'filter-preselected': 'Vorausgewählt:'
+      }
+    };
 
-    window.addEventListener('scroll', () => {
-      const scrolled = window.scrollY;
-      const total = document.body.scrollHeight - window.innerHeight;
-      document.getElementById('progress').style.width = (scrolled / total * 100) + '%';
-    });
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.08 });
-    document.querySelectorAll('.block').forEach(b => observer.observe(b));
+    var rotatingWords = {
+      en: [
+        { text: 'research-grounded.', color: 'var(--coral)' },
+        { text: 'problem-solving.',   color: 'var(--teal)'  },
+        { text: 'AI-augmented.',      color: 'var(--purple)'}
+      ],
+      de: [
+        { text: 'forschungsbasiert.', color: 'var(--coral)' },
+        { text: 'lösungsorientiert.', color: 'var(--teal)'  },
+        { text: 'KI-unterstützt.',    color: 'var(--purple)'}
+      ]
+    };
 
-    /* Dynamische Subnav (sticky, rechtsbündig) + Drawer-Abschnitt aus .block[id] */
-    (function () {
-      var blocks = Array.prototype.slice.call(document.querySelectorAll('main.content .block[id]'));
-      if (!blocks.length) return;
-      var items = blocks.map(function (block) {
-        var label = block.getAttribute('data-nav-label');
-        if (!label) {
-          var labelEl = block.querySelector('.block-label');
-          label = labelEl ? labelEl.textContent : block.id;
-          label = label.replace(/^[0-9]+[a-z]?\s*[·\u00b7\-–]\s*/i, '').trim();
+    var currentLang = localStorage.getItem('portfolio-lang') || 'en';
+
+    function applyTranslations(lang) {
+      document.documentElement.lang = lang;
+      var dict = translations[lang];
+      document.querySelectorAll('[data-i18n]').forEach(function (el) {
+        var key = el.getAttribute('data-i18n');
+        if (dict[key] !== undefined) {
+          el.innerHTML = dict[key];
         }
-        return { id: block.id, label: label };
       });
+      document.querySelectorAll('.lang-switch button').forEach(function (btn) {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+      });
+    }
 
-      var subnav = document.getElementById('subnav');
-      if (subnav) {
-        items.forEach(function (item) {
-          var a = document.createElement('a');
-          a.href = '#' + item.id; a.textContent = item.label; a.dataset.target = item.id; a.setAttribute('data-i18n', 'sub-' + item.id);
-          subnav.appendChild(a);
+    function switchLang(lang) {
+      currentLang = lang;
+      localStorage.setItem('portfolio-lang', lang);
+      applyTranslations(lang);
+      restartTyping(lang);
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      applyTranslations(currentLang);
+      document.querySelectorAll('.lang-switch button').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          if (btn.dataset.lang !== currentLang) switchLang(btn.dataset.lang);
         });
+      });
+    });
+  </script>
+
+  <!-- Typing animation: rotating adjectives, colored with existing CD tokens, language-aware -->
+  <script>
+    var typingTimer = null;
+
+    function restartTyping(lang) {
+      if (typingTimer) clearTimeout(typingTimer);
+      startTyping(lang);
+    }
+
+    function startTyping(lang) {
+      var words = rotatingWords[lang] || rotatingWords.en;
+      var el     = document.getElementById('word');
+      var cursor = document.getElementById('cursor');
+      if (!el || !cursor) return;
+
+      var wordIndex = 0;
+      var charIndex = 0;
+      var deleting  = false;
+
+      var TYPE_SPEED   = 60;
+      var DELETE_SPEED = 35;
+      var HOLD_TIME    = 1400;
+
+      function setColor(color) {
+        el.style.color = color;
+        cursor.style.background = color;
       }
 
-      var toggleItem = document.getElementById('drawerSubnavToggleItem');
-      var listItem = document.getElementById('drawerSubnavListItem');
-      var listEl = document.getElementById('drawerSubnavList');
-      if (toggleItem && listItem && listEl) {
-        toggleItem.hidden = false;
-        listItem.hidden = false;
-        items.forEach(function (item) {
-          var li = document.createElement('li');
-          var a = document.createElement('a');
-          a.href = '#' + item.id; a.textContent = item.label; a.className = 'subnav-drawer-item'; a.dataset.target = item.id; a.setAttribute('data-i18n', 'sub-' + item.id);
-          li.appendChild(a);
-          listEl.appendChild(li);
-        });
+      function tick() {
+        var current = words[wordIndex];
+
+        if (!deleting) {
+          if (charIndex === 0) setColor(current.color);
+          charIndex++;
+          el.textContent = current.text.slice(0, charIndex);
+          if (charIndex === current.text.length) {
+            deleting = true;
+            typingTimer = setTimeout(tick, HOLD_TIME);
+            return;
+          }
+          typingTimer = setTimeout(tick, TYPE_SPEED);
+        } else {
+          charIndex--;
+          el.textContent = current.text.slice(0, charIndex);
+          if (charIndex === 0) {
+            deleting = false;
+            wordIndex = (wordIndex + 1) % words.length;
+            typingTimer = setTimeout(tick, 300);
+            return;
+          }
+          typingTimer = setTimeout(tick, DELETE_SPEED);
+        }
       }
 
-      var allNavLinks = document.querySelectorAll('.subnav a, .subnav-drawer-item');
-      var activeObserver = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (!entry.isIntersecting) return;
-          var id = entry.target.id;
-          allNavLinks.forEach(function (link) { link.classList.toggle('active', link.dataset.target === id); });
-          var activeDesktop = subnav && subnav.querySelector('a.active');
-          if (activeDesktop) { activeDesktop.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' }); }
+      tick();
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      startTyping(currentLang);
+    });
+  </script>
+
+  <!-- Filter bar: manual chip clicks (single-select) + UTM-preselect via utm_content -->
+  <script>
+    (function () {
+      document.addEventListener('DOMContentLoaded', function () {
+        var chips     = document.querySelectorAll('.filter-chip');
+        var cards     = document.querySelectorAll('.card');
+        var hint      = document.getElementById('filter-hint');
+        var hintText  = document.getElementById('filter-hint-text');
+        var hintReset = document.getElementById('filter-hint-reset');
+
+        var categoryI18nKey = {
+          design: 'filter-design',
+          ai:     'filter-ai',
+          uxr:    'filter-uxr'
+        };
+
+        function applyFilter(category, source) {
+          chips.forEach(function (chip) {
+            chip.classList.toggle('active', chip.dataset.filter === category);
+          });
+
+          cards.forEach(function (card) {
+            var cats = (card.dataset.category || '').split(' ');
+            var show = category === 'all' || cats.indexOf(category) !== -1;
+            card.classList.toggle('hidden', !show);
+          });
+
+          if (source === 'link' && category !== 'all') {
+            var dict = translations[currentLang];
+            hintText.innerHTML = dict['filter-preselected'] + ' <strong>' + dict[categoryI18nKey[category]] + '</strong>';
+            hint.classList.add('visible');
+          } else {
+            hint.classList.remove('visible');
+          }
+        }
+
+        chips.forEach(function (chip) {
+          chip.addEventListener('click', function () {
+            var category = chip.dataset.filter;
+            applyFilter(category, 'manual');
+            posthog.capture('filter_clicked', { category: category });
+          });
         });
-      }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
-      blocks.forEach(function (block) { activeObserver.observe(block); });
+
+        hintReset.addEventListener('click', function () {
+          applyFilter('all', 'manual');
+          posthog.capture('filter_reset_clicked');
+        });
+
+        var params      = new URLSearchParams(window.location.search);
+        var utmContent  = params.get('utm_content');
+        var validValues = Object.keys(categoryI18nKey);
+
+        if (utmContent && validValues.indexOf(utmContent) !== -1) {
+          applyFilter(utmContent, 'link');
+          posthog.capture('filter_preset_via_link', {
+            category:   utmContent,
+            utm_source: params.get('utm_source'),
+            utm_medium: params.get('utm_medium')
+          });
+        }
+      });
     })();
   </script>
+
   <script>
   (function () {
     var toggle = document.getElementById('navToggle');
@@ -618,145 +1294,20 @@
     closeBtn.addEventListener('click', closeDrawer);
     overlay.addEventListener('click', closeDrawer);
 
-  })();
-  </script>
-
-  <script>
-  /* ============================================================
-     i18n: EN is the authored markup, DE comes from this dictionary.
-     Language is shared across portfolio pages via localStorage 'sw-lang'.
-     ============================================================ */
-  (function () {
-    var LANG_KEY = 'sw-lang';
-    var currentLang = 'en';
-    var DE = {
-      "menu-open": "Menü öffnen",
-      "menu-close": "Menü schließen",
-      "subnav-aria": "Abschnitte auf dieser Seite",
-      "nav-portfolio": "Portfolio",
-      "nav-about": "Über mich",
-      "nav-imprint": "Impressum",
-      "tag-unverified": "Ungeprüfter Output",
-      "tag-missing": "Fehlender Input",
-      "cookie-text": "Diese Seite nutzt PostHog für datenschutzfreundliche Analysen, gehostet auf Servern in der EU. <a href=\"https://sebastian-weber.github.io/uxui-portfolio/datenschutz.html\" target=\"_blank\">Datenschutzerklärung</a>",
-      "cookie-decline": "Ablehnen",
-      "cookie-accept": "Akzeptieren",
-      "drawer-onpage": "Auf dieser Seite",
-      "h1": "Ein KI-Redesign auf dem Prüfstand",
-      "hero-sub": "Ich habe Figma Make eine responsive Navbar anhand von sechs Screenshots nachbauen lassen. Auf den ersten Blick wirkte das Ergebnis stimmig. Spannend wurde es erst beim zweiten Hinsehen.",
-      "meta-project": "Projekt",
-      "meta-project-v": "Peters Elektro Template<br>Design-to-Code-Experiment",
-      "meta-role": "Meine Rolle",
-      "meta-role-v": "Design Review<br>Technischer Audit, Accessibility-QA",
-      "meta-timeline": "Zeitraum",
-      "lbl-01": "01 · Kontext",
-      "h2-01": "Versuchsaufbau und erste Einschätzung",
-      "ctx-p1": "Ich habe Figma Make Screenshots einer bestehenden responsiven Navigationsleiste gegeben: das Desktop- und das Mobile-Layout sowie einzelne Zustände wie aufgeklappte Dropdowns und das mobile Drawer-Overlay. Dann habe ich das Tool gebeten, die Komponente in Code nachzubauen. Die beiden vollständigen Ansichten unten zeigen die Ausgangslage. Die Screenshots der einzelnen Zustände zeige ich hier nicht.",
-      "cap-orig-nav": "Ausgangslage · die originale Desktop-Navbar als Referenz",
-      "cap-orig-mobile": "Ausgangslage · das originale Mobile-Menü",
-      "cap-first": "Das erste Ergebnis vor jeder Prüfung: Logo bereits verformt, Bild bereits defekt",
-      "ctx-p2": "Nach dem ersten Durchsehen habe ich Figma Make gefragt: Hast du das Design exakt kopiert, verbessert oder eher neu gestaltet? Die Antwort: <em>\"More of a <strong>faithful copy</strong> with <strong>minor practical adjustments</strong>,\"</em> (!), also eine originalgetreue Kopie mit kleinen Anpassungen. Im selben Atemzug nannte das Tool eigene Schwächen: Das Logo sei nur angenähert, Breite des Dropdown-Panels und Proportionen der Karten könnten leicht abweichen. Diese Eingeständnisse widersprechen der eigenen Einschätzung. Das Tool hat sich selbst falsch bewertet. So sah dieser erste Output aus:",
-      "ctx-p3": "Danach habe ich zwei Varianten erstellen lassen: Version B bleibt nah an der Referenz, Version C ist eine mutigere Überarbeitung. Dabei zeigte sich, dass das Tool die Abweichungen unterschätzt hatte. Das Logo lag weit vom Original entfernt, weit mehr als eine Annäherung. Auch die Ausrichtung der Navigation und die Schrift wichen stärker ab, als „kleine Anpassungen“ vermuten ließ. Für mich ein erster Hinweis: Wie ein Tool seine eigene Arbeit bewertet, muss ich unabhängig prüfen. Ich kann es nicht einfach übernehmen.",
-      "lbl-02": "02 · Befunde",
-      "h2-02": "Wo die KI danebenlag",
-      "find-p": "Bei der genaueren Prüfung habe ich fünf Befunde festgehalten. Jeder gehört zu einem von zwei Fehlermustern. <strong>Ungeprüfter Output</strong> heißt: Ich musste eine Aussage erst an der Realität prüfen, bevor ich ihr trauen konnte. <strong>Fehlender Input</strong> heißt: Das Tool hat aus unvollständigem Material geraten und dabei sicher gewirkt.",
-      "f1-t": "Ein kaputtes Bild, das erst auf Hinweis repariert wurde",
-      "f1-b": "Eine Dropdown-Karte für „Solaranlagen-Installation“ verwies auf eine defekte Bild-URL. Der Fehler war von Anfang an sichtbar, schon im ersten Output oben. Trotzdem überstand er mehrere Iterationen und zwei getrennte Designstränge. Figma Make hat ihn nie selbst bemerkt oder behoben. Erst als ich ihn ausdrücklich angesprochen habe, wurde er korrigiert.",
-      "f1-cap": "Die Karte Solaranlagen-Installation, das Bild wurde nie geladen",
-      "f2-t": "Kontrast gemessen statt geschätzt",
-      "f2-b": "Ich habe die Kontrastwerte nachgeprüft, statt mich auf das Rendering zu verlassen. Version B hat den Test bestanden: Sie übernimmt die Barrierefreiheits-Entscheidungen der Referenz. Version C nicht. Zwei Textelemente fallen durch WCAG AA: ein Untertitel im Dropdown mit 3,3:1 und eine Unterzeile im Mobile-Menü mit 3,9:1. Gefordert sind 4,5:1. Auf einem hellen Bildschirm wirkten beide gut lesbar. Die Korrektur: Deckkraft auf etwa 0,55 angehoben, das ergibt rund 6,2:1. Wichtig: Die Werte habe ich durch gezielte Fragen an Figma Make bekommen. Das ist eine Chatfunktion, kein eigenes Audit-Feature. Echte WCAG-Scanner und Tools für heuristische Evaluation gibt es als Plugins für Figma, nicht in Figma Make.",
-      "f2-cap-b": "Version B · nah an der Referenz, Kontrast hielt stand",
-      "f2-cap-c": "Version C · Kontrast fiel unter WCAG AA",
-      "f3-t": "Mobile Hierarchie: Nähe schlägt Ausrichtung",
-      "f3-b": "In der Referenz gab es im Mobile-Menü keine Telefonnummer. Die Chevrons saßen dort ebenfalls rechts, wie bei Figma Make. Das Original war nicht für Mobile optimiert und trotzdem verständlich. Das lag nicht an der Ausrichtung, sondern an der Nähe: Jeder Chevron saß direkt neben seinem Label, beide wirkten wie eine Einheit. Figma Make hat die Chevrons rechts gelassen, aber an den äußeren Rand geschoben. Damit fehlt der Bezug zum Label. Außerdem hat das Tool eine Telefonnummer ergänzt, die es in der Referenz nicht gab. Sie steht unten im Menü und wirkt wie nachträglich eingefügt. Auf Nachfrage hat das Tool das Problem mit den Chevrons offen eingeräumt: Es wollte sie „dezent“ gestalten, dadurch wirkten sie losgelöst.",
-      "f3-cap-a": "Originalreferenz · Chevrons mit ihren Labels gruppiert, keine Telefonnummer",
-      "f3-cap-b": "Überarbeitung von Figma Make · Chevrons an den Rand gerückt, Telefonnummer isoliert",
-      "f4-t": "Das Logo: zweimal falsch geraten",
-      "f4-b": "Eine frühe Version zeigte das Logo als „E)“, einen verformten Bogen. Eine spätere zeigte ein „P“. Das Tool hat keinen der Fehler selbst gelöst und keinen richtig benannt. Es beschrieb das Logo als „close but not exact“. Tatsächlich war es eine ganz andere Buchstabenform. Das Tool kannte das echte Asset nicht, nur eine aus Screenshots abgeleitete Form. Mein Logo ist ein „E“, das an eine Steckdose erinnert und leicht nach rechts geneigt ist. Aus Screenshots allein konnte das Tool es offensichtlich nicht erkennen. Das richtige Logo erschien erst, als ich die Datei Logotype.svg direkt hochgeladen habe.",
-      "f4-cap-a": "Erster fehlerhafter Zustand · als „P“ gerendert",
-      "f4-cap-b": "Zweiter fehlerhafter Zustand · ein anderer verformter Bogen, nicht die eigentliche Korrektur",
-      "f5-t": "Die Schrift: geraten statt erkannt",
-      "f5-b": "Der Nav-Text war schmaler und enger gesetzt als im Original. Das Computed-Style-Panel im Browser zeigte den Grund: Die Nav nutzt den Standard-Schriftstack von Tailwind (ui-sans-serif, system-ui, sans-serif), also gar keine eigene Schrift. Figma Make hat die Lücke offen benannt. Es hatte nur Screenshots, ohne Text- oder Schrifterkennung. Deshalb hat es auf Inter getippt. Inter ähnelt den Systemschriften, die es tatsächlich gesehen hat.",
-      "lbl-03": "03 · Verbesserungen",
-      "h2-03": "Was Figma Make besser gemacht hat",
-      "imp-p": "Nicht alles musste ich korrigieren. Einiges hat das Design wirklich besser gemacht:",
-      "imp-1": "<strong>Ein moderneres Gesamtbild</strong>: Die Navbar reagiert auf das Scrollen, der CTA-Button hat einen Farbverlauf, die Hover-Zustände sind animiert. Das wirkt deutlich polierter als die Original-Screenshots.",
-      "imp-2": "<strong>Passendere Fotos</strong>: Bei mehreren Service-Karten hat Figma Make die Stockbilder ersetzt. Die neuen Bilder passen besser zur jeweiligen Leistung und wirken deutscher, hochwertiger und kommerzieller. Nicht jeder Tausch ist gelungen.",
-      "imp-3": "<strong>Ein durchdachteres Mobile-Layout</strong>: Das Overlay füllt den ganzen Bildschirm, die Abschnitte klappen als Akkordeon auf. Das gibt mehr Struktur als eine einfache Liste.",
-      "imp-4": "<strong>Eine sinnvolle Schriftwahl</strong>: Figma Make ist bei Inter geblieben, statt den geratenen System-Stack zu übernehmen. So sieht die Schrift auf jedem Betriebssystem gleich aus.",
-      "lbl-04": "04 · Fazit",
-      "h2-04": "Zwei Fehlermuster und wie man sie erkennt",
-      "tk-p1": "<strong>Fehlender Input</strong> betrifft das Logo und die Schrift. Das Tool hat aus unvollständigem Material geraten und nie gesagt, dass es rät. In beiden Fällen kam ich schneller ans Ziel, als ich direkt an die Quelle ging: an die SVG-Datei und an das Computed-Style-Panel. Weitere Prompts hätten länger gedauert. <strong>Ungeprüfter Output</strong> betrifft die Kontrastfehler, die Hierarchie und das kaputte Bild. Jeden dieser Fehler habe ich nur gefunden, weil ich etwas Konkretes geprüft habe, statt einfach zu vertrauen.",
-      "tk-p2": "Das deutlichste Muster in der zweiten Gruppe: Optik ging durchgehend vor Barrierefreiheit. Am klarsten zeigen das die Kontrastfehler. Zwei Textelemente lagen unter WCAG AA, während das Tool Aufwand in Farbverläufe und Hover-Animationen gesteckt hat. Dieselbe Lücke zeigt sich im Mobile-Menü: In den Dropdown-Karten auf dem Desktop funktioniert die Nähe von Elementen, im Mobile-Menü nicht mehr.",
-      "tk-callout": "Was sich übertragen lässt, ist der diagnostische Blick: Ich erkenne, welches der beiden Fehlermuster vorliegt, fehlender Input oder ungeprüfter Output, und weiß, welche Prüfung es braucht.",
-      "tk-p3": "Alle Befunde beruhen auf dem gerenderten Ergebnis, den berechneten Styles im Browser und den Begründungen des Tools selbst. Den Code dahinter habe ich nicht Zeile für Zeile geprüft. Das kann ich später nachholen. Eine Frage lasse ich bewusst offen: Ob der Ansatz auch für Performance funktioniert, also für Bildgrößen, render-blockierende Ressourcen und Ladezeiten, habe ich hier nicht getestet.",
-      "cta-h2": "Alle Projekte",
-      "cta-btn": "Zur Projektübersicht &rarr;",
-      "foot-sig": "Sebastian Weber · UI Designer · Design-to-Code · Köln 2026",
-      "foot-legal": "Impressum &amp; Datenschutz",
-      "foot-cookie": "Cookie-Einstellungen",
-      "alt-12": "Finales Rendering der Navbar",
-      "alt-11": "Mobile-Menü, in dem das Logo als eine andere verformte Form erscheint",
-      "alt-10": "Mobile-Menü, in dem das Logo als verformte, P-ähnliche Form erscheint",
-      "alt-9": "Überarbeitetes Mobile-Menü von Figma Make mit Chevrons am äußersten rechten Rand, getrennt von ihren Labels, und einer isolierten Telefonnummer unten",
-      "alt-8": "Originales Referenz-Mobile-Menü mit Chevrons direkt an ihren Labels und ohne Telefonnummer",
-      "alt-7": "Version C: Telefonnummer in gedämpftem Grün mit geringerem Kontrast zum dunklen Hintergrund",
-      "alt-6": "Version B: Telefonnummer und Kontakt-Button in vollem Weiß und Grün, hoher Kontrast zum dunklen Hintergrund",
-      "alt-5": "Dropdown-Karte mit einem Platzhaltersymbol für ein defektes Bild statt eines Solaranlagen-Fotos",
-      "alt-4": "Der allererste Output von Figma Make: Navbar mit einem Logo als verformte E-Klammer-Form und einem defekten Bildsymbol anstelle des Fotos für Solaranlagen-Installation",
-      "alt-3": "Originales Referenz-Mobile-Menü mit Chevrons direkt an ihren Labels",
-      "alt-2": "Originale Referenz-Navbar auf dem Desktop vor der Überarbeitung durch Figma Make",
-      "alt-1": "Vorher-Nachher-Vergleich",
-      "sub-context": "Kontext",
-      "sub-findings": "Befunde",
-      "sub-improvements": "Verbesserungen",
-      "sub-takeaway": "Fazit"
-};
-    var EN_CACHE = new Map();
-    var ATTR_CACHE = new Map();
-    var EN_TITLE = document.title;
-    var DE_TITLE = 'Case Study: Ein KI-Redesign auf dem Prüfstand | Sebastian Weber';
-
-    function applyStaticI18n() {
-      document.documentElement.lang = currentLang;
-      document.title = currentLang === 'de' ? DE_TITLE : EN_TITLE;
-      document.querySelectorAll('[data-i18n]').forEach(function (el) {
-        if (!EN_CACHE.has(el)) EN_CACHE.set(el, el.innerHTML);
-        var de = DE[el.getAttribute('data-i18n')];
-        el.innerHTML = (currentLang === 'de' && de !== undefined) ? de : EN_CACHE.get(el);
-      });
-      [['data-i18n-aria', 'aria-label'], ['data-i18n-alt', 'alt']].forEach(function (pair) {
-        document.querySelectorAll('[' + pair[0] + ']').forEach(function (el) {
-          if (!ATTR_CACHE.has(el)) ATTR_CACHE.set(el, {});
-          var c = ATTR_CACHE.get(el);
-          if (c[pair[1]] === undefined) c[pair[1]] = el.getAttribute(pair[1]);
-          var de = DE[el.getAttribute(pair[0])];
-          el.setAttribute(pair[1], (currentLang === 'de' && de !== undefined) ? de : c[pair[1]]);
+    /* Sprach-Buttons im Drawer an die bestehende switchLang() koppeln */
+    var drawerLangButtons = document.querySelectorAll('.nav-drawer__lang [data-lang]');
+    drawerLangButtons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var lang = btn.getAttribute('data-lang');
+        if (typeof window.switchLang === 'function') {
+          window.switchLang(lang);
+        }
+        document.querySelectorAll('[data-lang]').forEach(function (b) {
+          b.classList.toggle('active', b.getAttribute('data-lang') === lang);
         });
       });
-      document.querySelectorAll('[data-lang]').forEach(function (b) {
-        b.classList.toggle('active', b.getAttribute('data-lang') === currentLang);
-      });
-    }
-
-    window.switchLang = function (lang) {
-      if (lang !== 'en' && lang !== 'de') return;
-      if (lang === currentLang) return;
-      currentLang = lang;
-      try { localStorage.setItem(LANG_KEY, lang); } catch (e) {}
-      applyStaticI18n();
-    };
-
-    try {
-      var saved = localStorage.getItem(LANG_KEY);
-      if (saved === 'de' || saved === 'en') currentLang = saved;
-    } catch (e) {}
-    document.querySelectorAll('[data-lang]').forEach(function (btn) {
-      btn.addEventListener('click', function () { window.switchLang(btn.getAttribute('data-lang')); });
     });
-    applyStaticI18n();
   })();
   </script>
 
-</body>
-</html>
+</body></html>
