@@ -1,21 +1,21 @@
-﻿# Sebastian Weber - Design-to-Code Portfolio
+# Sebastian Weber - Design-to-Code Portfolio
 
 UX/UI Designer aus Koeln. Ich designe Interfaces und baue sie selbst.
 
-Live: sebastian-weber.github.io/uxui-portfolio
+Live: [sebastian-weber.github.io/uxui-portfolio](https://sebastian-weber.github.io/uxui-portfolio)
 
-## ðŸ“ Struktur
+## Struktur
 
 ```
-index.html   # Portfolio-Uebersicht
-about.html   # About (DE)
-about-en.html # About (EN)
-datenschutz.html # Datenschutz / Privacy
+index.html        # Portfolio-Uebersicht
+about.html        # About (DE)
+about-en.html     # About (EN)
+datenschutz.html  # Datenschutz / Privacy
 ```
 
 Die einzelnen Case Studies und Tools liegen in ihren eigenen Repos und werden von hier aus verlinkt.
 
-## ðŸ—‚ï¸ Projekte
+## Projekte
 
 | Karte | Typ | Projekt |
 |---|---|---|
@@ -27,15 +27,15 @@ Die einzelnen Case Studies und Tools liegen in ihren eigenen Repos und werden vo
 | 6 | Case Study | LinkedIn Profile Readiness Guide: von PDF zu interaktivem Tool |
 | 7 | Tool | LinkedIn Profile Readiness Guide: live ausprobieren |
 
-## ðŸŽ¨ Farbsystem
+## Farbsystem
 
 | Farbe | Kategorie |
 |---|---|
-| Coral #E06040 | Case Study |
-| Purple #7B5EA7 | AI Workflow |
-| Teal #4A9B8E | Tool |
+| Coral `#E06040` | Case Study |
+| Purple `#7B5EA7` | AI Workflow |
+| Teal `#4A9B8E` | Tool |
 
-## ðŸ› ï¸ Stack
+## Stack
 
 - Vanilla HTML/CSS
 - Montserrat (Google Fonts)
