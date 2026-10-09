@@ -12,20 +12,20 @@
   if (window.__swConsentLoaded) return;
   window.__swConsentLoaded = true;
 
-  var PRIVACY_URL = 'https://sebastian-weber.github.io/uxui-portfolio/datenschutz.html';
+  var PRIVACY_URL = 'https://sebastian-weber.github.io/uxui-portfolio/datenschutz.html#posthog';
 
   var TEXT = {
     de: {
       title: 'Hilf mir, die UX meines Portfolios zu verbessern',
-      body: 'Wer an Einstellungsprozessen beteiligt ist, sichtet viele Bewerbungen und hat kaum Zeit für Rückmeldungen. Das verstehe ich. Deshalb möchte ich sehen, wie Du mein Portfolio nutzt: was Du öffnest, wie weit Du liest, wo Du abspringst. Dafür zeichne ich Deine Sitzung mit PostHog auf, Eingaben bleiben verborgen. Deine Daten nutze ich nicht kommerziell.',
-      privacy: 'Datenschutz',
+      body: 'Wer an Einstellungsprozessen beteiligt ist, sichtet viele Bewerbungen und hat kaum Zeit für Rückmeldungen. Das verstehe ich. Deshalb möchte ich sehen, wie Du mein Portfolio nutzt: was Du öffnest, wie weit Du liest, wo Du abspringst. Dafür setze ich Cookies und zeichne Deine Sitzung mit PostHog auf, Eingaben bleiben verborgen. Deine Daten nutze ich nicht kommerziell.',
+      privacy: 'Details zu Cookies und PostHog',
       decline: 'Nein, danke',
       accept: 'Ja, gerne'
     },
     en: {
       title: 'Help me improve the UX of my portfolio',
-      body: 'Anyone involved in hiring reviews many applications and has little time to give feedback. I understand that. That’s why I’d like to see how you use my portfolio: what you open, how far you read, where you leave. To do this, I record your session with PostHog, and anything you type stays hidden. I don’t use your data for commercial purposes.',
-      privacy: 'Privacy Policy',
+      body: 'Anyone involved in hiring reviews many applications and has little time to give feedback. I understand that. That’s why I’d like to see how you use my portfolio: what you open, how far you read, where you leave. To do this, I use cookies and record your session with PostHog, and anything you type stays hidden. I don’t use your data for commercial purposes.',
+      privacy: 'Details on cookies and PostHog',
       decline: 'No, thanks',
       accept: 'Yes, happy to'
     }
