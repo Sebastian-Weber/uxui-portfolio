@@ -346,22 +346,6 @@
       .facts-grid { grid-template-columns: 1fr; }
     }
 
-    /* Cookie Banner */
-    #cookie-banner {
-      position: fixed; bottom: 24px; left: 50%;
-      transform: translateX(-50%);
-      background: var(--dark); color: #fff;
-      padding: 16px 24px; border-radius: 12px;
-      display: flex; align-items: center; gap: 16px;
-      z-index: 200; font-size: 13px;
-      max-width: 560px; width: calc(100% - 48px);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-    }
-    #cookie-banner p { margin: 0; flex: 1; color: #ccc; line-height: 1.5; }
-    #cookie-banner a { color: #fff; }
-    .cookie-btn { padding: 8px 16px; border-radius: 7px; font-size: 12px; font-weight: 600; cursor: pointer; border: none; white-space: nowrap; font-family: inherit; }
-    .cookie-accept { background: var(--coral); color: #fff; }
-    .cookie-decline { background: transparent; color: #ccc; border: 1px solid #555 !important; }
   </style>
 
   <!-- PostHog — Enhanced Tracking -->
@@ -432,14 +416,6 @@
           });
         }, sec * 1000);
       });
-
-      var settingsLink = document.getElementById('cookie-settings-link');
-      if (settingsLink) {
-        settingsLink.addEventListener('click', function (e) {
-          e.preventDefault();
-          document.getElementById('cookie-banner').style.display = 'flex';
-        });
-      }
 
       var langButtons = document.querySelectorAll('.lang-switch button');
       langButtons.forEach(function (btn) {
@@ -532,17 +508,6 @@
     });
   </script>
 
-  <script>
-    function decideConsent(accepted) {
-      document.getElementById('cookie-banner').style.display = 'none';
-      if (accepted) {
-        posthog.opt_in_capturing();
-      } else {
-        posthog.opt_out_capturing();
-      }
-      posthog.capture('cookie_consent', { accepted: accepted, page: 'about' });
-    }
-  </script>
 
   <!-- i18n: translation dictionary + language switch (shared localStorage key with index.html) -->
   <script>
@@ -579,9 +544,6 @@
         'footer-line1': 'Sebastian Weber · UX/UI Designer · Design-to-Code · Cologne 2026',
         'footer-imprint': 'Imprint & Privacy Policy',
         'footer-cookie-settings': 'Cookie Settings',
-        'cookie-text': 'This site uses PostHog to create anonymized usage statistics and session recordings. <a href="https://sebastian-weber.github.io/uxui-portfolio/datenschutz.html">Privacy Policy</a>',
-        'cookie-decline': 'Decline',
-        'cookie-accept': 'Accept'
       },
       de: {
         'nav-portfolio': 'Portfolio',
@@ -615,9 +577,6 @@
         'footer-line1': 'Sebastian Weber · UX/UI Designer · Design-to-Code · Köln 2026',
         'footer-imprint': 'Impressum & Datenschutz',
         'footer-cookie-settings': 'Cookie-Einstellungen',
-        'cookie-text': 'Diese Seite verwendet PostHog, um anonymisierte Nutzungsstatistiken und Sitzungsaufzeichnungen zu erstellen. <a href="https://sebastian-weber.github.io/uxui-portfolio/datenschutz.html">Datenschutz</a>',
-        'cookie-decline': 'Ablehnen',
-        'cookie-accept': 'Akzeptieren'
       }
     };
 
